@@ -219,6 +219,12 @@ LionKit.OnInitialized += () => {
 
 #endif
 
+#if APSdk_Firebase
+                APFirebaseWrapper.Instance.Initialize();
+                APFirebaseInfo apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
+                
+#endif
+
 #if APSdk_GameAnalytics
 
                     APGameAnalyticsWrapper.Instance.Initialize();
@@ -226,7 +232,7 @@ LionKit.OnInitialized += () => {
 #endif
 
 
-                    if (!apLionKitInfo.startBannerAdManually && apLionKitInfo.enableBannerAd) {
+    if (!apLionKitInfo.startBannerAdManually && apLionKitInfo.enableBannerAd) {
                         BannerAd.ShowBannerAd();
                     }
                 };
@@ -245,6 +251,10 @@ LionKit.OnInitialized += () => {
 
 #if APSdk_GameAnalytics
                 APGameAnalyticsWrapper.Instance.Initialize();
+#endif
+
+#if APSdk_Firebase
+                APFirebaseWrapper.Instance.Initialize();
 #endif
 
 #endif

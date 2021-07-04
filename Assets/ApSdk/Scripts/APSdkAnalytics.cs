@@ -111,10 +111,14 @@
         private APGameAnalyticsInfo _apGameAnalyticsInfo;
 #endif
 
+#if APSdk_Firebase
+        private APFirebaseInfo _apFirebaseInfo;
+#endif
+
 #endregion
 
         //---------------
-#region Public Callback
+        #region Public Callback
 
         public APSdkAnalytics (APSdkConfiguretionInfo apSdkConfiguretionInfo) {
 
@@ -132,17 +136,21 @@
             _apGameAnalyticsInfo = Resources.Load<APGameAnalyticsInfo>("GameAnalytics/APGameAnalyticsInfo");
 #endif
 
+#if APSdk_Firebase
+         _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
+#endif
+
 #if APSdk_LionKit
             _isLionKitIntegrated = true;
 #endif
 
         }
 
-        #endregion
+    #endregion
 
-        #region Event   :   Preset
+    #region Event   :   Preset
 
-        public void LevelStarted(object level, object score = null)
+    public void LevelStarted(object level, object score = null)
         {
             if (_apSdkConfiguretionInfo.logAnalyticsEvent)
             {
@@ -155,7 +163,7 @@
                 //if    :   LionKit Integrated
                 Analytics.LogEvent(Key.level_started, eventParam);
 #else
-            //if    :   LionKit Not Integrated
+                //if    :   LionKit Not Integrated
 
 #if APSdk_Facebook
             //if    :   Facebook Integrated
@@ -169,10 +177,25 @@
                 APAdjustWrapper.Instance.LogEvent(Key.level_started, eventParam);
 #endif
 
+#if APSdk_Firebase
+
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
+                else {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_started,
+                            new List<Firebase.Analytics.Parameter>() {
+                                new Firebase.Analytics.Parameter(
+                                        Key.score,
+                                        (double)score
+                                    )
+                            }
+                        );
+                }
+
 #endif
 
-
-
+#endif
 
 #if APSdk_GameAnalytics
                 //if    :   GameAnalytics Integrated
@@ -198,7 +221,7 @@
                 //if    :   LionKit Integrated
                 Analytics.LogEvent(Key.level_complete, eventParam);
 #else
-            //if    :   LionKit Not Integrated
+                //if    :   LionKit Not Integrated
 
 #if APSdk_Facebook
             //if    :   Facebook Integrated
@@ -210,6 +233,25 @@
             //if    :   Adjust Integrated
             
                 APAdjustWrapper.Instance.LogEvent(Key.level_complete, eventParam);
+#endif
+
+#if APSdk_Firebase
+
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
+                else
+                {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_complete,
+                            new List<Firebase.Analytics.Parameter>() {
+                                new Firebase.Analytics.Parameter(
+                                        Key.score,
+                                        (double)score
+                                    )
+                            }
+                        );
+                }
+
 #endif
 
 #endif
@@ -241,7 +283,7 @@
                 //if    :   LionKit Integrated
                 Analytics.LogEvent(Key.level_failed, eventParam);
 #else
-            //if    :   LionKit Not Integrated
+                //if    :   LionKit Not Integrated
 
 #if APSdk_Facebook
             //if    :   Facebook Integrated
@@ -253,6 +295,25 @@
             //if    :   Adjust Integrated
             
                 APAdjustWrapper.Instance.LogEvent(Key.level_failed, eventParam);
+#endif
+
+#if APSdk_Firebase
+
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
+                else
+                {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_failed,
+                            new List<Firebase.Analytics.Parameter>() {
+                                new Firebase.Analytics.Parameter(
+                                        Key.score,
+                                        (double)score
+                                    )
+                            }
+                        );
+                }
+
 #endif
 
 #endif
