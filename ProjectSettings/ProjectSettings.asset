@@ -575,8 +575,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
-    4: s_max_enabled;gameanalytics_max_enabled;APSdk_LionKit_Integrated;APSdk_Facebook_Integrated;APSdk_Adjust_Integrated;APSdk_GameAnalytics_Integrated;APSdk_LionKit;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics
-    7: gameanalytics_max_enabled;APSdk_LionKit;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics
+    4: s_max_enabled;gameanalytics_max_enabled;APSdk_LionKit_Integrated;APSdk_Facebook_Integrated;APSdk_Adjust_Integrated;APSdk_GameAnalytics_Integrated;APSdk_LionKit;APSdk_GameAnalytics
+    7: gameanalytics_max_enabled;APSdk_LionKit;APSdk_GameAnalytics
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
