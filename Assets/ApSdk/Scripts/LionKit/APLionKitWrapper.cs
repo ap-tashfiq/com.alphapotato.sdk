@@ -222,7 +222,7 @@ LionKit.OnInitialized += () => {
 #if APSdk_Firebase
                 
                 APFirebaseInfo apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
-                APFirebaseWrapper.Instance.Initialize(()=> {
+                APFirebaseWrapper.Instance.Initialize(apSdkConfiguretionInfo, ()=> {
 
                     if (apFirebaseInfo.IsFirebaseAnalyticsEventEnabled && apFirebaseInfo.IsSubscribedToLionEvent) {
 

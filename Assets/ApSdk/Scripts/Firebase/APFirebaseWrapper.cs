@@ -18,6 +18,7 @@ public class APFirebaseWrapper : MonoBehaviour
 
     #region Private Variables
 
+    private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
     private APFirebaseInfo _apFirebaseInfo;
 
     #endregion
@@ -41,8 +42,9 @@ public class APFirebaseWrapper : MonoBehaviour
 
     #region Public Callback
 
-    public void Initialize(UnityAction OnInitialized = null)
+    public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, UnityAction OnInitialized = null)
     {
+        _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
         _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -76,7 +78,7 @@ public class APFirebaseWrapper : MonoBehaviour
 
     public void LogFirebaseEvent(string eventName, string parameName, string paramValue) {
 
-        if (_apFirebaseInfo.IsFirebaseAnalyticsEventEnabled)
+        if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apFirebaseInfo.IsFirebaseAnalyticsEventEnabled)
         {
             FirebaseAnalytics.LogEvent(
                     eventName,
@@ -88,7 +90,7 @@ public class APFirebaseWrapper : MonoBehaviour
 
     public void LogFirebaseEvent(string eventName, List<Parameter> parameter) {
 
-        if (_apFirebaseInfo.IsFirebaseAnalyticsEventEnabled) {
+        if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apFirebaseInfo.IsFirebaseAnalyticsEventEnabled) {
 
             FirebaseAnalytics.LogEvent(
                 eventName,
