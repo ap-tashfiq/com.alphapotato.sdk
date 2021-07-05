@@ -167,8 +167,9 @@
 
 #if APSdk_Facebook
             //if    :   Facebook Integrated
-            
-                APFacebookWrapper.Instance.LogEvent(Key.level_started, eventParam);
+
+                if(_apFacebookInfo.IsFacebookEventEnabled)
+                    APFacebookWrapper.Instance.LogEvent(Key.level_started, eventParam);
 #endif
 
 #if APSdk_Adjust
@@ -219,6 +220,8 @@
                 if (score != null)
                     eventParam.Add(_isLionKitIntegrated ? Key.rank : Key.score, score);
 
+                
+
 #if APSdk_LionKit
                 //if    :   LionKit Integrated
                 Analytics.LogEvent(Key.level_complete, eventParam);
@@ -228,7 +231,8 @@
 #if APSdk_Facebook
             //if    :   Facebook Integrated
             
-                APFacebookWrapper.Instance.LogEvent(Key.level_complete, eventParam);
+                if(_apFacebookInfo.IsFacebookEventEnabled)
+                    APFacebookWrapper.Instance.LogEvent(Key.level_complete, eventParam);
 #endif
 
 #if APSdk_Adjust
@@ -288,8 +292,9 @@
 
 #if APSdk_Facebook
             //if    :   Facebook Integrated
-            
-                APFacebookWrapper.Instance.LogEvent(Key.level_failed, eventParam);
+
+                if(_apFacebookInfo.IsFacebookEventEnabled)
+                    APFacebookWrapper.Instance.LogEvent(Key.level_failed, eventParam);
 #endif
 
 #if APSdk_Adjust
