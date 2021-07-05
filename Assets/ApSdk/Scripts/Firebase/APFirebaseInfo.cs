@@ -7,33 +7,29 @@ public class APFirebaseInfo : ScriptableObject
 {
     #region Public Variables
 
-    public bool TrackEvent {
-        get {
+    public bool IsFirebaseAnalyticsEventEnabled { get { return _enableFirebaseAnalyticsEvent; } }
 
-#if APSdk_LionKit
-        return _subscribeToLionEvent;
-#else
-        return _trackProgressionEvent;
-#endif
+    public bool IsTrackingProgressionEvent { get { return _trackProgressionEvent; } }
+    public bool IsTrackingAdEvent { get { return _trackAdEvent; } }
 
-        }
-    }
+    public bool IsSubscribedToLionEvent { get { return _subscribeToLionEvent; } }
+    public bool IsSubscribedToLionEventUA { get { return _subscribeToLionEventUA; } }
 
-    public bool TrackAdEvent
-    {
-        get
-        {
-            return _trackAdEvent;
-        }
-    }
 
-#endregion
 
-#region Private Variables
+    #endregion
+
+    #region Private Variables
+
+    [SerializeField] private bool _enableFirebaseAnalyticsEvent;
+
+    [SerializeField] private bool _trackProgressionEvent = false;
+    [SerializeField] private bool _trackAdEvent = false;
 
     [SerializeField] private bool _subscribeToLionEvent = false;
-    [SerializeField] private bool _trackEvent = false;
-    [SerializeField] private bool _trackAdEvent = false;
+    [SerializeField] private bool _subscribeToLionEventUA = false;
+
+    
 
 #endregion
 }

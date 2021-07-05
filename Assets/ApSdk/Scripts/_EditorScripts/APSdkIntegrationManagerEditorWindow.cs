@@ -11,7 +11,7 @@ namespace APSdk
 
     public class APSdkIntegrationManagerEditorWindow : EditorWindow
     {
-#region Private Variables   :   General
+        #region Private Variables   :   General
 
         private static EditorWindow _reference;
         private const float _labelWidth = 200;
@@ -28,7 +28,7 @@ namespace APSdk
         private const string _linkForDownload       = "https://portbucket2@bitbucket.org/portbucket2/apsdk.git";
         private const string _linkForDocumetation   = "https://bitbucket.org/portbucket2/apsdk/src/master/";
 
-#endregion
+        #endregion
 
         #region Private Variables   :   APSdkConfiguretionInfo
 
@@ -40,6 +40,7 @@ namespace APSdk
                 private GUIContent              _facebookSettingContent;
                 private GUIContent              _adjustSettingContent;
                 private GUIContent              _gameAnalyticsSettingContent;
+                private GUIContent              _firebaseSettingContent;
                 private GUIContent              _abTestSettingContent;
                 private GUIContent              _debuggingSettingContent;
 
@@ -48,12 +49,14 @@ namespace APSdk
                 private SerializedProperty      _isFacebookSDKIntegrated;
                 private SerializedProperty      _isAdjustSDKIntegrated;
                 private SerializedProperty      _isGameAnalyticsSDKIntegrated;
+                private SerializedProperty      _isFirebaseSDKIntegrated;
 
                 private SerializedProperty      _showGeneralSettings;
                 private SerializedProperty      _showLionAdSetting;
                 private SerializedProperty      _showFacebookSetting;
                 private SerializedProperty      _showAdjustSetting;
                 private SerializedProperty      _showGameAnalyticsSetting;
+                private SerializedProperty      _showFirebaseSetting;
                 private SerializedProperty      _showABTestSetting;
                 private SerializedProperty      _showDebuggingSettings;
 
@@ -156,6 +159,23 @@ namespace APSdk
 
         #endregion
 
+        #region Prvate Variables    :   Firebase
+
+#if APSdk_Firebase
+        private APFirebaseInfo _apFirebaseInfo;
+        private SerializedObject _serializedFirebaseInfo;
+
+        private SerializedProperty _enableFirebaseAnalyticsEvent;
+
+        private SerializedProperty _trackProgressionEventOnFirebase;
+        private SerializedProperty _trackAdEventOnFirebase;
+
+        private SerializedProperty _subscribeToLionEventOnFirebase;
+        private SerializedProperty _subscribeToLionEventUAOnFirebase;
+#endif
+
+        #endregion
+
         #region Editor
 
         [MenuItem("AP/APSdk Integration Manager")]
@@ -217,6 +237,9 @@ namespace APSdk
 
                     EditorGUILayout.Space();
                     GameAnalyticsSettingsGUI();
+
+                    EditorGUILayout.Space();
+                    FirebaseSettingsGUI();
 
                     EditorGUILayout.Space();
                     ABTestSettingsGUI();
@@ -855,6 +878,92 @@ namespace APSdk
 #endif
         }
 
+        private void FirebaseSettingsGUI() {
+
+            string title = string.Format("{0}{1}", "Firebase", _isGameAnalyticsSDKIntegrated.boolValue ? "" : "- SDK Not Found");
+            DrawHeaderGUI(title, ref _firebaseSettingContent, ref _settingsTitleStyle, ref _showFirebaseSetting);
+
+#if APSdk_Firebase
+            if (_showFirebaseSetting.boolValue) {
+
+                EditorGUI.indentLevel += 1;
+                {
+                    EditorGUILayout.BeginVertical();
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField("EnableFirebaseEvent", GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _enableFirebaseAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableFirebaseAnalyticsEvent.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _enableFirebaseAnalyticsEvent.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        APSdkEditorModule.DrawHorizontalLine();
+
+#if APSdk_LionKit
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _subscribeToLionEventOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnFirebase.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _subscribeToLionEventOnFirebase.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _subscribeToLionEventUAOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnFirebase.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _subscribeToLionEventUAOnFirebase.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+#else
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackProgressionEventOnFirebase.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackProgressionEventOnFirebase.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnFirebase.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackProgressionEventOnFirebase.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackAdEventOnFirebase.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackAdEventOnFirebase.boolValue = EditorGUILayout.Toggle(_trackAdEventOnFirebase.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackAdEventOnFirebase.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+#endif
+
+                    }
+                    EditorGUILayout.EndVertical();
+                }
+                EditorGUI.indentLevel -= 1;
+            }
+#endif
+                    }
+
         private void ABTestSettingsGUI() {
 
             DrawHeaderGUI("A/B Test", ref _abTestSettingContent, ref _settingsTitleStyle, ref _showABTestSetting);
@@ -954,13 +1063,15 @@ namespace APSdk
             _isFacebookSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFacebookSDKIntegrated");
             _isAdjustSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isAdjustSDKIntegrated");
             _isGameAnalyticsSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isGameAnalyticsSDKIntegrated");
+            _isFirebaseSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFirebaseSDKIntegrated");
 
             _showGeneralSettings = _serializedSDKConfiguretionInfo.FindProperty("_showGeneralSetting");
             _showLionAdSetting = _serializedSDKConfiguretionInfo.FindProperty("_showLionAdSetting");
             _showFacebookSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFacebookSetting");
             _showAdjustSetting = _serializedSDKConfiguretionInfo.FindProperty("_showAdjustSetting");
             _showGameAnalyticsSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
-            _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showABTestSetting");
+            _showFirebaseSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
+            _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFirebaseSetting");
             _showDebuggingSettings = _serializedSDKConfiguretionInfo.FindProperty("_showDebuggingSetting");
 
             _logAnalyticsEvent = _serializedSDKConfiguretionInfo.FindProperty("logAnalyticsEvent");
@@ -989,6 +1100,10 @@ namespace APSdk
 
             _gameAnalyticsSettingContent = new GUIContent(
                         "[" + (!_showGameAnalyticsSetting.boolValue ? "+" : "-") + "] " + (_isGameAnalyticsSDKIntegrated.boolValue ? "GameAnalytics" : "GameAnalytics - SDK Not Found")
+                    );
+
+            _firebaseSettingContent = new GUIContent(
+                        "[" + (!_showFirebaseSetting.boolValue ? "+" : "-") + "] " + (_isFirebaseSDKIntegrated.boolValue ? "Firebase" : "Firebase - SDK Not Found")
                     );
 
             _abTestSettingContent = new GUIContent(
@@ -1101,6 +1216,20 @@ namespace APSdk
 #endif
 
             #endregion
+
+#if APSdk_Firebase
+
+            _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
+            _serializedFirebaseInfo = new SerializedObject(_apFirebaseInfo);
+
+            _enableFirebaseAnalyticsEvent = _serializedFirebaseInfo.FindProperty("_enableFirebaseAnalyticsEvent");
+
+            _trackProgressionEventOnFirebase = _serializedFirebaseInfo.FindProperty("_trackProgressionEvent");
+            _trackAdEventOnFirebase = _serializedFirebaseInfo.FindProperty("_trackAdEvent");
+
+            _subscribeToLionEventOnFirebase = _serializedFirebaseInfo.FindProperty("_subscribeToLionEvent");
+            _subscribeToLionEventUAOnFirebase = _serializedFirebaseInfo.FindProperty("_subscribeToLionEventUA");
+#endif
 
             APSdkAssetPostProcessor.LookForSDK();
 

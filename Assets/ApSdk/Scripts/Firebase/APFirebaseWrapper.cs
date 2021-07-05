@@ -66,7 +66,7 @@ public class APFirebaseWrapper : MonoBehaviour
 
     public void LogFirebaseEvent(string eventName) {
 
-        if (_apFirebaseInfo.TrackEvent) {
+        if (_apFirebaseInfo.IsFirebaseAnalyticsEventEnabled) {
 
             FirebaseAnalytics.LogEvent(
                eventName);
@@ -74,9 +74,21 @@ public class APFirebaseWrapper : MonoBehaviour
         
     }
 
+    public void LogFirebaseEvent(string eventName, string parameName, string paramValue) {
+
+        if (_apFirebaseInfo.IsFirebaseAnalyticsEventEnabled)
+        {
+            FirebaseAnalytics.LogEvent(
+                    eventName,
+                    parameName,
+                    paramValue
+                );
+        }
+    }
+
     public void LogFirebaseEvent(string eventName, List<Parameter> parameter) {
 
-        if (_apFirebaseInfo.TrackEvent) {
+        if (_apFirebaseInfo.IsFirebaseAnalyticsEventEnabled) {
 
             FirebaseAnalytics.LogEvent(
                 eventName,

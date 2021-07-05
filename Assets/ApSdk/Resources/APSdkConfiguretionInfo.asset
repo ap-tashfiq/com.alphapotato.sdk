@@ -16,11 +16,13 @@ MonoBehaviour:
   _isFacebookSDKIntegrated: 0
   _isAdjustSDKIntegrated: 0
   _isGameAnalyticsSDKIntegrated: 0
+  _isFirebaseSDKIntegrated: 0
   _showGeneralSetting: 0
   _showLionAdSetting: 0
   _showFacebookSetting: 1
   _showAdjustSetting: 0
-  _showGameAnalyticsSetting: 0
+  _showGameAnalyticsSetting: 1
+  _showFirebaseSetting: 0
   _showABTestSetting: 0
   _showDebuggingSetting: 0
   logAnalyticsEvent: 1

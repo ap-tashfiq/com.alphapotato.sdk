@@ -220,9 +220,77 @@ LionKit.OnInitialized += () => {
 #endif
 
 #if APSdk_Firebase
-                APFirebaseWrapper.Instance.Initialize();
-                APFirebaseInfo apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
                 
+                APFirebaseInfo apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
+                APFirebaseWrapper.Instance.Initialize(()=> {
+
+                    if (apFirebaseInfo.IsFirebaseAnalyticsEventEnabled && apFirebaseInfo.IsSubscribedToLionEvent) {
+
+                        LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                        {
+                            List<Firebase.Analytics.Parameter> parameters = new List<Firebase.Analytics.Parameter>();
+
+                            List<string> keyList = new List<string>();
+                            List<string> valueList = new List<string>();
+
+                            Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
+                            Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
+
+                            foreach (object key in keys)
+                            {
+                                keyList.Add(key.ToString());
+                            }
+
+                            foreach (object value in values)
+                            {
+                                valueList.Add(value.ToString());
+                            }
+
+                            int numberOfEventParams = keyList.Count;
+
+                            for (int i = 0; i < numberOfEventParams; i++) {
+                                parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                            }
+
+                            APFirebaseWrapper.Instance.LogFirebaseEvent(gameEvent.eventName, parameters);
+                        };
+                    }
+
+                    if (apFirebaseInfo.IsFirebaseAnalyticsEventEnabled && apFirebaseInfo.IsSubscribedToLionEventUA)
+                    {
+
+                        LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                        {
+                            List<Firebase.Analytics.Parameter> parameters = new List<Firebase.Analytics.Parameter>();
+
+                            List<string> keyList = new List<string>();
+                            List<string> valueList = new List<string>();
+
+                            Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
+                            Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
+
+                            foreach (object key in keys)
+                            {
+                                keyList.Add(key.ToString());
+                            }
+
+                            foreach (object value in values)
+                            {
+                                valueList.Add(value.ToString());
+                            }
+
+                            int numberOfEventParams = keyList.Count;
+
+                            for (int i = 0; i < numberOfEventParams; i++)
+                            {
+                                parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                            }
+
+                            APFirebaseWrapper.Instance.LogFirebaseEvent(gameEvent.eventName, parameters);
+                        };
+                    }
+                });
+
 #endif
 
 #if APSdk_GameAnalytics

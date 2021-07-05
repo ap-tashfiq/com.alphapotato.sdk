@@ -179,18 +179,18 @@
 
 #if APSdk_Firebase
 
-                if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
-                else {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
-                            Key.level_started,
-                            new List<Firebase.Analytics.Parameter>() {
-                                new Firebase.Analytics.Parameter(
-                                        Key.score,
-                                        (double)score
-                                    )
-                            }
-                        );
+                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
+
+                    if (score == null)
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
+                    else
+                    {
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(
+                                Key.level_started,
+                                Key.score,
+                            (string)score
+                            );
+                    }
                 }
 
 #endif
@@ -210,6 +210,8 @@
 
         public void LevelComplete(object level, object score = null)
         {
+            
+
             if (_apSdkConfiguretionInfo.logAnalyticsEvent)
             {
                 Dictionary<string, object> eventParam = new Dictionary<string, object>();
@@ -237,19 +239,18 @@
 
 #if APSdk_Firebase
 
-                if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
-                else
-                {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
-                            Key.level_complete,
-                            new List<Firebase.Analytics.Parameter>() {
-                                new Firebase.Analytics.Parameter(
-                                        Key.score,
-                                        (double)score
-                                    )
-                            }
-                        );
+                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
+
+                    if (score == null)
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
+                    else
+                    {
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(
+                                Key.level_complete,
+                                Key.score,
+                            (string)score
+                            );
+                    }
                 }
 
 #endif
@@ -299,19 +300,18 @@
 
 #if APSdk_Firebase
 
-                if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
-                else
-                {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
-                            Key.level_failed,
-                            new List<Firebase.Analytics.Parameter>() {
-                                new Firebase.Analytics.Parameter(
-                                        Key.score,
-                                        (double)score
-                                    )
-                            }
-                        );
+                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
+
+                    if (score == null)
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
+                    else
+                    {
+                        APFirebaseWrapper.Instance.LogFirebaseEvent(
+                                Key.level_failed,
+                                Key.score,
+                            (string)score
+                            );
+                    }
                 }
 
 #endif
