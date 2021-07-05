@@ -21,6 +21,7 @@ namespace APSdk
 
         #region private Variables
 
+        private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
         private UnityAction _OnInitialized;
         private APFacebookInfo _apFacebookInfo;
 
@@ -61,8 +62,9 @@ namespace APSdk
 
 #region Public Callback
 
-        public void Initialize(UnityAction OnInitialized = null) {
+        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, UnityAction OnInitialized = null) {
 
+            _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
             _OnInitialized = OnInitialized;
 
             _apFacebookInfo = Resources.Load<APFacebookInfo>("Facebook/APFacebookInfo");
@@ -79,24 +81,28 @@ namespace APSdk
 
         public void LogEvent(string eventName, Dictionary<string, object> eventParams) {
 
-            if (_apFacebookInfo.logFacebookEvent)
-            {
+            if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
 
-                if (FB.IsInitialized)
+                if (_apFacebookInfo.IsFacebookEventEnabled)
                 {
-                    FB.LogAppEvent(
-                            eventName,
-                            parameters: eventParams
-                        );
+
+                    if (FB.IsInitialized)
+                    {
+                        FB.LogAppEvent(
+                                eventName,
+                                parameters: eventParams
+                            );
+                    }
+                    else
+                    {
+                        APSdkLogger.LogError(string.Format("{0}\n{1}", "Failed to log event for facebook analytics!", eventName));
+                    }
                 }
                 else
                 {
-                    APSdkLogger.LogError(string.Format("{0}\n{1}", "Failed to log event for facebook analytics!", eventName));
-                }
-            }
-            else {
 
-                APSdkLogger.LogError("'logEventOnFacebook' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                    APSdkLogger.LogError("'logEventOnFacebook' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                }
             }
         }
 

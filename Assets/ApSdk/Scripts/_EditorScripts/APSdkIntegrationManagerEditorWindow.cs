@@ -100,12 +100,19 @@ namespace APSdk
 #if APSdk_Facebook
 
 
-        private APFacebookInfo _apFacebookInfo;
-        private SerializedObject _serializedFacebookInfo;
+        private APFacebookInfo      _apFacebookInfo;
+        private SerializedObject    _serializedFacebookInfo;
 
         private SerializedProperty _facebookAppName;
         private SerializedProperty _facebookAppId;
-        private SerializedProperty _logFacebookEvent;
+
+        private SerializedProperty _enableFacebookEvent;
+
+        private SerializedProperty _trackProgressionEventOnFacebook;
+        private SerializedProperty _trackAdEventOnFacebook;
+
+        private SerializedProperty _subscribeToLionEventOnFacebook;
+        private SerializedProperty _subscribeToLionEventUAOnFacebook;
 
 #endif
 
@@ -564,26 +571,82 @@ namespace APSdk
                             _facebookAppId.serializedObject.ApplyModifiedProperties();
                             Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId.stringValue };
                         }
-
-
                     }
                     EditorGUILayout.EndHorizontal();
 
+                    APSdkEditorModule.DrawHorizontalLine();
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        string logFacebookEventTitle = _logFacebookEvent.displayName;
-#if APSdk_LionKit
-                        logFacebookEventTitle = "SubscribeToLionEvent";
-#endif
-                        EditorGUILayout.LabelField(logFacebookEventTitle, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(
+                            new GUIContent(
+                                "EnableFacebookEvent",
+                                "Enable facebook event"
+                                ),
+                            GUILayout.Width(_labelWidth));
                         EditorGUI.BeginChangeCheck();
-                        _logFacebookEvent.boolValue = EditorGUILayout.Toggle(_logFacebookEvent.boolValue);
+                        _enableFacebookEvent.boolValue = EditorGUILayout.Toggle(_enableFacebookEvent.boolValue);
                         if (EditorGUI.EndChangeCheck())
-                            _logFacebookEvent.serializedObject.ApplyModifiedProperties();
-
+                        {
+                            _enableFacebookEvent.serializedObject.ApplyModifiedProperties();
+                        }
                     }
                     EditorGUILayout.EndHorizontal();
+
+                    APSdkEditorModule.DrawHorizontalLine();
+
+#if APSdk_LionKit
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _subscribeToLionEventOnFacebook.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnFacebook.boolValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _subscribeToLionEventOnFacebook.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _subscribeToLionEventUAOnFacebook.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnFacebook.boolValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _subscribeToLionEventUAOnFacebook.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+#else
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackProgressionEventOnFacebook.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackProgressionEventOnFacebook.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnFacebook.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackProgressionEventOnFacebook.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackAdEventOnFacebook.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackAdEventOnFacebook.boolValue = EditorGUILayout.Toggle(_trackAdEventOnFacebook.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackAdEventOnFacebook.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+#endif
 
                 }
                 EditorGUI.indentLevel -= 1;
@@ -591,7 +654,7 @@ namespace APSdk
 
 #endif
 
-        }
+                }
 
         private void AdjustSettingsGUI()
         {
@@ -892,7 +955,12 @@ namespace APSdk
                     {
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField("EnableFirebaseEvent", GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField(
+                                new GUIContent(
+                                "EnableFirebaseEvent",
+                                "Enable firebase event"
+                                ),
+                                GUILayout.Width(_labelWidth));
                             EditorGUI.BeginChangeCheck();
                             _enableFirebaseAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableFirebaseAnalyticsEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -1160,9 +1228,16 @@ namespace APSdk
 
             _serializedFacebookInfo = new SerializedObject(_apFacebookInfo);
 
-            _facebookAppName = _serializedFacebookInfo.FindProperty("appName");
-            _facebookAppId = _serializedFacebookInfo.FindProperty("appId");
-            _logFacebookEvent = _serializedFacebookInfo.FindProperty("logFacebookEvent");
+            _facebookAppName                    = _serializedFacebookInfo.FindProperty("_appName");
+            _facebookAppId                      = _serializedFacebookInfo.FindProperty("_appId");
+
+            _enableFacebookEvent                = _serializedFacebookInfo.FindProperty("_enableFacebookEvent");
+
+            _trackProgressionEventOnFacebook    = _serializedFacebookInfo.FindProperty("_trackProgressionEvent");
+            _trackAdEventOnFacebook             = _serializedFacebookInfo.FindProperty("_trackAdEvent");
+
+            _subscribeToLionEventOnFacebook     = _serializedFacebookInfo.FindProperty("_subscribeToLionEvent");
+            _subscribeToLionEventUAOnFacebook   = _serializedFacebookInfo.FindProperty("_subscribeToLionEventUA");
 #endif
 
             #endregion

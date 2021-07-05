@@ -166,15 +166,28 @@ LionKit.OnInitialized += () => {
 
 #if APSdk_Facebook
 
-                APFacebookWrapper.Instance.Initialize(()=> {
+                APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, ()=> {
 
                     APFacebookInfo apFacebookInfo = Resources.Load<APFacebookInfo>("Facebook/APFacebookInfo");
-                    if (apFacebookInfo.logFacebookEvent)
+                    if (apFacebookInfo.IsSubscribedToLionEvent)
                     {
 
                         LionStudios.Analytics.OnLogEvent += (gameEvent) =>
                         {
                             LogLionGameEvent("Facebook", gameEvent);
+                            APFacebookWrapper.Instance.LogEvent(
+                                    gameEvent.eventName,
+                                    gameEvent.eventParams
+                                );
+                        };
+                    }
+
+                    if (apFacebookInfo.IsSubscribedToLionEventUA)
+                    {
+
+                        LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                        {
+                            LogLionGameEvent("FacebookUA", gameEvent);
                             APFacebookWrapper.Instance.LogEvent(
                                     gameEvent.eventName,
                                     gameEvent.eventParams
@@ -310,7 +323,7 @@ LionKit.OnInitialized += () => {
                 // if LionKit not integrated
 
 #if APSdk_Facebook
-                APFacebookWrapper.Instance.Initialize();
+                APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
 
 #if APSdk_Adjust
@@ -322,7 +335,7 @@ LionKit.OnInitialized += () => {
 #endif
 
 #if APSdk_Firebase
-                APFirebaseWrapper.Instance.Initialize();
+                APFirebaseWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
 
 #endif
