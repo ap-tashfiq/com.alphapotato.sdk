@@ -16,6 +16,7 @@
             SerializedProperty _isFacebookSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFacebookSDKIntegrated");
             SerializedProperty _isAdjustSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isAdjustSDKIntegrated");
             SerializedProperty _isGameAnalyticsSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isGameAnalyticsSDKIntegrated");
+            SerializedProperty _isFirebaseSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFirebaseSDKIntegrated");
 
             _isLionKitSDKIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckLionKitIntegration();
             _isLionKitSDKIntegrated.serializedObject.ApplyModifiedProperties();
@@ -28,6 +29,9 @@
 
             _isGameAnalyticsSDKIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckGameAnalyticsIntegration();
             _isGameAnalyticsSDKIntegrated.serializedObject.ApplyModifiedProperties();
+
+            _isFirebaseSDKIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckFirebaseIntegration();
+            _isFirebaseSDKIntegrated.serializedObject.ApplyModifiedProperties();
 
             _serializedSDKConfiguretionInfo.ApplyModifiedProperties();
         }

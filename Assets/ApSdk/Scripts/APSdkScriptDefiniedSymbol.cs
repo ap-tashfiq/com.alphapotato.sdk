@@ -210,6 +210,18 @@
             return isAdded;
         }
 
+        public static bool CheckFirebaseIntegration()
+        {
+
+            bool isAdded = AssetDatabase.IsValidFolder("Assets/Firebase");
+            UpdateDefines(
+                    APSdkConstant.APSdk_Firebase,
+                    isAdded,
+                    new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
+                );
+            return isAdded;
+        }
+
         public static void UpdateDefines(string entry, bool enabled, BuildTargetGroup[] groups)
         {
             foreach (var group in groups)
