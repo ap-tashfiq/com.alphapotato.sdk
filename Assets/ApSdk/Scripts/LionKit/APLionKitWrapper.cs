@@ -308,7 +308,7 @@ LionKit.OnInitialized += () => {
 
 #if APSdk_GameAnalytics
 
-                    APGameAnalyticsWrapper.Instance.Initialize();
+                    APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 
 #endif
 
@@ -331,7 +331,7 @@ LionKit.OnInitialized += () => {
 #endif
 
 #if APSdk_GameAnalytics
-                APGameAnalyticsWrapper.Instance.Initialize();
+                APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
 
 #if APSdk_Firebase

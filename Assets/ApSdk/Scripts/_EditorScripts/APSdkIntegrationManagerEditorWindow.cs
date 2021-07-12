@@ -161,11 +161,14 @@ namespace APSdk
         private APGameAnalyticsInfo _apGameAnalyticsInfo;
         private SerializedObject    _serializedGameAnalyticsInfo;
 
-        private SerializedProperty _defaultWorldIndexOnGameAnalytics;
+
+        private SerializedProperty _enableGameAnalyticsEvent;
+
         private SerializedProperty _trackProgressionEventOnGA;
-#if APSdk_LionKit
         private SerializedProperty _trackAdEventOnGA;
-#endif
+
+        private SerializedProperty _defaultWorldIndexOnGameAnalytics;
+
 
 #endif
 
@@ -942,6 +945,55 @@ namespace APSdk
 
                 EditorGUI.indentLevel += 1;
 
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField(
+                        new GUIContent(
+                            "EnableGameAnalyticsEvent",
+                            "Enable GameAnalytics event"
+                            ),
+                        GUILayout.Width(_labelWidth));
+                    EditorGUI.BeginChangeCheck();
+                    _enableGameAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableGameAnalyticsEvent.boolValue);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        _enableGameAnalyticsEvent.serializedObject.ApplyModifiedProperties();
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
+
+                APSdkEditorModule.DrawHorizontalLine();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField(_trackProgressionEventOnGA.displayName, GUILayout.Width(_labelWidth));
+                    EditorGUI.BeginChangeCheck();
+                    _trackProgressionEventOnGA.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnGA.boolValue);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        _trackProgressionEventOnGA.serializedObject.ApplyModifiedProperties();
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
+
+#if APSdk_LionKit
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField(_trackAdEventOnGA.displayName, GUILayout.Width(_labelWidth));
+                    EditorGUI.BeginChangeCheck();
+                    _trackAdEventOnGA.boolValue = EditorGUILayout.Toggle(_trackAdEventOnGA.boolValue);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        _trackAdEventOnGA.serializedObject.ApplyModifiedProperties();
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
+#endif
+
+
+
+                APSdkEditorModule.DrawHorizontalLine();
+
                 EditorGUILayout.BeginVertical();
                 {
                     EditorGUILayout.BeginHorizontal();
@@ -952,30 +1004,6 @@ namespace APSdk
                         if (EditorGUI.EndChangeCheck())
                         {
                             _defaultWorldIndexOnGameAnalytics.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_trackProgressionEventOnGA.displayName, GUILayout.Width(_labelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _trackProgressionEventOnGA.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnGA.boolValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            _trackProgressionEventOnGA.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_trackAdEventOnGA.displayName, GUILayout.Width(_labelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _trackAdEventOnGA.boolValue = EditorGUILayout.Toggle(_trackAdEventOnGA.boolValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            _trackAdEventOnGA.serializedObject.ApplyModifiedProperties();
                         }
                     }
                     EditorGUILayout.EndHorizontal();
@@ -1338,9 +1366,12 @@ namespace APSdk
 
             _serializedGameAnalyticsInfo = new SerializedObject(_apGameAnalyticsInfo);
 
+            _enableGameAnalyticsEvent   = _serializedGameAnalyticsInfo.FindProperty("_enableGameAnalyticsEvent");
+
+            _trackProgressionEventOnGA  = _serializedGameAnalyticsInfo.FindProperty("_trackProgressionEvent");
+            _trackAdEventOnGA           = _serializedGameAnalyticsInfo.FindProperty("_trackAdEvent");
+
             _defaultWorldIndexOnGameAnalytics = _serializedGameAnalyticsInfo.FindProperty("_defaultWorldIndex");
-            _trackProgressionEventOnGA              = _serializedGameAnalyticsInfo.FindProperty("_trackProgressionEvent");
-            _trackAdEventOnGA = _serializedGameAnalyticsInfo.FindProperty("_trackAdEvent");
 
 #endif
 
