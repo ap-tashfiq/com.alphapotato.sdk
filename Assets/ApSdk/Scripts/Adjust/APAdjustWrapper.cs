@@ -19,7 +19,9 @@ namespace APSdk
 
         #region Private Variables
 
+        private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
         private APAdjustInfo _aPAdjustInfo;
+
 
         #endregion
 
@@ -70,22 +72,22 @@ namespace APSdk
 
         #region Public Callback
 
-        public void Initialize()
+        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-
+            _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
             APAdjustInfo adjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
 
             AdjustConfig adjustConfig = new AdjustConfig(
                 adjustInfo.appToken,
-                adjustInfo.environment,
-                adjustInfo.logLevel == AdjustLogLevel.Suppress);
+                adjustInfo.Environment,
+                adjustInfo.LogLevel == AdjustLogLevel.Suppress);
 
-            adjustConfig.setLogLevel(adjustInfo.logLevel);
-            adjustConfig.setSendInBackground(adjustInfo.sendInBackground);
-            adjustConfig.setEventBufferingEnabled(adjustInfo.eventBuffering);
-            adjustConfig.setLaunchDeferredDeeplink(adjustInfo.launchDeferredDeeplink);
+            adjustConfig.setLogLevel(adjustInfo.LogLevel);
+            adjustConfig.setSendInBackground(adjustInfo.SendInBackground);
+            adjustConfig.setEventBufferingEnabled(adjustInfo.EventBuffering);
+            adjustConfig.setLaunchDeferredDeeplink(adjustInfo.LaunchDeferredDeeplink);
 
-            adjustConfig.setDelayStart(adjustInfo.startDelay);
+            adjustConfig.setDelayStart(adjustInfo.StartDelay);
 
             Adjust.start(adjustConfig);
 
@@ -94,16 +96,19 @@ namespace APSdk
 
         public void LogEvent(string eventName, Dictionary<string, object> eventParams)
         {
-            if (_aPAdjustInfo.logAdjustEvent) {
-                AdjustEvent newEvent = new AdjustEvent(eventName);
-                Adjust.trackEvent(newEvent);
-            }
-            else
-            {
+            if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
 
-                APSdkLogger.LogError("'logAdjustEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
-            }
+                if (_aPAdjustInfo.IsAdjustEventEnabled)
+                {
+                    AdjustEvent newEvent = new AdjustEvent(eventName);
+                    Adjust.trackEvent(newEvent);
+                }
+                else
+                {
 
+                    APSdkLogger.LogError("'logAdjustEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                }
+            }
         }
 
         #endregion

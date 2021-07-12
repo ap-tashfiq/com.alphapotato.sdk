@@ -20,7 +20,7 @@ MonoBehaviour:
   _showGeneralSetting: 0
   _showLionAdSetting: 0
   _showFacebookSetting: 0
-  _showAdjustSetting: 0
+  _showAdjustSetting: 1
   _showGameAnalyticsSetting: 0
   _showFirebaseSetting: 0
   _showABTestSetting: 0

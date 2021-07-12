@@ -128,8 +128,13 @@ namespace APSdk
         private SerializedProperty _showAdjustBasicInfo;
         private SerializedProperty _showAdjustAdvancedInfo;
 
-        private SerializedProperty _logAdjustEvent;
-        private SerializedProperty _logAdjustEventUA;
+        private SerializedProperty _enableAdjustEvent;
+
+        private SerializedProperty _trackProgressionEventOnAdjust;
+        private SerializedProperty _trackAdEventOnAdjust;
+
+        private SerializedProperty _subscribeToLionEventOnAdjust;
+        private SerializedProperty _subscribeToLionEventUAOnAdjust;
 
         private SerializedProperty _adjustAppTokenForAndroid;
         private SerializedProperty _adjustAppTokenForIOS;
@@ -548,36 +553,6 @@ namespace APSdk
                 {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_facebookAppName.displayName, GUILayout.Width(_labelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _facebookAppName.stringValue = EditorGUILayout.TextField(_facebookAppName.stringValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            _facebookAppName.serializedObject.ApplyModifiedProperties();
-                            Facebook.Unity.Settings.FacebookSettings.AppLabels = new List<string>() { _facebookAppName.stringValue };
-                        }
-
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_facebookAppId.displayName, GUILayout.Width(_labelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _facebookAppId.stringValue = EditorGUILayout.TextField(_facebookAppId.stringValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-
-                            _facebookAppId.serializedObject.ApplyModifiedProperties();
-                            Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId.stringValue };
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    APSdkEditorModule.DrawHorizontalLine();
-
-                    EditorGUILayout.BeginHorizontal();
-                    {
                         EditorGUILayout.LabelField(
                             new GUIContent(
                                 "EnableFacebookEvent",
@@ -648,6 +623,36 @@ namespace APSdk
 
 #endif
 
+                    APSdkEditorModule.DrawHorizontalLine();
+
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField(_facebookAppName.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _facebookAppName.stringValue = EditorGUILayout.TextField(_facebookAppName.stringValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _facebookAppName.serializedObject.ApplyModifiedProperties();
+                            Facebook.Unity.Settings.FacebookSettings.AppLabels = new List<string>() { _facebookAppName.stringValue };
+                        }
+
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField(_facebookAppId.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _facebookAppId.stringValue = EditorGUILayout.TextField(_facebookAppId.stringValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+
+                            _facebookAppId.serializedObject.ApplyModifiedProperties();
+                            Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId.stringValue };
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
                 }
                 EditorGUI.indentLevel -= 1;
             }
@@ -667,35 +672,79 @@ namespace APSdk
             {
                 EditorGUI.indentLevel += 1;
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_logAdjustEvent.displayName, GUILayout.Width(_labelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _logAdjustEvent.boolValue = EditorGUILayout.Toggle(_logAdjustEvent.boolValue);
-                        if (EditorGUI.EndChangeCheck())
-                            _logAdjustEvent.serializedObject.ApplyModifiedProperties();
-                    }
-                    EditorGUILayout.EndHorizontal();
-#if APSdk_LionKit
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        string logAdjustEventTitle = _logAdjustEvent.displayName;
-#if APSdk_LionKit
-                        logAdjustEventTitle = "SubscribeToLionEvent";
-#endif
 
-                        EditorGUILayout.LabelField(logAdjustEventTitle, GUILayout.Width(_labelWidth));
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField(
+                            new GUIContent(
+                                "EnableAdjustEvent",
+                                "Enable adjust event"
+                                ),
+                            GUILayout.Width(_labelWidth));
                         EditorGUI.BeginChangeCheck();
-                        _logAdjustEventUA.boolValue = EditorGUILayout.Toggle(_logAdjustEventUA.boolValue);
+                        _enableAdjustEvent.boolValue = EditorGUILayout.Toggle(_enableAdjustEvent.boolValue);
                         if (EditorGUI.EndChangeCheck())
-                            _logAdjustEventUA.serializedObject.ApplyModifiedProperties();
+                        {
+                            _enableAdjustEvent.serializedObject.ApplyModifiedProperties();
+                        }
                     }
                     EditorGUILayout.EndHorizontal();
 
+                    APSdkEditorModule.DrawHorizontalLine();
 
+#if APSdk_LionKit
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _subscribeToLionEventOnAdjust.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnAdjust.boolValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _subscribeToLionEventOnAdjust.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                        EditorGUI.BeginChangeCheck();
+                        _subscribeToLionEventUAOnAdjust.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnAdjust.boolValue);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _subscribeToLionEventUAOnAdjust.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
 #else
-                    EditorGUILayout.HelpBox("To track UA event, you need to integrated 'LionKit' to your project", MessageType.Info);
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackProgressionEventOnAdjust.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackProgressionEventOnAdjust.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnAdjust.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackProgressionEventOnAdjust.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            EditorGUILayout.LabelField(_trackAdEventOnAdjust.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUI.BeginChangeCheck();
+                            _trackAdEventOnAdjust.boolValue = EditorGUILayout.Toggle(_trackAdEventOnAdjust.boolValue);
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                _trackAdEventOnAdjust.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
 #endif
+
+                    APSdkEditorModule.DrawHorizontalLine();
 
                     #region Settings    :   Basic
 
@@ -749,7 +798,7 @@ namespace APSdk
                                 {
                                     EditorGUILayout.LabelField(_adjustEnvironment.displayName, GUILayout.Width(_labelWidth));
                                     EditorGUI.BeginChangeCheck();
-                                    _adjustEnvironment.enumValueIndex = (int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.environment));
+                                    _adjustEnvironment.enumValueIndex = (int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.Environment));
                                     if (EditorGUI.EndChangeCheck())
                                     {
                                         _adjustEnvironment.serializedObject.ApplyModifiedProperties();
@@ -797,7 +846,7 @@ namespace APSdk
                                 {
                                     EditorGUILayout.LabelField(_adjustLogLevel.displayName, GUILayout.Width(_labelWidth));
                                     EditorGUI.BeginChangeCheck();
-                                    _adjustLogLevel.enumValueIndex = ((int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.logLevel))) - 1;
+                                    _adjustLogLevel.enumValueIndex = ((int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.LogLevel))) - 1;
                                     if (EditorGUI.EndChangeCheck())
                                     {
                                         _adjustLogLevel.serializedObject.ApplyModifiedProperties();
@@ -1255,20 +1304,25 @@ namespace APSdk
             _showAdjustBasicInfo = _serializedAdjustInfo.FindProperty("_showBasicInfo");
             _showAdjustAdvancedInfo = _serializedAdjustInfo.FindProperty("_showAdvancedInfo");
 
-            _logAdjustEvent = _serializedAdjustInfo.FindProperty("logAdjustEvent");
-            _logAdjustEventUA = _serializedAdjustInfo.FindProperty("logAdjustEventUA");
+            _enableAdjustEvent = _serializedAdjustInfo.FindProperty("_enableAdjustEvent");
 
-            _adjustAppTokenForAndroid = _serializedAdjustInfo.FindProperty("appTokenForAndroid");
-            _adjustAppTokenForIOS = _serializedAdjustInfo.FindProperty("appTokenForIOS");
+            _trackProgressionEventOnAdjust = _serializedAdjustInfo.FindProperty("_trackProgressionEvent");
+            _trackAdEventOnAdjust = _serializedAdjustInfo.FindProperty("_trackAdEvent");
 
-            _adjustEnvironment = _serializedAdjustInfo.FindProperty("environment");
+            _subscribeToLionEventOnAdjust = _serializedAdjustInfo.FindProperty("_subscribeToLionEvent");
+            _subscribeToLionEventUAOnAdjust = _serializedAdjustInfo.FindProperty("_subscribeToLionEventUA");
 
-            _adjustLogLevel = _serializedAdjustInfo.FindProperty("logLevel");
-            _adjustStartManually = _serializedAdjustInfo.FindProperty("startManually");
-            _adjustStartDelay = _serializedAdjustInfo.FindProperty("startDelay");
-            _adjustEventBuffering = _serializedAdjustInfo.FindProperty("eventBuffering");
-            _adjustSendInBackground = _serializedAdjustInfo.FindProperty("sendInBackground");
-            _adjustLaunchDeferredDeeplink = _serializedAdjustInfo.FindProperty("launchDeferredDeeplink");
+            _adjustAppTokenForAndroid = _serializedAdjustInfo.FindProperty("_appTokenForAndroid");
+            _adjustAppTokenForIOS = _serializedAdjustInfo.FindProperty("_appTokenForIOS");
+
+            _adjustEnvironment = _serializedAdjustInfo.FindProperty("_environment");
+
+            _adjustLogLevel = _serializedAdjustInfo.FindProperty("_logLevel");
+            _adjustStartManually = _serializedAdjustInfo.FindProperty("_startManually");
+            _adjustStartDelay = _serializedAdjustInfo.FindProperty("_startDelay");
+            _adjustEventBuffering = _serializedAdjustInfo.FindProperty("_eventBuffering");
+            _adjustSendInBackground = _serializedAdjustInfo.FindProperty("_sendInBackground");
+            _adjustLaunchDeferredDeeplink = _serializedAdjustInfo.FindProperty("_launchDeferredDeeplink");
 
 #endif
 

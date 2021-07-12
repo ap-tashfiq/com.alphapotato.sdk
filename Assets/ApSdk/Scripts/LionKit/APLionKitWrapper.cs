@@ -204,9 +204,9 @@ LionKit.OnInitialized += () => {
                     
 
                     // do adjust init
-                    APAdjustWrapper.Instance.Initialize();
+                    APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo);
                     APAdjustInfo aPAdjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
-                    if (aPAdjustInfo.logAdjustEvent) {
+                    if (aPAdjustInfo.IsSubscribedToLionEvent) {
 
                         LionStudios.Analytics.OnLogEvent += (gameEvent) =>
                         {
@@ -218,7 +218,7 @@ LionKit.OnInitialized += () => {
                         };
                     }
 
-                    if (aPAdjustInfo.logAdjustEventUA) {
+                    if (aPAdjustInfo.IsSubscribedToLionEventUA) {
 
                         LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
                         {
@@ -327,7 +327,7 @@ LionKit.OnInitialized += () => {
 #endif
 
 #if APSdk_Adjust
-                APAdjustWrapper.Instance.Initialize();
+                APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
 
 #if APSdk_GameAnalytics
