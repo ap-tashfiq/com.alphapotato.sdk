@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showBasicInfo: 1
   _showAdvancedInfo: 1
-  logEventOnAdjust: 1
-  logEventUAOnAdjust: 1
-  appTokenForAndroid: o4p8424ki134
-  appTokenForIOS: q69xu1s07nr4
-  environment: 0
-  logLevel: 1
-  startDelay: 0
-  startManually: 0
-  eventBuffering: 0
-  sendInBackground: 0
-  launchDeferredDeeplink: 1
+  _enableAdjustEvent: 0
+  _trackProgressionEvent: 0
+  _trackAdEvent: 0
+  _subscribeToLionEvent: 0
+  _subscribeToLionEventUA: 0
+  _appTokenForAndroid: 
+  _appTokenForIOS: 
+  _environment: 0
+  _logLevel: 7
+  _startDelay: 0
+  _startManually: 1
+  _eventBuffering: 0
+  _sendInBackground: 0
+  _launchDeferredDeeplink: 1

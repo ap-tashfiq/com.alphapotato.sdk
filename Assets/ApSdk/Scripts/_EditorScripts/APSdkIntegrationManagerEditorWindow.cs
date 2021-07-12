@@ -992,7 +992,7 @@ namespace APSdk
 
         private void FirebaseSettingsGUI() {
 
-            string title = string.Format("{0}{1}", "Firebase", _isGameAnalyticsSDKIntegrated.boolValue ? "" : "- SDK Not Found");
+            string title = string.Format("{0}{1}", "Firebase", _isFirebaseSDKIntegrated.boolValue ? "" : "- SDK Not Found");
             DrawHeaderGUI(title, ref _firebaseSettingContent, ref _settingsTitleStyle, ref _showFirebaseSetting);
 
 #if APSdk_Firebase
@@ -1187,8 +1187,8 @@ namespace APSdk
             _showFacebookSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFacebookSetting");
             _showAdjustSetting = _serializedSDKConfiguretionInfo.FindProperty("_showAdjustSetting");
             _showGameAnalyticsSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
-            _showFirebaseSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
-            _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFirebaseSetting");
+            _showFirebaseSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFirebaseSetting");
+            _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showABTestSetting");
             _showDebuggingSettings = _serializedSDKConfiguretionInfo.FindProperty("_showDebuggingSetting");
 
             _logAnalyticsEvent = _serializedSDKConfiguretionInfo.FindProperty("logAnalyticsEvent");
