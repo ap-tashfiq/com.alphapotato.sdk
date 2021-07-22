@@ -2,8 +2,8 @@
 {
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "MaxAdConfiguretion", menuName = "MaxAdConfiguretion")]
-    public class MaxAdConfiguretion : BaseClassForAdConfiguretion
+    [CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
+    public class APMaxAdNetworkConfiguretion : BaseClassForAdConfiguretion
     {
 
 #if UNITY_EDITOR

@@ -41,6 +41,7 @@ namespace APSdk
                 private GUIContent              _adjustSettingContent;
                 private GUIContent              _gameAnalyticsSettingContent;
                 private GUIContent              _firebaseSettingContent;
+                private GUIContent              _adNetworkSettingContent;
                 private GUIContent              _abTestSettingContent;
                 private GUIContent              _debuggingSettingContent;
 
@@ -57,6 +58,7 @@ namespace APSdk
                 private SerializedProperty      _showAdjustSetting;
                 private SerializedProperty      _showGameAnalyticsSetting;
                 private SerializedProperty      _showFirebaseSetting;
+                private SerializedProperty      _showAdNetworks;
                 private SerializedProperty      _showABTestSetting;
                 private SerializedProperty      _showDebuggingSettings;
 
@@ -241,8 +243,8 @@ namespace APSdk
                 {
                     GeneralSettingGUI();
 
-                    EditorGUILayout.Space();
-                    LionAdSettingsGUI();
+                    //EditorGUILayout.Space();
+                    //LionAdSettingsGUI();
 
                     EditorGUILayout.Space();
                     FacebookSettingGUI();
@@ -255,6 +257,9 @@ namespace APSdk
 
                     EditorGUILayout.Space();
                     FirebaseSettingsGUI();
+
+                    EditorGUILayout.Space();
+                    AdNetworksSettingsGUI();
 
                     EditorGUILayout.Space();
                     ABTestSettingsGUI();
@@ -289,6 +294,225 @@ namespace APSdk
                 }
             }
             EditorGUILayout.EndVertical();
+        }
+
+        private void DrawAdNetworkGUI(int adConfiguretionIndex, BaseClassForAdConfiguretion adConfiguretion) {
+
+            //Referencing Variables
+            SerializedObject serailizedAdConfiguretion  = new SerializedObject(adConfiguretion);
+
+            SerializedProperty _showSettings            = serailizedAdConfiguretion.FindProperty("_showSettings");
+            SerializedProperty _showRewardedAdSettings  = serailizedAdConfiguretion.FindProperty("_showRewardedAdSettings");
+            SerializedProperty _showInterstitialAdSettings  = serailizedAdConfiguretion.FindProperty("_showInterstitialAdSettings");
+            SerializedProperty _showBannerAdSettings    = serailizedAdConfiguretion.FindProperty("_showBannerAdSettings");
+            SerializedProperty _showCrossPromoAdSettings = serailizedAdConfiguretion.FindProperty("_showCrossPromoAdSettings");
+
+            SerializedProperty _nameOfAdNetwork         = serailizedAdConfiguretion.FindProperty("_nameOfAdNetwork");
+
+            SerializedProperty _isAdSDKIntegrated       = serailizedAdConfiguretion.FindProperty("_isAdSDKIntegrated");
+
+            SerializedProperty _enableRewardedAd   = serailizedAdConfiguretion.FindProperty("_enableRewardedAd");
+
+            SerializedProperty _enableInterstitialAd    = serailizedAdConfiguretion.FindProperty("_enableInterstitialAd");
+
+            SerializedProperty _enableBannerAd          = serailizedAdConfiguretion.FindProperty("_enableBannerAd");
+            SerializedProperty _showBannerAdManually    = serailizedAdConfiguretion.FindProperty("_showBannerAdManually");
+
+            SerializedProperty _enableCrossPromoAd      = serailizedAdConfiguretion.FindProperty("_enableCrossPromoAd");
+
+
+            //Setting Titles
+            GUIContent titleContent = new GUIContent(
+                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfAdNetwork.stringValue + (_isAdSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                );
+            GUIStyle titleStyle = new GUIStyle(EditorStyles.boldLabel);
+            titleStyle.alignment = TextAnchor.MiddleLeft;
+            titleStyle.padding.left = 18;
+
+            EditorGUILayout.BeginHorizontal(GUI.skin.box);
+            {
+                if (GUILayout.Button(titleContent, titleStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth - 100f)))
+                {
+                    _showSettings.boolValue = !_showSettings.boolValue;
+                    _showSettings.serializedObject.ApplyModifiedProperties();
+
+                    titleContent = new GUIContent(
+                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfAdNetwork.stringValue + (_isAdSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                    );
+                }
+
+                if (_apSDKConfiguretionInfo.indexOfActiveAdConfiguretion == adConfiguretionIndex)
+                {
+                    if (GUILayout.Button("Disable", GUILayout.Width(80)))
+                    {
+                        _apSDKConfiguretionInfo.indexOfActiveAdConfiguretion = -1;
+                    }
+                }
+                else {
+                    if (GUILayout.Button("Enable", GUILayout.Width(80)))
+                    {
+                        _apSDKConfiguretionInfo.indexOfActiveAdConfiguretion = adConfiguretionIndex;
+                    }
+                }
+
+                GUILayout.FlexibleSpace();
+            }
+            EditorGUILayout.EndHorizontal();
+
+            if (_showSettings.boolValue) {
+
+                //AdType Configuretion
+                GUIStyle adTypeStyle = new GUIStyle(EditorStyles.boldLabel);
+                adTypeStyle.alignment = TextAnchor.MiddleLeft;
+                adTypeStyle.padding.left = 36;
+
+                //------------------------------
+                #region RewardedAd
+
+                EditorGUI.indentLevel += 1;
+                {
+                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
+                    {
+                        string rewardedAdLabel = "[" + (!_showRewardedAdSettings.boolValue ? "+" : "-") + "] [RewardedAd]";
+                        GUIContent rewardedAdLabelContent = new GUIContent(
+                                rewardedAdLabel
+
+                            );
+
+                        if (GUILayout.Button(rewardedAdLabelContent, adTypeStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
+                        {
+                            _showRewardedAdSettings.boolValue = !_showRewardedAdSettings.boolValue;
+                            _showRewardedAdSettings.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    if (_showRewardedAdSettings.boolValue)
+                    {
+
+                        EditorGUI.indentLevel += 2;
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_enableRewardedAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _enableRewardedAd.boolValue = EditorGUILayout.Toggle(_enableRewardedAd.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _enableRewardedAd.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
+                        }
+                        EditorGUI.indentLevel -= 2;
+
+                    }
+                }
+                EditorGUI.indentLevel -= 1;
+
+
+                #endregion
+
+                //------------------------------
+                #region InterstitialAd
+
+                EditorGUI.indentLevel += 1;
+                {
+                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
+                    {
+                        string interstitialAdLabel = "[" + (!_showInterstitialAdSettings.boolValue ? "+" : "-") + "] [InterstitialAd]";
+                        GUIContent interstialAdLabelContent = new GUIContent(
+                                interstitialAdLabel
+
+                            );
+
+                        if (GUILayout.Button(interstialAdLabelContent, adTypeStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
+                        {
+                            _showInterstitialAdSettings.boolValue = !_showInterstitialAdSettings.boolValue;
+                            _showInterstitialAdSettings.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    if (_showInterstitialAdSettings.boolValue)
+                    {
+                        EditorGUI.indentLevel += 2;
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_enableInterstitialAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _enableInterstitialAd.boolValue = EditorGUILayout.Toggle(_enableInterstitialAd.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _enableInterstitialAd.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
+                        }
+                        EditorGUI.indentLevel -= 2;
+
+                    }
+                }
+                EditorGUI.indentLevel -= 1;
+
+
+                #endregion
+
+                //------------------------------
+                #region BannerAd
+
+                EditorGUI.indentLevel += 1;
+                {
+                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
+                    {
+                        string bannerAdLabel = "[" + (!_showBannerAdSettings.boolValue ? "+" : "-") + "] [BannerAd]";
+                        GUIContent bannerAdLabelContent = new GUIContent(
+                                bannerAdLabel
+
+                            );
+
+                        if (GUILayout.Button(bannerAdLabelContent, adTypeStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
+                        {
+                            _showBannerAdSettings.boolValue = !_showBannerAdSettings.boolValue;
+                            _showBannerAdSettings.serializedObject.ApplyModifiedProperties();
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    if (_showBannerAdSettings.boolValue)
+                    {
+                        EditorGUI.indentLevel += 2;
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_enableBannerAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _enableBannerAd.boolValue = EditorGUILayout.Toggle(_enableBannerAd.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _enableBannerAd.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
+
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_showBannerAdManually.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _showBannerAdManually.boolValue = EditorGUILayout.Toggle(_showBannerAdManually.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _showBannerAdManually.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
+                        }
+                        EditorGUI.indentLevel -= 2;
+
+                    }
+                }
+                EditorGUI.indentLevel -= 1;
+
+
+                #endregion
+
+            }
+
+
+
         }
 
         private void GeneralSettingGUI()
@@ -384,7 +608,7 @@ namespace APSdk
 
             #endregion
 
-                //------------------------------
+            //------------------------------
             #region InterstitialAd
 
                 EditorGUI.indentLevel += 1;
@@ -431,7 +655,7 @@ namespace APSdk
 
             #endregion
 
-                //------------------------------
+            //------------------------------
             #region BannerAd
 
                 EditorGUI.indentLevel += 1;
@@ -488,7 +712,8 @@ namespace APSdk
 
             #endregion
 
-                //------------------------------
+
+            //------------------------------
             #region CrossPromoAd
 
                 EditorGUI.indentLevel += 1;
@@ -534,6 +759,7 @@ namespace APSdk
 
 
             #endregion
+
             }
 
 
@@ -1109,6 +1335,23 @@ namespace APSdk
 #endif
                     }
 
+        private void AdNetworksSettingsGUI() {
+
+            DrawHeaderGUI("AdNetworks", ref _adNetworkSettingContent, ref _settingsTitleStyle, ref _showAdNetworks);
+
+            if (_showAdNetworks.boolValue) {
+                int numberOfAdNetwork = _apSDKConfiguretionInfo.listOfAdConfiguretion.Count;
+                
+                {
+                    for (int i = 0; i < numberOfAdNetwork; i++)
+                    {
+                        DrawAdNetworkGUI(i, _apSDKConfiguretionInfo.listOfAdConfiguretion[i]);
+                    }
+                }
+                
+            }
+        }
+
         private void ABTestSettingsGUI() {
 
             DrawHeaderGUI("A/B Test", ref _abTestSettingContent, ref _settingsTitleStyle, ref _showABTestSetting);
@@ -1216,6 +1459,7 @@ namespace APSdk
             _showAdjustSetting = _serializedSDKConfiguretionInfo.FindProperty("_showAdjustSetting");
             _showGameAnalyticsSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
             _showFirebaseSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFirebaseSetting");
+            _showAdNetworks = _serializedSDKConfiguretionInfo.FindProperty("_showAdNetworks");
             _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showABTestSetting");
             _showDebuggingSettings = _serializedSDKConfiguretionInfo.FindProperty("_showDebuggingSetting");
 
@@ -1249,6 +1493,10 @@ namespace APSdk
 
             _firebaseSettingContent = new GUIContent(
                         "[" + (!_showFirebaseSetting.boolValue ? "+" : "-") + "] " + (_isFirebaseSDKIntegrated.boolValue ? "Firebase" : "Firebase - SDK Not Found")
+                    );
+
+            _adNetworkSettingContent = new GUIContent(
+                        "[" + (!_showAdNetworks.boolValue ? "+" : "-") + "] " + "AdNetwork"
                     );
 
             _abTestSettingContent = new GUIContent(

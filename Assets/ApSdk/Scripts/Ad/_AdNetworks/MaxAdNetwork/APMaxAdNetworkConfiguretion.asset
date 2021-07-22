@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e927253ddfe5b45e79cb371c526d68bf, type: 3}
-  m_Name: MaxAdConfiguretion
+  m_Name: APMaxAdNetworkConfiguretion
   m_EditorClassIdentifier: 
-  _enableRewardedVideoAd: 0
+  _showSettings: 0
+  _showRewardedAdSettings: 0
+  _showInterstitialAdSettings: 0
+  _showBannerAdSettings: 0
+  _nameOfAdNetwork: MaxAdNetwork
+  _isAdSDKIntegrated: 1
+  _enableRewardedAd: 0
   _enableInterstitialAd: 0
   _enableBannerAd: 0
   _showBannerAdManually: 0

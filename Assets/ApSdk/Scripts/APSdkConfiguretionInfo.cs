@@ -23,6 +23,7 @@
         [SerializeField] private bool _showAdjustSetting = false;
         [SerializeField] private bool _showGameAnalyticsSetting = false;
         [SerializeField] private bool _showFirebaseSetting = false;
+        [SerializeField] private bool _showAdNetworks = false;
         [SerializeField] private bool _showABTestSetting = false;
         [SerializeField] private bool _showDebuggingSetting = false;
 #endif
