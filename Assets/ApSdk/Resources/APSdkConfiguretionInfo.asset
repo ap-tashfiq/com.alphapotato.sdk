@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a57a0b015c445d4b084119d72e8405, type: 3}
   m_Name: APSdkConfiguretionInfo
   m_EditorClassIdentifier: 
-  _isLionKitSDKIntegrated: 0
+  _isLionKitSDKIntegrated: 1
   _isFacebookSDKIntegrated: 0
   _isAdjustSDKIntegrated: 0
   _isGameAnalyticsSDKIntegrated: 0
   _isFirebaseSDKIntegrated: 0
   _showGeneralSetting: 1
-  _showLionAdSetting: 0
+  _showLionAdSetting: 1
   _showFacebookSetting: 0
   _showAdjustSetting: 0
   _showGameAnalyticsSetting: 0
@@ -26,6 +26,10 @@ MonoBehaviour:
   _showABTestSetting: 0
   _showDebuggingSetting: 0
   logAnalyticsEvent: 1
+  activeAdConfiguretion: {fileID: 11400000, guid: a187bd99ed2934aa598eadd41941cc7c,
+    type: 2}
+  listOfAdConfiguretion:
+  - {fileID: 11400000, guid: a187bd99ed2934aa598eadd41941cc7c, type: 2}
   maxMediationDebugger: 0
   showAPSdkLogInConsole: 1
   infoLogColor: {r: 1, g: 0.9881732, b: 0.740566, a: 1}

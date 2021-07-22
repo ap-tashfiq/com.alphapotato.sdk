@@ -1,6 +1,7 @@
 ﻿namespace APSdk
 {
     using UnityEngine;
+    using System.Collections.Generic;
 
     //[CreateAssetMenu(fileName = "APSdkConfiguretionInfo", menuName = APSdkConstant.NameOfSDK + "/APSdkConfiguretionInfo")]
     public class APSdkConfiguretionInfo : ScriptableObject
@@ -9,6 +10,7 @@
 
 #if UNITY_EDITOR
 
+        [Header("Parameter  :   Editor")]
         [SerializeField] private bool _isLionKitSDKIntegrated = false;
         [SerializeField] private bool _isFacebookSDKIntegrated = false;
         [SerializeField] private bool _isAdjustSDKIntegrated = false;
@@ -25,7 +27,14 @@
         [SerializeField] private bool _showDebuggingSetting = false;
 #endif
 
+        [Header("Parameter  :   Analytics")]
         public bool logAnalyticsEvent = true;
+
+        [Header("Parameter  :   Ads")]
+        public int indexOfActiveAdConfiguretion = -1;
+        public List<BaseClassForAdConfiguretion> listOfAdConfiguretion;
+
+        [Header("Parameter  :   Debugger")]
         public bool maxMediationDebugger = false;
 
         [Space(5.0f)]

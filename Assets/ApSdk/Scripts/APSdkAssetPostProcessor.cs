@@ -33,6 +33,9 @@
             _isFirebaseSDKIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckFirebaseIntegration();
             _isFirebaseSDKIntegrated.serializedObject.ApplyModifiedProperties();
 
+            foreach (BaseClassForAdConfiguretion adConfig in _apSDKConfiguretionInfo.listOfAdConfiguretion)
+                adConfig.SetSDKNameAndIntegrationStatus();
+
             _serializedSDKConfiguretionInfo.ApplyModifiedProperties();
         }
 

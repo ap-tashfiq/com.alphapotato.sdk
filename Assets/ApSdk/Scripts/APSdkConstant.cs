@@ -17,6 +17,9 @@
         public const string APSdk_Adjust = "APSdk_Adjust";
         public const string APSdk_GameAnalytics = "APSdk_GameAnalytics";
         public const string APSdk_Firebase = "APSdk_Firebase";
+
+
+        public const string APSdk_MaxAdNetwork = "APSdk_MaxAdNetwork";
     }
 }
 

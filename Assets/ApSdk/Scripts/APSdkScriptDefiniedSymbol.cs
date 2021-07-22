@@ -162,7 +162,22 @@
 
         #endregion
 
-        #region Public Callback
+        #region Public Callback :   AdNetwork
+
+        public static bool CheckMaxAdNetworkIntegrated() {
+
+            bool isAdded = AssetDatabase.IsValidFolder("Assets/MaxSdk");
+            UpdateDefines(
+                    APSdkConstant.APSdk_MaxAdNetwork,
+                    isAdded,
+                    new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
+                );
+            return isAdded;
+        }
+
+        #endregion
+
+        #region Public Callback :   3rd Party SDK
 
         public static bool CheckLionKitIntegration()
         {
