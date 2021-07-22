@@ -15,8 +15,8 @@ MonoBehaviour:
   _isLionKitSDKIntegrated: 0
   _isFacebookSDKIntegrated: 0
   _isAdjustSDKIntegrated: 0
-  _isGameAnalyticsSDKIntegrated: 1
-  _isFirebaseSDKIntegrated: 1
+  _isGameAnalyticsSDKIntegrated: 0
+  _isFirebaseSDKIntegrated: 0
   _showGeneralSetting: 1
   _showLionAdSetting: 0
   _showFacebookSetting: 0
