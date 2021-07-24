@@ -34,7 +34,7 @@
             _isFirebaseSDKIntegrated.serializedObject.ApplyModifiedProperties();
 
             foreach (BaseClassForAdConfiguretion adConfig in _apSDKConfiguretionInfo.listOfAdConfiguretion)
-                adConfig.SetSDKNameAndIntegrationStatus();
+                adConfig.SetNameAndIntegrationStatus();
 
             _serializedSDKConfiguretionInfo.ApplyModifiedProperties();
         }

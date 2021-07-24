@@ -101,7 +101,7 @@
                             APGameAnalyticsWrapper.Instance.AdEvent(
                                 GAAdAction.Show,
                                 GAAdType.Interstitial,
-                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                                 adPlacement
                             );
 #endif
@@ -123,7 +123,7 @@
                             APGameAnalyticsWrapper.Instance.AdEvent(
                                 GAAdAction.FailedShow,
                                 GAAdType.Interstitial,
-                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                                 adPlacement
                             );
 #endif

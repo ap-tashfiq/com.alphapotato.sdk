@@ -7,15 +7,6 @@
     public class APMaxAdNetworkConfiguretion : BaseClassForAdConfiguretion
     {
         
-
-#if UNITY_EDITOR
-        public override void SetSDKNameAndIntegrationStatus()
-        {
-            SetSDKName(APSdkConstant.APSdk_MaxAdNetwork);
-            _isAdSDKIntegrated = APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated();
-            
-        }
-#endif
         public override void Initialize()
         {
 #if APSdk_MaxAdNetwork
@@ -70,6 +61,12 @@
 #if APSdk_MaxAdNetwork
             APMaxAdNetwork.RewardedAd.ShowRewardedAd(adPlacement, OnAdClosed, OnAdFailed);
 #endif
+        }
+
+        public override void SetNameAndIntegrationStatus()
+        {
+            SetNameOfConfiguretion(APSdkConstant.APSdk_MaxAdNetwork);
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated();
         }
     }
 }

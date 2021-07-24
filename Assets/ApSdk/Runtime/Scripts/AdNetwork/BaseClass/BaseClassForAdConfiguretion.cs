@@ -3,11 +3,9 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public abstract class BaseClassForAdConfiguretion : ScriptableObject
+    public abstract class BaseClassForAdConfiguretion : APBaseClassForConfiguretion
     {
         #region Public Variables
-
-        public string NameOfAdNetwork { get { return _nameOfAdNetwork; } }
 
         public bool IsRewardedAdEnabled { get { return _enableRewardedAd; } }
         public bool IsInterstitialAdEnabled { get { return _enableInterstitialAd; } }
@@ -26,10 +24,7 @@
 
 #endif
 
-        [SerializeField] protected string _nameOfAdNetwork;
-
-        [Space(5.0f)]
-        [SerializeField] protected bool _isAdSDKIntegrated;
+        
 
         [Space(5.0f)]
         [SerializeField] private bool _enableRewardedAd;
@@ -47,9 +42,7 @@
         #endregion
 
         #region Abstract Method
-#if UNITY_EDITOR
-        public abstract void SetSDKNameAndIntegrationStatus();
-#endif
+
         public abstract void Initialize();
 
         public abstract bool IsRewardedAdReady();
@@ -71,20 +64,7 @@
 
         #endregion
 
-        #region Protected Method
-#if UNITY_EDITOR
-
-        /// <summary>
-        /// Editor Only
-        /// </summary>
-        /// <param name="scriptDefineSymbol"></param>
-        protected void SetSDKName(string scriptDefineSymbol) {
-
-            string[] splited = scriptDefineSymbol.Split('_');
-            _nameOfAdNetwork = splited[1];
-        }
-#endif
-        #endregion
+    
     }
 
 

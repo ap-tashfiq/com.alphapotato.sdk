@@ -307,9 +307,9 @@ namespace APSdk
             SerializedProperty _showBannerAdSettings    = serailizedAdConfiguretion.FindProperty("_showBannerAdSettings");
             SerializedProperty _showCrossPromoAdSettings = serailizedAdConfiguretion.FindProperty("_showCrossPromoAdSettings");
 
-            SerializedProperty _nameOfAdNetwork         = serailizedAdConfiguretion.FindProperty("_nameOfAdNetwork");
+            SerializedProperty _nameOfConfiguretion         = serailizedAdConfiguretion.FindProperty("_nameOfConfiguretion");
 
-            SerializedProperty _isAdSDKIntegrated       = serailizedAdConfiguretion.FindProperty("_isAdSDKIntegrated");
+            SerializedProperty _isSDKIntegrated       = serailizedAdConfiguretion.FindProperty("_isSDKIntegrated");
 
             SerializedProperty _enableRewardedAd   = serailizedAdConfiguretion.FindProperty("_enableRewardedAd");
 
@@ -323,7 +323,7 @@ namespace APSdk
 
             //Setting Titles
             GUIContent titleContent = new GUIContent(
-                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfAdNetwork.stringValue + (_isAdSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
                 );
             GUIStyle titleStyle = new GUIStyle(EditorStyles.boldLabel);
             titleStyle.alignment = TextAnchor.MiddleLeft;
@@ -337,7 +337,7 @@ namespace APSdk
                     _showSettings.serializedObject.ApplyModifiedProperties();
 
                     titleContent = new GUIContent(
-                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfAdNetwork.stringValue + (_isAdSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
                     );
                 }
 

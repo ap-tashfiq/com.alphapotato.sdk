@@ -100,7 +100,7 @@
                             APGameAnalyticsWrapper.Instance.AdEvent(
                                 isEligibleForReward ? GAAdAction.RewardReceived : GAAdAction.Show,
                                 GAAdType.RewardedVideo,
-                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                                 adPlacement
                             );
 #endif
@@ -124,7 +124,7 @@
                             APGameAnalyticsWrapper.Instance.AdEvent(
                                 GAAdAction.FailedShow,
                                 GAAdType.RewardedVideo,
-                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                                 adPlacement
                             );
 #endif

@@ -99,7 +99,7 @@
                     APGameAnalyticsWrapper.Instance.AdEvent(
                         GAAdAction.Show,
                         GAAdType.Banner,
-                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                         adPlacement
                     );
 #endif
@@ -119,7 +119,7 @@
                     APGameAnalyticsWrapper.Instance.AdEvent(
                         GAAdAction.FailedShow,
                         GAAdType.Banner,
-                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                         adPlacement
                     );
 #endif
@@ -146,7 +146,7 @@
                 APGameAnalyticsWrapper.Instance.AdEvent(
                     GAAdAction.Undefined,
                     GAAdType.Banner,
-                    _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                    _apSdkConfiguretionInfo.SelectedAdConfig.NameOfConfiguretion,
                     paramName
                 );
 #endif
