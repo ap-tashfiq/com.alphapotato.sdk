@@ -64,7 +64,7 @@
 
         #region Public Callback
 
-        public static bool IsInterstitialAdReady()
+        public static bool IsAdReady()
         {
 
             if (_apSdkConfiguretionInfo.SelectedAdConfig != null)
@@ -75,7 +75,7 @@
             return false;
         }
 
-        public static void ShowInterstitialAd(
+        public static void Show(
             string adPlacement = "interstitial",
             UnityAction OnAdFailed = null,
             UnityAction OnAdClosed = null)

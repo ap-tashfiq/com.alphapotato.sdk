@@ -64,7 +64,7 @@
 
         #region Public Callback
 
-        public static bool IsRewardedAdReady() {
+        public static bool IsAdReady() {
 
             if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
                 return _apSdkConfiguretionInfo.SelectedAdConfig.IsRewardedAdReady();
@@ -73,7 +73,7 @@
             return false;
         }
 
-        public static void ShowRewardedAd(
+        public static void Show(
             string adPlacement,
             UnityAction<bool> OnAdClosed,
             UnityAction OnAdFailed = null)

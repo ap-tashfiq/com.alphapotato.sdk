@@ -63,7 +63,7 @@
 
         #region Public Callback
 
-        public static bool IsBannerAdReady()
+        public static bool IsAdReady()
         {
 
             if (_apSdkConfiguretionInfo.SelectedAdConfig != null)
@@ -74,7 +74,7 @@
             return false;
         }
 
-        public static void ShowBannerAd(string adPlacement = "banner", int playerLevel = 0) {
+        public static void Show(string adPlacement = "banner", int playerLevel = 0) {
 
             if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
 
@@ -83,7 +83,7 @@
                         playerLevel
                     );
 
-                if (IsBannerAdReady())
+                if (IsAdReady())
                 {
 
                     string paramName = adPlacement;
@@ -127,7 +127,7 @@
             }
         }
 
-        public static void HideBannerAd() {
+        public static void Hide() {
 
             if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
 
