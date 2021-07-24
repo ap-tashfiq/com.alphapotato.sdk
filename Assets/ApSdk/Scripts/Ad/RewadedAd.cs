@@ -3,7 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public static class RewadedVideoAd
+    public static class RewardedAd
     {
         #region Private Variables
 

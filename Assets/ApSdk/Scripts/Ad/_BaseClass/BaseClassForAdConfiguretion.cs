@@ -47,9 +47,10 @@
 #if UNITY_EDITOR
         public abstract void SetSDKNameAndIntegrationStatus();
 #endif
-        
+        public abstract void Initialize(BaseClassForAdConfiguretion adConfiguretion);
 
-#endregion
+
+    #endregion
 
 #region Protected Method
 #if UNITY_EDITOR

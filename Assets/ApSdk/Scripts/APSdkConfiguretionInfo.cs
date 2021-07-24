@@ -48,6 +48,26 @@
 
         #endregion
 
+        #region Configuretion
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void OnGameStart() {
+
+            APSdkConfiguretionInfo apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
+            if (apSdkConfiguretionInfo.indexOfActiveAdConfiguretion >= 0
+            && apSdkConfiguretionInfo.indexOfActiveAdConfiguretion < apSdkConfiguretionInfo.listOfAdConfiguretion.Count)
+            {
+                apSdkConfiguretionInfo.listOfAdConfiguretion[apSdkConfiguretionInfo.indexOfActiveAdConfiguretion].Initialize(
+                    apSdkConfiguretionInfo.listOfAdConfiguretion[apSdkConfiguretionInfo.indexOfActiveAdConfiguretion]);
+            }
+            else {
+
+                APSdkLogger.LogError("No Ad Network Selected");
+            }
+        }
+
+        #endregion
+
     }
 }
 

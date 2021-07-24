@@ -161,7 +161,7 @@ namespace APSdk
         }
 
         public void HideBannerAd() {
-
+            
             Banner.Hide();
         }
 

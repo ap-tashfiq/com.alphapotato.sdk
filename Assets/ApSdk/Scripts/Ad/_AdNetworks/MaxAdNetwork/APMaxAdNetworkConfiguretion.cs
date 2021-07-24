@@ -14,6 +14,10 @@
             
         }
 #endif
+        public override void Initialize(BaseClassForAdConfiguretion adConfiguretion)
+        {
+            APMaxAdNetwork.Initialize(adConfiguretion);
+        }
     }
 }
 
