@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: APAdjustInfo
   m_EditorClassIdentifier: 
   _showBasicInfo: 1
-  _showAdvancedInfo: 1
-  _enableAdjustEvent: 0
+  _showAdvancedInfo: 0
+  _enableAdjustEvent: 1
   _trackProgressionEvent: 0
   _trackAdEvent: 0
-  _subscribeToLionEvent: 0
-  _subscribeToLionEventUA: 0
-  _appTokenForAndroid: 
-  _appTokenForIOS: 
-  _environment: 0
+  _subscribeToLionEvent: 1
+  _subscribeToLionEventUA: 1
+  _appTokenForAndroid: o4p8424ki134
+  _appTokenForIOS: q69xu1s07nr4
+  _environment: 1
   _logLevel: 7
   _startDelay: 0
   _startManually: 1

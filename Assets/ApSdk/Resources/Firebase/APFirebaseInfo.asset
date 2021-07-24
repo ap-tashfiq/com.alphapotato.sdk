@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f26d22efd2d04f21b1d50fe9bbf5f33, type: 3}
   m_Name: APFirebaseInfo
   m_EditorClassIdentifier: 
+  _enableFirebaseAnalyticsEvent: 1
   _trackProgressionEvent: 0
   _trackAdEvent: 0
+  _subscribeToLionEvent: 1
+  _subscribeToLionEventUA: 1

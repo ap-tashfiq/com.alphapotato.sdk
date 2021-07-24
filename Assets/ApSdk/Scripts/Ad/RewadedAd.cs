@@ -2,6 +2,15 @@
 {
     using UnityEngine;
     using UnityEngine.Events;
+    using System.Collections.Generic;
+
+#if APSdk_LionKit
+    using LionStudios;
+#endif
+
+#if APSdk_GameAnalytics
+    using GameAnalyticsSDK;
+#endif
 
     public static class RewardedAd
     {
@@ -9,8 +18,6 @@
 
         private static APSdkConfiguretionInfo _apSdkConfiguretionInfo;
 
-        private static UnityAction _OnAdFailed;
-        private static UnityAction<bool> _OnAdClosed;
 
         #endregion
 
@@ -19,31 +26,51 @@
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void OnGameStart()
         {
-
             _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
+        }
+
+        private static void LogEvent(string paramName, string paramValue, string eventName, Dictionary<string, object> eventParams) {
+
+#if APSdk_LionKit
+            Analytics.LogEvent(eventName, eventParams);
+#else
+
+#if APSdk_Facebook
+                            APFacebookWrapper.Instance.AdEvent(
+                                    eventName,
+                                    eventParams
+                                );
+#endif
+
+#if APSdk_Adjust
+                            APAdjustWrapper.Instance.AdEvent(
+                                    eventName,
+                                    eventParams
+                                );
+#endif
+
+#if APSdk_Firebase
+                            APFirebaseWrapper.Instance.AdEvent(
+                                    eventName,
+                                    paramName,
+                                    paramValue
+                                );
+#endif
+
+#endif
         }
 
         #endregion
 
         #region Public Callback
 
+        public static bool IsRewardedAdReady() {
 
-        public static void ShowRewardedAd(
-                string eventName,
-                string paramName,
-                object paramValue,
-                string adPlacement,
-                UnityAction<bool> OnAdClosed,
-                UnityAction OnAdFailed = null)
-        {
-
-            if (_apSdkConfiguretionInfo.indexOfActiveAdConfiguretion == -1) {
-                APSdkLogger.LogError("No AdNetwork Selected");
-                return;
+            if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
+                return _apSdkConfiguretionInfo.SelectedAdConfig.IsRewardedAdReady();
             }
 
-            _OnAdClosed = OnAdClosed;
-            _OnAdFailed = OnAdFailed;
+            return false;
         }
 
         public static void ShowRewardedAd(
@@ -51,17 +78,67 @@
             UnityAction<bool> OnAdClosed,
             UnityAction OnAdFailed = null)
         {
-            if (_apSdkConfiguretionInfo.indexOfActiveAdConfiguretion == -1)
+            if (_apSdkConfiguretionInfo.SelectedAdConfig != null)
             {
-                APSdkLogger.LogError("No AdNetwork Selected");
-                return;
-            }
+                _apSdkConfiguretionInfo.SelectedAdConfig.ShowRewardedAd(
+                        adPlacement,
+                        (isEligibleForReward) =>
+                        {
+                            OnAdClosed.Invoke(isEligibleForReward);
 
-            _OnAdClosed = OnAdClosed;
-            _OnAdFailed = OnAdFailed;
+                            
+                            string paramName = adPlacement;
+                            string paramValue = isEligibleForReward ? "awarded" : "shown";
+
+                            string eventName = "rewardedVideoAd";
+                            Dictionary<string, object> eventParams = new Dictionary<string, object>();
+                            eventParams.Add(paramName, paramValue);
+
+                            LogEvent(paramName, paramValue, eventName, eventParams);
+
+#if APSdk_GameAnalytics
+                            APGameAnalyticsWrapper.Instance.AdEvent(
+                                isEligibleForReward ? GAAdAction.RewardReceived : GAAdAction.Show,
+                                GAAdType.RewardedVideo,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                adPlacement
+                            );
+#endif
+
+                            
+                        },
+                        () => {
+
+                            OnAdFailed?.Invoke();
+
+                            string paramName = adPlacement;
+                            string paramValue = "failed";
+
+                            string eventName = "rewardedVideoAd";
+                            Dictionary<string, object> eventParams = new Dictionary<string, object>();
+                            eventParams.Add(paramName, paramValue);
+
+                            LogEvent(paramName, paramValue, eventName, eventParams);
+
+#if APSdk_GameAnalytics
+                            APGameAnalyticsWrapper.Instance.AdEvent(
+                                GAAdAction.FailedShow,
+                                GAAdType.RewardedVideo,
+                                _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                                adPlacement
+                            );
+#endif
+
+                        }
+                    );
+            }
+            else {
+
+                APSdkLogger.LogError("Failed to display 'RewardedAd' as no 'AdNetwork' is selected/enabled");
+            }
         }
 
-        #endregion
+#endregion
     }
 
 }

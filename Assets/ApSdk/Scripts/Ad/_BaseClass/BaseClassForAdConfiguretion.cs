@@ -1,10 +1,13 @@
 ﻿namespace APSdk
 {
     using UnityEngine;
+    using UnityEngine.Events;
 
     public abstract class BaseClassForAdConfiguretion : ScriptableObject
     {
         #region Public Variables
+
+        public string NameOfAdNetwork { get { return _nameOfAdNetwork; } }
 
         public bool IsRewardedAdEnabled { get { return _enableRewardedAd; } }
         public bool IsInterstitialAdEnabled { get { return _enableInterstitialAd; } }
@@ -21,9 +24,9 @@
         [SerializeField] private bool _showInterstitialAdSettings;
         [SerializeField] private bool _showBannerAdSettings;
 
-        [SerializeField] protected string _nameOfAdNetwork;
-        
 #endif
+
+        [SerializeField] protected string _nameOfAdNetwork;
 
         [Space(5.0f)]
         [SerializeField] protected bool _isAdSDKIntegrated;
@@ -47,20 +50,41 @@
 #if UNITY_EDITOR
         public abstract void SetSDKNameAndIntegrationStatus();
 #endif
-        public abstract void Initialize(BaseClassForAdConfiguretion adConfiguretion);
+        public abstract void Initialize();
+
+        public abstract bool IsRewardedAdReady();
+        public abstract void ShowRewardedAd(
+            string adPlacement,
+            UnityAction<bool> OnAdClosed,
+            UnityAction OnAdFailed = null);
+
+        public abstract bool IsInterstitialAdReady();
+        public abstract void ShowInterstitialAd(
+            string adPlacement = "interstitial",
+            UnityAction OnAdFailed = null,
+            UnityAction OnAdClosed = null);
+
+        public abstract bool IsBannerAdReady();
+        public abstract void ShowBannerAd(string adPlacement = "banner", int playerLevel = 0);
+        public abstract void HideBannerAd();
 
 
-    #endregion
+        #endregion
 
-#region Protected Method
+        #region Protected Method
 #if UNITY_EDITOR
+
+        /// <summary>
+        /// Editor Only
+        /// </summary>
+        /// <param name="scriptDefineSymbol"></param>
         protected void SetSDKName(string scriptDefineSymbol) {
 
             string[] splited = scriptDefineSymbol.Split('_');
             _nameOfAdNetwork = splited[1];
         }
 #endif
-#endregion
+        #endregion
     }
 
 

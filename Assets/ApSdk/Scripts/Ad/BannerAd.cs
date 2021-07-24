@@ -1,18 +1,159 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BannerAd : MonoBehaviour
+﻿namespace APSdk
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    using UnityEngine;
+    using System.Collections.Generic;
 
-    // Update is called once per frame
-    void Update()
+#if APSdk_LionKit
+    using LionStudios;
+#endif
+
+#if APSdk_GameAnalytics
+    using GameAnalyticsSDK;
+#endif
+
+    public static class BannerAd
     {
-        
+        #region Private Variables
+
+        private static APSdkConfiguretionInfo _apSdkConfiguretionInfo;
+
+        #endregion
+
+        #region Configuretion
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void OnGameStart()
+        {
+            _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
+        }
+
+        private static void LogEvent(string paramName, string paramValue, string eventName, Dictionary<string, object> eventParams)
+        {
+
+#if APSdk_LionKit
+            Analytics.LogEvent(eventName, eventParams);
+#else
+
+#if APSdk_Facebook
+                            APFacebookWrapper.Instance.AdEvent(
+                                    eventName,
+                                    eventParams
+                                );
+#endif
+
+#if APSdk_Adjust
+                            APAdjustWrapper.Instance.AdEvent(
+                                    eventName,
+                                    eventParams
+                                );
+#endif
+
+#if APSdk_Firebase
+                            APFirebaseWrapper.Instance.AdEvent(
+                                    eventName,
+                                    paramName,
+                                    paramValue
+                                );
+#endif
+
+#endif
+        }
+
+        #endregion
+
+        #region Public Callback
+
+        public static bool IsBannerAdReady()
+        {
+
+            if (_apSdkConfiguretionInfo.SelectedAdConfig != null)
+            {
+                return _apSdkConfiguretionInfo.SelectedAdConfig.IsBannerAdReady();
+            }
+
+            return false;
+        }
+
+        public static void ShowBannerAd(string adPlacement = "banner", int playerLevel = 0) {
+
+            if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
+
+                _apSdkConfiguretionInfo.SelectedAdConfig.ShowBannerAd(
+                        adPlacement,
+                        playerLevel
+                    );
+
+                if (IsBannerAdReady())
+                {
+
+                    string paramName = adPlacement;
+                    string paramValue = "shown";
+
+                    string eventName = "bannerAd";
+                    Dictionary<string, object> eventParams = new Dictionary<string, object>();
+                    eventParams.Add(paramName, paramValue);
+
+                    LogEvent(paramName, paramValue, eventName, eventParams);
+
+#if APSdk_GameAnalytics
+                    APGameAnalyticsWrapper.Instance.AdEvent(
+                        GAAdAction.Show,
+                        GAAdType.Banner,
+                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                        adPlacement
+                    );
+#endif
+                }
+                else {
+
+                    string paramName = adPlacement;
+                    string paramValue = "failed";
+
+                    string eventName = "bannerAd";
+                    Dictionary<string, object> eventParams = new Dictionary<string, object>();
+                    eventParams.Add(paramName, paramValue);
+
+                    LogEvent(paramName, paramValue, eventName, eventParams);
+
+#if APSdk_GameAnalytics
+                    APGameAnalyticsWrapper.Instance.AdEvent(
+                        GAAdAction.FailedShow,
+                        GAAdType.Banner,
+                        _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                        adPlacement
+                    );
+#endif
+                }
+            }
+        }
+
+        public static void HideBannerAd() {
+
+            if (_apSdkConfiguretionInfo.SelectedAdConfig != null) {
+
+                _apSdkConfiguretionInfo.SelectedAdConfig.HideBannerAd();
+
+                string paramName = "banner";
+                string paramValue = "hide";
+
+                string eventName = "bannerAd";
+                Dictionary<string, object> eventParams = new Dictionary<string, object>();
+                eventParams.Add(paramName, paramValue);
+
+                LogEvent(paramName, paramValue, eventName, eventParams);
+
+#if APSdk_GameAnalytics
+                APGameAnalyticsWrapper.Instance.AdEvent(
+                    GAAdAction.Undefined,
+                    GAAdType.Banner,
+                    _apSdkConfiguretionInfo.SelectedAdConfig.NameOfAdNetwork,
+                    paramName
+                );
+#endif
+            }
+        }
+
+        #endregion
     }
 }
+

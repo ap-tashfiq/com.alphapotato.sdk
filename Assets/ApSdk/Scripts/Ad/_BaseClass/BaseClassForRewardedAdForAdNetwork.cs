@@ -26,7 +26,6 @@
         #region Abstract Method
 
         public abstract bool IsRewardedAdReady();
-
         public abstract void ShowRewardedAd(
             string adPlacement,
             UnityAction<bool> OnAdClosed,

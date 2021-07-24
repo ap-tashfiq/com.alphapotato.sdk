@@ -20,7 +20,7 @@ namespace APSdk
 
         public static APLionKitRewardedAdController Instance;
 
-        public bool IsRewardedAdReady { get { return RewardedAd.IsAdReady; } }
+        public bool IsRewardedAdReady { get { return LionStudios.Ads.RewardedAd.IsAdReady; } }
         public bool IsAdRunning { get; private set; }
 
         #endregion
@@ -91,8 +91,8 @@ namespace APSdk
 
         private void ShowAd() {
 
-           
-            RewardedAd.Show(_ShowRewardedAdRequest);
+
+            LionStudios.Ads.RewardedAd.Show(_ShowRewardedAdRequest);
         }
 
 #endregion

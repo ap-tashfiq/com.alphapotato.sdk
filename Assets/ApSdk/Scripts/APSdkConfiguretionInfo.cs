@@ -27,6 +27,15 @@
         [SerializeField] private bool _showABTestSetting = false;
         [SerializeField] private bool _showDebuggingSetting = false;
 #endif
+        public BaseClassForAdConfiguretion SelectedAdConfig
+        {
+            get {
+                if (indexOfActiveAdConfiguretion >= 0 && indexOfActiveAdConfiguretion < listOfAdConfiguretion.Count)
+                    return listOfAdConfiguretion[indexOfActiveAdConfiguretion];
+
+                return null;
+            }
+        }
 
         [Header("Parameter  :   Analytics")]
         public bool logAnalyticsEvent = true;
@@ -54,11 +63,9 @@
         private static void OnGameStart() {
 
             APSdkConfiguretionInfo apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
-            if (apSdkConfiguretionInfo.indexOfActiveAdConfiguretion >= 0
-            && apSdkConfiguretionInfo.indexOfActiveAdConfiguretion < apSdkConfiguretionInfo.listOfAdConfiguretion.Count)
+            if (apSdkConfiguretionInfo.SelectedAdConfig != null)
             {
-                apSdkConfiguretionInfo.listOfAdConfiguretion[apSdkConfiguretionInfo.indexOfActiveAdConfiguretion].Initialize(
-                    apSdkConfiguretionInfo.listOfAdConfiguretion[apSdkConfiguretionInfo.indexOfActiveAdConfiguretion]);
+                apSdkConfiguretionInfo.SelectedAdConfig.Initialize();
             }
             else {
 

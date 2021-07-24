@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "25774777793",
+    "project_id": "sidehero-bc4f5",
+    "storage_bucket": "sidehero-bc4f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25774777793:android:6ff38c3fe87d3983e17b40",
+        "android_client_info": {
+          "package_name": "com.alphapotato.sidehero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25774777793-600b4u2n1o9p829knmnp7sso87ivlfs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhxXhPcswUD1b8nPXC8I1Q_rwrWs_SX7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25774777793-600b4u2n1o9p829knmnp7sso87ivlfs2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25774777793-ul52i6tkk7un4icqmek891n0rp0k202k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alphapotato.sidehero"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

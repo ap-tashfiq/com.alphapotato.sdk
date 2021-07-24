@@ -79,6 +79,30 @@ namespace APSdk
             }
         }
 
+        public void ProgressionEvent(string eventName, Dictionary<string, object> eventParams)
+        {
+
+            if (_apFacebookInfo.IsTrackingProgressionEvent)
+            {
+                LogEvent(eventName, eventParams);
+            }
+            else
+            {
+                APSdkLogger.LogWarning("'ProgressionEvent' is disabled for 'FacebookSDK'");
+            }
+        }
+
+        public void AdEvent(string eventName, Dictionary<string, object> eventParams) {
+
+            if (_apFacebookInfo.IsTrackingAdEvent)
+            {
+                LogEvent(eventName, eventParams);
+            }
+            else {
+                APSdkLogger.LogWarning("'AdEvent' is disabled for 'FacebookSDK'");
+            }
+        }
+
         public void LogEvent(string eventName, Dictionary<string, object> eventParams) {
 
             if (_apSdkConfiguretionInfo.logAnalyticsEvent) {

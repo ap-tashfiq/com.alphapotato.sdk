@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: APSdkConfiguretionInfo
   m_EditorClassIdentifier: 
   _isLionKitSDKIntegrated: 1
-  _isFacebookSDKIntegrated: 0
-  _isAdjustSDKIntegrated: 0
-  _isGameAnalyticsSDKIntegrated: 0
-  _isFirebaseSDKIntegrated: 0
+  _isFacebookSDKIntegrated: 1
+  _isAdjustSDKIntegrated: 1
+  _isGameAnalyticsSDKIntegrated: 1
+  _isFirebaseSDKIntegrated: 1
   _showGeneralSetting: 0
   _showLionAdSetting: 1
   _showFacebookSetting: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   _showFirebaseSetting: 0
   _showAdNetworks: 1
   _showABTestSetting: 0
-  _showDebuggingSetting: 0
+  _showDebuggingSetting: 1
   logAnalyticsEvent: 1
   indexOfActiveAdConfiguretion: 0
   listOfAdConfiguretion:

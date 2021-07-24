@@ -147,10 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 796332631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1714e3eca94cb4a8aa9e78eefc147a86, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f5c2a198dea14573a4666440614b5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitForTashfiq: 1
 --- !u!4 &796332633
 Transform:
   m_ObjectHideFlags: 0

@@ -99,6 +99,32 @@ public class APFirebaseWrapper : MonoBehaviour
         } 
     }
 
+    public void ProgressionEvent(string eventName, string parameName, string paramValue)
+    {
+
+        if (_apFirebaseInfo.IsTrackingProgressionEvent)
+        {
+            LogFirebaseEvent(eventName, parameName, paramValue);
+        }
+        else
+        {
+            APSdkLogger.LogWarning("'ProgressionEvent' is disabled for 'FirebaseSDK'");
+        }
+    }
+
+    public void AdEvent(string eventName, string parameName, string paramValue)
+    {
+
+        if (_apFirebaseInfo.IsTrackingAdEvent)
+        {
+            LogFirebaseEvent(eventName, parameName, paramValue);
+        }
+        else
+        {
+            APSdkLogger.LogWarning("'AdEvent' is disabled for 'FirebaseSDK'");
+        }
+    }
+
     #endregion
 }
 

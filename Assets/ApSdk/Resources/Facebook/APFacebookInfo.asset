@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6752084a4494bd78b4a5122ebd3fbf, type: 3}
   m_Name: APFacebookInfo
   m_EditorClassIdentifier: 
-  appName: Craft Master
-  appId: 160782859234512
-  logEventOnFacebook: 1
+  _appName: Side Hero
+  _appId: 160782859234512
+  _enableFacebookEvent: 1
+  _trackProgressionEvent: 0
+  _trackAdEvent: 0
+  _subscribeToLionEvent: 0
+  _subscribeToLionEventUA: 0

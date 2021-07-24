@@ -94,6 +94,32 @@ namespace APSdk
             APSdkLogger.Log("Adjust Initialized");
         }
 
+        public void ProgressionEvent(string eventName, Dictionary<string, object> eventParams)
+        {
+
+            if (_aPAdjustInfo.IsTrackingProgressionEvent)
+            {
+                LogEvent(eventName, eventParams);
+            }
+            else
+            {
+                APSdkLogger.LogWarning("'ProgressionEvent' is disabled for 'AdjustSDK'");
+            }
+        }
+
+        public void AdEvent(string eventName, Dictionary<string, object> eventParams)
+        {
+
+            if (_aPAdjustInfo.IsTrackingAdEvent)
+            {
+                LogEvent(eventName, eventParams);
+            }
+            else
+            {
+                APSdkLogger.LogWarning("'AdEvent' is disabled for 'AdjustSDK'");
+            }
+        }
+
         public void LogEvent(string eventName, Dictionary<string, object> eventParams)
         {
             if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
