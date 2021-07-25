@@ -72,6 +72,27 @@ namespace APSdk
 
         #region Public Callback
 
+        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, APAdjustConfiguretion adjustConfiguretion) {
+
+            _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
+
+            AdjustConfig adjustConfig = new AdjustConfig(
+                adjustConfiguretion.appToken,
+                adjustConfiguretion.Environment,
+                adjustConfiguretion.LogLevel == AdjustLogLevel.Suppress);
+
+            adjustConfig.setLogLevel(adjustConfiguretion.LogLevel);
+            adjustConfig.setSendInBackground(adjustConfiguretion.SendInBackground);
+            adjustConfig.setEventBufferingEnabled(adjustConfiguretion.EventBuffering);
+            adjustConfig.setLaunchDeferredDeeplink(adjustConfiguretion.LaunchDeferredDeeplink);
+
+            adjustConfig.setDelayStart(adjustConfiguretion.StartDelay);
+
+            Adjust.start(adjustConfig);
+
+            APSdkLogger.Log("Adjust Initialized");
+        }
+
         public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;

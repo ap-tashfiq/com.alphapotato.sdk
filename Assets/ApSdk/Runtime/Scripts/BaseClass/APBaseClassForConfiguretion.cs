@@ -40,6 +40,8 @@
 
         public abstract void SetNameAndIntegrationStatus();
 
+        public abstract void Initialize();
+
         #endregion
     }
 }

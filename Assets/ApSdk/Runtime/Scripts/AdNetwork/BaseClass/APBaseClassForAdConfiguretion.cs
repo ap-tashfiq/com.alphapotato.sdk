@@ -42,8 +42,6 @@
 
         #region Abstract Method
 
-        public abstract void Initialize();
-
         public abstract bool IsRewardedAdReady();
         public abstract void ShowRewardedAd(
             string adPlacement,

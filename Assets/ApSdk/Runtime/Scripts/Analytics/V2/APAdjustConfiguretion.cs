@@ -28,6 +28,15 @@
             }
         }
 
+        public AdjustEnvironment Environment { get { return _environment; } }
+
+        public AdjustLogLevel LogLevel { get { return _logLevel; } }
+        public float StartDelay { get { return _startDelay; } }
+        public bool StartManually { get { return _startManually; } }
+        public bool EventBuffering { get { return _eventBuffering; } }
+        public bool SendInBackground { get { return _sendInBackground; } }
+        public bool LaunchDeferredDeeplink { get { return _launchDeferredDeeplink; } }
+
         #endregion
 
 
@@ -63,12 +72,52 @@
 #endif
         }
 
+        public override void Initialize()
+        {
+
+            APSdkConfiguretionInfo _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
+
+#if APSdk_LionKit
+
+            LionStudios.LionKit.OnInitialized += () =>
+            {
+                APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
+
+                if (_subscribeToLionEvent) {
+
+                    LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                    {
+                        APLionKitWrapper.LogLionGameEvent("Adjust", gameEvent);
+                        APAdjustWrapper.Instance.LogEvent(
+                                    gameEvent.eventName,
+                                    gameEvent.eventParams
+                                );
+                    };
+                }
+
+                if (_subscribeToLionEventUA)
+                {
+                    LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                    {
+                        APLionKitWrapper.LogLionGameEvent("AdjustUA", gameEvent);
+                        APAdjustWrapper.Instance.LogEvent(
+                                    gameEvent.eventName,
+                                    gameEvent.eventParams
+                                );
+                    };
+                }
+            };
+#else
+
+            APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
+
+#endif
+        }
+
         public override bool CanBeSubscribedToLionLogEvent()
         {
             return true;
         }
-
-
 
         public override void PreCustomEditorGUI()
         {
@@ -230,10 +279,12 @@
 #endif
         }
 
-        #endregion
+        
+
+#endregion
     }
 
 
 #endif
-}
+        }
 

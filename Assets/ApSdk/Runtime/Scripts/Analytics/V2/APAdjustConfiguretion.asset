@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce8da8f354b54db89d6a4dae3b0a52f, type: 3}
   m_Name: APAdjustConfiguretion
   m_EditorClassIdentifier: 
-  _showSettings: 1
+  _showSettings: 0
   _nameOfConfiguretion: Adjust
   _isSDKIntegrated: 1
   _enableAnalyticsEvent: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
   _appTokenForAndroid: 
   _appTokenForIOS: 
   _environment: 0
-  _logLevel: 7
+  _logLevel: 1
   _startDelay: 0
   _startManually: 1
   _eventBuffering: 0

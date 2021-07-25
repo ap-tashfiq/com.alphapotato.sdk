@@ -76,7 +76,7 @@
 
 #if APSdk_LionKit
 
-private static void LogLionGameEvent(string prefix, LionGameEvent gameEvent) {
+public static void LogLionGameEvent(string prefix, LionGameEvent gameEvent) {
 
             string logEvent = " [" +  prefix + "]";
             logEvent += " [EventName] : " + gameEvent.eventName + "";
@@ -200,8 +200,6 @@ LionKit.OnInitialized += () => {
 #endif
 
 #if APSdk_Adjust
-
-                    
 
                     // do adjust init
                     APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo);

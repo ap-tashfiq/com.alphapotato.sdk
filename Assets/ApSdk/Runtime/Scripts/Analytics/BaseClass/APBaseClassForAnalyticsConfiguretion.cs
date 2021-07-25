@@ -31,8 +31,8 @@ using UnityEditor;
         [SerializeField] protected bool _trackProgressionEvent = false;
         [SerializeField] protected bool _trackAdEvent = false;
 
-        [SerializeField] private bool _subscribeToLionEvent = false;
-        [SerializeField] private bool _subscribeToLionEventUA = false;
+        [SerializeField] protected bool _subscribeToLionEvent = false;
+        [SerializeField] protected bool _subscribeToLionEventUA = false;
 
 
 #endregion
