@@ -32,32 +32,7 @@ namespace APSdk
 
             serializedObject.Update();
 
-            EditorGUILayout.BeginHorizontal(GUI.skin.box);
-            {
-                if (GUILayout.Button("RewardedAd")) {
-                    APLionKitWrapper.RewardedAd.ShowRewardedAd("test_rewarded_video",(isRecieveAward)=> { });
-                }
-
-                if (GUILayout.Button("InterstitialAd"))
-                {
-                    APLionKitWrapper.InterstitialAd.ShowInterstitialAd();
-                }
-            }
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginHorizontal(GUI.skin.box);
-            {
-                if (GUILayout.Button("Show Banner")) {
-
-                    APLionKitWrapper.BannerAd.ShowBannerAd();
-                }
-
-                if (GUILayout.Button("HideBanner Banner"))
-                {
-                    APLionKitWrapper.BannerAd.HideBannerAd();
-                }
-            }
-            EditorGUILayout.EndHorizontal();
+            
 
             serializedObject.ApplyModifiedProperties();
         }

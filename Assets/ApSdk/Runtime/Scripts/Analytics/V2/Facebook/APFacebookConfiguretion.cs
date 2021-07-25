@@ -1,5 +1,6 @@
 ﻿namespace APSdk
 {
+
 #if APSdk_Facebook
 
     using UnityEngine;
@@ -41,47 +42,50 @@
                 APFacebookWrapper.Instance = newAPFacebookWrapper.AddComponent<APFacebookWrapper>();
 
                 DontDestroyOnLoad(newAPFacebookWrapper);
-            }
 
 #if APSdk_LionKit
-            LionStudios.LionKit.OnInitialized += () =>
-            {
+                LionStudios.LionKit.OnInitialized += () =>
+                {
 
-                APFacebookWrapper.Instance.Initialize(
-                    apSdkConfiguretionInfo,
-                    this,
-                    ()=> {
-                        if (_subscribeToLionEvent)
-                        {
-
-                            LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                    APFacebookWrapper.Instance.Initialize(
+                        apSdkConfiguretionInfo,
+                        this,
+                        () => {
+                            if (_subscribeToLionEvent)
                             {
-                                APLionKitWrapper.LogLionGameEvent("Facebook", gameEvent);
-                                APFacebookWrapper.Instance.LogEvent(
-                                        gameEvent.eventName,
-                                        gameEvent.eventParams
-                                    );
-                            };
-                        }
 
-                        if (_subscribeToLionEventUA)
-                        {
+                                LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                                {
+                                    APLionKitWrapper.LogLionGameEvent("Facebook", gameEvent);
+                                    APFacebookWrapper.Instance.LogEvent(
+                                            gameEvent.eventName,
+                                            gameEvent.eventParams
+                                        );
+                                };
+                            }
 
-                            LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                            if (_subscribeToLionEventUA)
                             {
-                                APLionKitWrapper.LogLionGameEvent("FacebookUA", gameEvent);
-                                APFacebookWrapper.Instance.LogEvent(
-                                        gameEvent.eventName,
-                                        gameEvent.eventParams
-                                    );
-                            };
-                        }
-                    });
 
-            };
+                                LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                                {
+                                    APLionKitWrapper.LogLionGameEvent("FacebookUA", gameEvent);
+                                    APFacebookWrapper.Instance.LogEvent(
+                                            gameEvent.eventName,
+                                            gameEvent.eventParams
+                                        );
+                                };
+                            }
+                        });
+
+                };
 #else
         APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
+
+            }
+
+
         }
 
         #endregion

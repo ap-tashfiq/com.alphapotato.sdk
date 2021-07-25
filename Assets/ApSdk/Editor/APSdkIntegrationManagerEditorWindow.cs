@@ -105,27 +105,6 @@ namespace APSdk
 
         #endregion
 
-        
-
-        #region Private Variables   :   GameAnalyticsInfo
-
-#if APSdk_GameAnalytics
-
-        private APGameAnalyticsInfo _apGameAnalyticsInfo;
-        private SerializedObject    _serializedGameAnalyticsInfo;
-
-
-        private SerializedProperty _enableGameAnalyticsEvent;
-
-        private SerializedProperty _trackProgressionEventOnGA;
-        private SerializedProperty _trackAdEventOnGA;
-
-        private SerializedProperty _defaultWorldIndexOnGameAnalytics;
-
-
-#endif
-
-        #endregion
 
         #region Prvate Variables    :   Firebase
 
@@ -304,13 +283,13 @@ namespace APSdk
 
                 EditorGUI.BeginDisabledGroup(!_enableAnalyticsEvent.boolValue);
                 {
-                    analyticsConfiguretion.PreCustomEditorGUI();
-
-                    if (analyticsConfiguretion.CanBeSubscribedToLionLogEvent())
+                    EditorGUI.indentLevel += 1;
                     {
+                        analyticsConfiguretion.PreCustomEditorGUI();
 
-                        EditorGUI.indentLevel += 1;
+                        if (analyticsConfiguretion.CanBeSubscribedToLionLogEvent())
                         {
+
 #if APSdk_LionKit
                             EditorGUILayout.BeginHorizontal();
                             {
@@ -354,35 +333,32 @@ namespace APSdk
                         EditorGUILayout.EndHorizontal();
 #endif
                         }
-                        EditorGUI.indentLevel -= 1;
+                        else {
 
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(LabelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _trackProgressionEvent.boolValue = EditorGUILayout.Toggle(_trackProgressionEvent.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _trackProgressionEvent.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
 
-                    }
-                    else
-                    {
-
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(LabelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _trackProgressionEvent.boolValue = EditorGUILayout.Toggle(_trackProgressionEvent.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                                _trackProgressionEvent.serializedObject.ApplyModifiedProperties();
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(LabelWidth));
+                                EditorGUI.BeginChangeCheck();
+                                _trackAdEvent.boolValue = EditorGUILayout.Toggle(_trackAdEvent.boolValue);
+                                if (EditorGUI.EndChangeCheck())
+                                    _trackAdEvent.serializedObject.ApplyModifiedProperties();
+                            }
+                            EditorGUILayout.EndHorizontal();
                         }
-                        EditorGUILayout.EndHorizontal();
 
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(LabelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _trackAdEvent.boolValue = EditorGUILayout.Toggle(_trackAdEvent.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                                _trackAdEvent.serializedObject.ApplyModifiedProperties();
-                        }
-                        EditorGUILayout.EndHorizontal();
+                        analyticsConfiguretion.PostCustomEditorGUI();
                     }
-
-                    analyticsConfiguretion.PostCustomEditorGUI();
+                    EditorGUI.indentLevel -= 1;
 
                 }
                 EditorGUI.EndDisabledGroup();
@@ -647,308 +623,6 @@ namespace APSdk
                 }
                 EditorGUI.indentLevel -= 1;
             }
-        }
-
-        private void LionAdSettingsGUI()
-        {
-
-            DrawHeaderGUI((_isLionKitSDKIntegrated.boolValue ? "LionKitAd" : "LionKitAd = LionKit Not Found"), ref _lionAdSettingContent, ref _settingsTitleStyle, ref _showLionAdSetting);
-
-#if APSdk_LionKit
-
-            if (_showLionAdSetting.boolValue) {
-
-                    #region RewardedAd
-
-                EditorGUI.indentLevel += 1;
-                {
-                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
-                    {
-                        string rewardedAdLabel = "[" + (!_adShowRewardedAdSettings.boolValue ? "+" : "-") + "] [RewardedAd]";
-                        GUIContent rewardedAdLabelContent = new GUIContent(
-                                rewardedAdLabel
-
-                            );
-                        GUIStyle rewardedAdLabelStyle = new GUIStyle(EditorStyles.boldLabel);
-                        rewardedAdLabelStyle.alignment = TextAnchor.MiddleLeft;
-                        rewardedAdLabelStyle.padding.left = 18;
-
-                        if (GUILayout.Button(rewardedAdLabelContent, rewardedAdLabelStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
-                        {
-                            _adShowRewardedAdSettings.boolValue = !_adShowRewardedAdSettings.boolValue;
-                            _adShowRewardedAdSettings.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    if (_adShowRewardedAdSettings.boolValue)
-                    {
-
-                        EditorGUI.indentLevel += 1;
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                            {
-                                EditorGUILayout.LabelField(_adEnableRewardedAd.displayName, GUILayout.Width(LabelWidth));
-                                EditorGUI.BeginChangeCheck();
-                                _adEnableRewardedAd.boolValue = EditorGUILayout.Toggle(_adEnableRewardedAd.boolValue);
-                                if (EditorGUI.EndChangeCheck())
-                                    _adEnableRewardedAd.serializedObject.ApplyModifiedProperties();
-                            }
-                            EditorGUILayout.EndHorizontal();
-                        }
-                        EditorGUI.indentLevel -= 1;
-
-                    }
-                }
-                EditorGUI.indentLevel -= 1;
-
-
-                    #endregion
-
-            //------------------------------
-                    #region InterstitialAd
-
-                EditorGUI.indentLevel += 1;
-                {
-                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
-                    {
-                        string interstitialAdLabel = "[" + (!_adShowInterstitialAdSettings.boolValue ? "+" : "-") + "] [InterstitialAd]";
-                        GUIContent interstialAdLabelContent = new GUIContent(
-                                interstitialAdLabel
-
-                            );
-                        GUIStyle interstiaialAdLabelStyle = new GUIStyle(EditorStyles.boldLabel);
-                        interstiaialAdLabelStyle.alignment = TextAnchor.MiddleLeft;
-                        interstiaialAdLabelStyle.padding.left = 18;
-
-                        if (GUILayout.Button(interstialAdLabelContent, interstiaialAdLabelStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
-                        {
-                            _adShowInterstitialAdSettings.boolValue = !_adShowInterstitialAdSettings.boolValue;
-                            _adShowInterstitialAdSettings.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    if (_adShowInterstitialAdSettings.boolValue)
-                    {
-                        EditorGUI.indentLevel += 1;
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                            {
-                                EditorGUILayout.LabelField(_adEnableInterstitialAd.displayName, GUILayout.Width(LabelWidth));
-                                EditorGUI.BeginChangeCheck();
-                                _adEnableInterstitialAd.boolValue = EditorGUILayout.Toggle(_adEnableInterstitialAd.boolValue);
-                                if (EditorGUI.EndChangeCheck())
-                                    _adEnableInterstitialAd.serializedObject.ApplyModifiedProperties();
-                            }
-                            EditorGUILayout.EndHorizontal();
-                        }
-                        EditorGUI.indentLevel -= 1;
-
-                    }
-                }
-                EditorGUI.indentLevel -= 1;
-
-
-                    #endregion
-
-            //------------------------------
-                    #region BannerAd
-
-                EditorGUI.indentLevel += 1;
-                {
-                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
-                    {
-                        string bannerAdLabel = "[" + (!_adShowBannerAdSettings.boolValue ? "+" : "-") + "] [BannerAd]";
-                        GUIContent bannerAdLabelContent = new GUIContent(
-                                bannerAdLabel
-
-                            );
-                        GUIStyle bannerAdLabelStyle = new GUIStyle(EditorStyles.boldLabel);
-                        bannerAdLabelStyle.alignment = TextAnchor.MiddleLeft;
-                        bannerAdLabelStyle.padding.left = 18;
-
-                        if (GUILayout.Button(bannerAdLabelContent, bannerAdLabelStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
-                        {
-                            _adShowBannerAdSettings.boolValue = !_adShowBannerAdSettings.boolValue;
-                            _adShowBannerAdSettings.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    if (_adShowBannerAdSettings.boolValue)
-                    {
-                        EditorGUI.indentLevel += 1;
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                            {
-                                EditorGUILayout.LabelField(_adEnableBannerAd.displayName, GUILayout.Width(LabelWidth));
-                                EditorGUI.BeginChangeCheck();
-                                _adEnableBannerAd.boolValue = EditorGUILayout.Toggle(_adEnableBannerAd.boolValue);
-                                if (EditorGUI.EndChangeCheck())
-                                    _adEnableBannerAd.serializedObject.ApplyModifiedProperties();
-                            }
-                            EditorGUILayout.EndHorizontal();
-
-                            EditorGUILayout.BeginHorizontal();
-                            {
-                                EditorGUILayout.LabelField(_adStartBannerAdManually.displayName, GUILayout.Width(LabelWidth));
-                                EditorGUI.BeginChangeCheck();
-                                _adStartBannerAdManually.boolValue = EditorGUILayout.Toggle(_adStartBannerAdManually.boolValue);
-                                if (EditorGUI.EndChangeCheck())
-                                    _adStartBannerAdManually.serializedObject.ApplyModifiedProperties();
-                            }
-                            EditorGUILayout.EndHorizontal();
-                        }
-                        EditorGUI.indentLevel -= 1;
-
-                    }
-                }
-                EditorGUI.indentLevel -= 1;
-
-
-                    #endregion
-
-
-            //------------------------------
-                    #region CrossPromoAd
-
-                EditorGUI.indentLevel += 1;
-                {
-                    EditorGUILayout.BeginHorizontal(GUI.skin.box);
-                    {
-                        string crossPromoAdLabel = "[" + (!_adShowCrossPromoAdSettings.boolValue ? "+" : "-") + "] [CrossPromoAd]--[InDevelopment]";
-                        GUIContent crossPromoAdLabelContent = new GUIContent(
-                                crossPromoAdLabel
-
-                            );
-                        GUIStyle crossPromoAdLabelStyle = new GUIStyle(EditorStyles.boldLabel);
-                        crossPromoAdLabelStyle.alignment = TextAnchor.MiddleLeft;
-                        crossPromoAdLabelStyle.padding.left = 18;
-
-                        if (GUILayout.Button(crossPromoAdLabelContent, crossPromoAdLabelStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
-                        {
-                            _adShowCrossPromoAdSettings.boolValue = !_adShowCrossPromoAdSettings.boolValue;
-                            _adShowCrossPromoAdSettings.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    if (_adShowCrossPromoAdSettings.boolValue)
-                    {
-                        EditorGUI.indentLevel += 1;
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                            {
-                                EditorGUILayout.LabelField(_adEnableCrossPromoAd.displayName, GUILayout.Width(LabelWidth));
-                                EditorGUI.BeginChangeCheck();
-                                _adEnableCrossPromoAd.boolValue = EditorGUILayout.Toggle(_adEnableCrossPromoAd.boolValue);
-                                if (EditorGUI.EndChangeCheck())
-                                    _adEnableCrossPromoAd.serializedObject.ApplyModifiedProperties();
-                            }
-                            EditorGUILayout.EndHorizontal();
-                        }
-                        EditorGUI.indentLevel -= 1;
-
-                    }
-                }
-                EditorGUI.indentLevel -= 1;
-
-
-                    #endregion
-
-            }
-
-
-#endif
-
-
-        }
-
-      
-        
-        private void GameAnalyticsSettingsGUI() {
-
-            string title = string.Format("{0}{1}", "GameAnalytics", _isGameAnalyticsSDKIntegrated.boolValue ? "" : "- SDK Not Found");
-            DrawHeaderGUI(title, ref _gameAnalyticsSettingContent, ref _settingsTitleStyle, ref _showGameAnalyticsSetting);
-
-#if APSdk_GameAnalytics
-
-            if (_showGameAnalyticsSetting.boolValue) {
-
-                EditorGUI.indentLevel += 1;
-
-                EditorGUILayout.BeginHorizontal();
-                {
-                    EditorGUILayout.LabelField(
-                        new GUIContent(
-                            "EnableGameAnalyticsEvent",
-                            "Enable GameAnalytics event"
-                            ),
-                        GUILayout.Width(LabelWidth));
-                    EditorGUI.BeginChangeCheck();
-                    _enableGameAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableGameAnalyticsEvent.boolValue);
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        _enableGameAnalyticsEvent.serializedObject.ApplyModifiedProperties();
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
-
-                APSdkEditorModule.DrawHorizontalLine();
-
-                EditorGUILayout.BeginHorizontal();
-                {
-                    EditorGUILayout.LabelField(_trackProgressionEventOnGA.displayName, GUILayout.Width(LabelWidth));
-                    EditorGUI.BeginChangeCheck();
-                    _trackProgressionEventOnGA.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnGA.boolValue);
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        _trackProgressionEventOnGA.serializedObject.ApplyModifiedProperties();
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
-
-#if APSdk_LionKit
-                EditorGUILayout.BeginHorizontal();
-                {
-                    EditorGUILayout.LabelField(_trackAdEventOnGA.displayName, GUILayout.Width(LabelWidth));
-                    EditorGUI.BeginChangeCheck();
-                    _trackAdEventOnGA.boolValue = EditorGUILayout.Toggle(_trackAdEventOnGA.boolValue);
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        _trackAdEventOnGA.serializedObject.ApplyModifiedProperties();
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
-#endif
-
-
-
-                APSdkEditorModule.DrawHorizontalLine();
-
-                EditorGUILayout.BeginVertical();
-                {
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_defaultWorldIndexOnGameAnalytics.displayName, GUILayout.Width(LabelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _defaultWorldIndexOnGameAnalytics.intValue = EditorGUILayout.IntField(_defaultWorldIndexOnGameAnalytics.intValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            _defaultWorldIndexOnGameAnalytics.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-
-                }
-                EditorGUILayout.EndVertical();
-
-                EditorGUI.indentLevel -= 1;
-            }
-
-#endif
         }
 
         private void FirebaseSettingsGUI() {
@@ -1276,27 +950,7 @@ namespace APSdk
 
             
 
-            //-------------
-                    
-
-                    #region GameAnalyticsInfo
-
-#if APSdk_GameAnalytics
-
-            _apGameAnalyticsInfo = Resources.Load<APGameAnalyticsInfo>("GameAnalytics/APGameAnalyticsInfo");
-
-            _serializedGameAnalyticsInfo = new SerializedObject(_apGameAnalyticsInfo);
-
-            _enableGameAnalyticsEvent   = _serializedGameAnalyticsInfo.FindProperty("_enableGameAnalyticsEvent");
-
-            _trackProgressionEventOnGA  = _serializedGameAnalyticsInfo.FindProperty("_trackProgressionEvent");
-            _trackAdEventOnGA           = _serializedGameAnalyticsInfo.FindProperty("_trackAdEvent");
-
-            _defaultWorldIndexOnGameAnalytics = _serializedGameAnalyticsInfo.FindProperty("_defaultWorldIndex");
-
-#endif
-
-                    #endregion
+            
 
 #if APSdk_Firebase
 

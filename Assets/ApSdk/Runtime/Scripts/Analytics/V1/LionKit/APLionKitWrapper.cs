@@ -14,17 +14,10 @@
 #region Public Variables
 
         public static APLionKitWrapper Instance { get; private set; }
-        public static APSdkAnalytics Analytics { get; private set; }
+        public static APAnalytics Analytics { get; private set; }
 
 
-#if APSdk_LionKit
 
-
-        public static APLionKitRewardedAdController RewardedAd { get; private set; }
-        public static APLionKitInterstitialAdController InterstitialAd { get; private set; } 
-        public static APLionKitBannerAdController BannerAd { get; private set; }
-
-#endif
 
 
 
@@ -146,20 +139,7 @@ LionKit.OnInitialized += () => {
                     
                     APLionKitInfo apLionKitInfo = Resources.Load<APLionKitInfo>("LionKit/APLionKitInfo");
 
-                    if (RewardedAd == null) {
-                        RewardedAd = new GameObject("APLionKitRewardedAdController").AddComponent<APLionKitRewardedAdController>();
-                        RewardedAd.Initialization(apSdkConfiguretionInfo, apLionKitInfo);
-                    }
-
-                    if (InterstitialAd == null) {
-                        InterstitialAd = new GameObject("APLionKitInterstitialAdController").AddComponent<APLionKitInterstitialAdController>();
-                        InterstitialAd.Initialization(apSdkConfiguretionInfo, apLionKitInfo);
-                    }
-
-                    if (BannerAd == null) {
-                        BannerAd = new GameObject("APLionKitBannerAdController").AddComponent<APLionKitBannerAdController>();
-                        BannerAd.Initialization(apSdkConfiguretionInfo, apLionKitInfo);
-                    }
+                    
                     
 
                     APSdkLogger.Log("LionKit Initialized");
@@ -240,31 +220,14 @@ LionKit.OnInitialized += () => {
 
 #endif
 
-#if APSdk_GameAnalytics
 
-                    APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo);
-
-#endif
-
-
-    if (!apLionKitInfo.startBannerAdManually && apLionKitInfo.enableBannerAd) {
-                        BannerAd.ShowBannerAd();
-                    }
                 };
 
 
 #else
                 // if LionKit not integrated
 
-#if APSdk_Facebook
-                APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo);
-#endif
 
-
-
-#if APSdk_GameAnalytics
-                APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo);
-#endif
 
 #if APSdk_Firebase
                 APFirebaseWrapper.Instance.Initialize(apSdkConfiguretionInfo);
@@ -272,7 +235,7 @@ LionKit.OnInitialized += () => {
 
 #endif
 
-                Analytics = new APSdkAnalytics(apSdkConfiguretionInfo);
+                Analytics = new APAnalytics(apSdkConfiguretionInfo);
 
             }
         }

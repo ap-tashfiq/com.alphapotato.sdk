@@ -7,7 +7,7 @@
     using LionStudios;
 #endif
 
-    public class APSdkAnalytics
+    public class APAnalytics
     {
         #region Custom Variables
 
@@ -103,9 +103,7 @@
 
 
 
-#if APSdk_GameAnalytics
-        private APGameAnalyticsInfo _apGameAnalyticsInfo;
-#endif
+
 
 #if APSdk_Firebase
         private APFirebaseInfo _apFirebaseInfo;
@@ -116,7 +114,7 @@
         //---------------
         #region Public Callback
 
-        public APSdkAnalytics (APSdkConfiguretionInfo apSdkConfiguretionInfo) {
+        public APAnalytics (APSdkConfiguretionInfo apSdkConfiguretionInfo) {
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
 
@@ -124,9 +122,7 @@
 
 
 
-#if APSdk_GameAnalytics
-            _apGameAnalyticsInfo = Resources.Load<APGameAnalyticsInfo>("GameAnalytics/APGameAnalyticsInfo");
-#endif
+
 
 #if APSdk_Firebase
          _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
@@ -196,7 +192,7 @@
                     APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Start,
                         (int)level,
-                        world: _apGameAnalyticsInfo.DefaultWorldIndex);
+                        world: -1);
 #endif
             }
         }
@@ -262,7 +258,7 @@
                     APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Complete,
                         (int)level,
-                        world: _apGameAnalyticsInfo.DefaultWorldIndex);
+                        world: -1);
 #endif
             }
         }
@@ -324,7 +320,7 @@
                     APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Fail,
                         (int)level,
-                        world: _apGameAnalyticsInfo.DefaultWorldIndex);
+                        world: -1);
 #endif
             }
         }

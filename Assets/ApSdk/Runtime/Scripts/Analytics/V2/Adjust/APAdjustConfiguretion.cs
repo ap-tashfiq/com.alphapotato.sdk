@@ -247,44 +247,45 @@
                 APAdjustWrapper.Instance = newAPAdjustWrapper.AddComponent<APAdjustWrapper>();
 
                 DontDestroyOnLoad(newAPAdjustWrapper);
-            }
 
 #if APSdk_LionKit
 
-            LionStudios.LionKit.OnInitialized += () =>
-            {
-                APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
-
-                if (_subscribeToLionEvent)
+                LionStudios.LionKit.OnInitialized += () =>
                 {
+                    APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
 
-                    LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                    if (_subscribeToLionEvent)
                     {
-                        APLionKitWrapper.LogLionGameEvent("Adjust", gameEvent);
-                        APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                    };
-                }
 
-                if (_subscribeToLionEventUA)
-                {
-                    LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                        LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                        {
+                            APLionKitWrapper.LogLionGameEvent("Adjust", gameEvent);
+                            APAdjustWrapper.Instance.LogEvent(
+                                        gameEvent.eventName,
+                                        gameEvent.eventParams
+                                    );
+                        };
+                    }
+
+                    if (_subscribeToLionEventUA)
                     {
-                        APLionKitWrapper.LogLionGameEvent("AdjustUA", gameEvent);
-                        APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                    };
-                }
-            };
+                        LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                        {
+                            APLionKitWrapper.LogLionGameEvent("AdjustUA", gameEvent);
+                            APAdjustWrapper.Instance.LogEvent(
+                                        gameEvent.eventName,
+                                        gameEvent.eventParams
+                                    );
+                        };
+                    }
+                };
 #else
 
             APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
 
 #endif
+
+            }
         }
 
 

@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb6752084a4494bd78b4a5122ebd3fbf, type: 3}
-  m_Name: APFacebookInfo
+  m_Script: {fileID: 11500000, guid: e5e0bce3929c94610ae0dd8f70a948b8, type: 3}
+  m_Name: APGameAnalyticsConfiguretion
   m_EditorClassIdentifier: 
-  _appName: Side Hero
-  _appId: 160782859234512
-  _enableFacebookEvent: 1
+  _showSettings: 0
+  _nameOfConfiguretion: GameAnalytics
+  _isSDKIntegrated: 1
+  _enableAnalyticsEvent: 0
   _trackProgressionEvent: 0
   _trackAdEvent: 0
   _subscribeToLionEvent: 0
   _subscribeToLionEventUA: 0
+  _defaultWorldIndex: 1
