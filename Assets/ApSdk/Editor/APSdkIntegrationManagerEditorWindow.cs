@@ -11,10 +11,16 @@ namespace APSdk
 
     public class APSdkIntegrationManagerEditorWindow : EditorWindow
     {
+        #region Public Variables
+
+        public const float LabelWidth = 200;
+
+        #endregion
+
         #region Private Variables   :   General
 
         private static EditorWindow _reference;
-        private const float _labelWidth = 200;
+        
 
         private bool _IsInformationFetched = false;
         private Vector2 _scrollPosition;
@@ -355,7 +361,9 @@ namespace APSdk
 
                 EditorGUI.BeginDisabledGroup(!_enableAnalyticsEvent.boolValue);
                 {
-                    if (analyticsConfiguretion.IsAbleToSubscribeToLionLogEvent)
+                    analyticsConfiguretion.PreCustomEditorGUI();
+
+                    if (analyticsConfiguretion.CanBeSubscribedToLionLogEvent())
                     {
 
                         EditorGUI.indentLevel += 1;
@@ -363,7 +371,7 @@ namespace APSdk
 #if APSdk_LionKit
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_subscribeToLionEvent.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_subscribeToLionEvent.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _subscribeToLionEvent.boolValue = EditorGUILayout.Toggle(_subscribeToLionEvent.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -373,7 +381,7 @@ namespace APSdk
 
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_subscribeToLionEventUA.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_subscribeToLionEventUA.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _subscribeToLionEventUA.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUA.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -412,7 +420,7 @@ namespace APSdk
 
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _trackProgressionEvent.boolValue = EditorGUILayout.Toggle(_trackProgressionEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -422,7 +430,7 @@ namespace APSdk
 
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _trackAdEvent.boolValue = EditorGUILayout.Toggle(_trackAdEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -430,6 +438,8 @@ namespace APSdk
                         }
                         EditorGUILayout.EndHorizontal();
                     }
+
+                    analyticsConfiguretion.PostCustomEditorGUI();
 
                 }
                 EditorGUI.EndDisabledGroup();
@@ -536,7 +546,7 @@ namespace APSdk
                             {
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_enableRewardedAd.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_enableRewardedAd.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _enableRewardedAd.boolValue = EditorGUILayout.Toggle(_enableRewardedAd.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -580,7 +590,7 @@ namespace APSdk
                             {
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_enableInterstitialAd.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_enableInterstitialAd.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _enableInterstitialAd.boolValue = EditorGUILayout.Toggle(_enableInterstitialAd.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -624,7 +634,7 @@ namespace APSdk
                             {
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_enableBannerAd.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_enableBannerAd.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _enableBannerAd.boolValue = EditorGUILayout.Toggle(_enableBannerAd.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -634,7 +644,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_showBannerAdManually.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_showBannerAdManually.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _showBannerAdManually.boolValue = EditorGUILayout.Toggle(_showBannerAdManually.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -669,7 +679,7 @@ namespace APSdk
                 {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("Reference/Link", GUILayout.Width(_labelWidth + 30));
+                        EditorGUILayout.LabelField("Reference/Link", GUILayout.Width(LabelWidth + 30));
                         if (GUILayout.Button("Download", _hyperlinkStyle, GUILayout.Width(100))) {
                             Application.OpenURL(_linkForDownload);
                         }
@@ -683,7 +693,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_logAnalyticsEvent.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_logAnalyticsEvent.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _logAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_logAnalyticsEvent.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -735,7 +745,7 @@ namespace APSdk
                         {
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_adEnableRewardedAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_adEnableRewardedAd.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _adEnableRewardedAd.boolValue = EditorGUILayout.Toggle(_adEnableRewardedAd.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -782,7 +792,7 @@ namespace APSdk
                         {
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_adEnableInterstitialAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_adEnableInterstitialAd.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _adEnableInterstitialAd.boolValue = EditorGUILayout.Toggle(_adEnableInterstitialAd.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -829,7 +839,7 @@ namespace APSdk
                         {
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_adEnableBannerAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_adEnableBannerAd.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _adEnableBannerAd.boolValue = EditorGUILayout.Toggle(_adEnableBannerAd.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -839,7 +849,7 @@ namespace APSdk
 
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_adStartBannerAdManually.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_adStartBannerAdManually.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _adStartBannerAdManually.boolValue = EditorGUILayout.Toggle(_adStartBannerAdManually.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -887,7 +897,7 @@ namespace APSdk
                         {
                             EditorGUILayout.BeginHorizontal();
                             {
-                                EditorGUILayout.LabelField(_adEnableCrossPromoAd.displayName, GUILayout.Width(_labelWidth));
+                                EditorGUILayout.LabelField(_adEnableCrossPromoAd.displayName, GUILayout.Width(LabelWidth));
                                 EditorGUI.BeginChangeCheck();
                                 _adEnableCrossPromoAd.boolValue = EditorGUILayout.Toggle(_adEnableCrossPromoAd.boolValue);
                                 if (EditorGUI.EndChangeCheck())
@@ -931,7 +941,7 @@ namespace APSdk
                                 "EnableFacebookEvent",
                                 "Enable facebook event"
                                 ),
-                            GUILayout.Width(_labelWidth));
+                            GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _enableFacebookEvent.boolValue = EditorGUILayout.Toggle(_enableFacebookEvent.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -946,7 +956,7 @@ namespace APSdk
 #if APSdk_LionKit
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _subscribeToLionEventOnFacebook.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnFacebook.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -958,7 +968,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _subscribeToLionEventUAOnFacebook.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnFacebook.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1000,7 +1010,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_facebookAppName.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_facebookAppName.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _facebookAppName.stringValue = EditorGUILayout.TextField(_facebookAppName.stringValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1014,7 +1024,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_facebookAppId.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_facebookAppId.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _facebookAppId.stringValue = EditorGUILayout.TextField(_facebookAppId.stringValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1053,7 +1063,7 @@ namespace APSdk
                                 "EnableAdjustEvent",
                                 "Enable adjust event"
                                 ),
-                            GUILayout.Width(_labelWidth));
+                            GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _enableAdjustEvent.boolValue = EditorGUILayout.Toggle(_enableAdjustEvent.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1068,7 +1078,7 @@ namespace APSdk
 #if APSdk_LionKit
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _subscribeToLionEventOnAdjust.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnAdjust.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1080,7 +1090,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _subscribeToLionEventUAOnAdjust.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnAdjust.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1149,7 +1159,7 @@ namespace APSdk
                             {
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustAppTokenForAndroid.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustAppTokenForAndroid.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustAppTokenForAndroid.stringValue = EditorGUILayout.TextField(_adjustAppTokenForAndroid.stringValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1159,7 +1169,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustAppTokenForIOS.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustAppTokenForIOS.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustAppTokenForIOS.stringValue = EditorGUILayout.TextField(_adjustAppTokenForIOS.stringValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1169,7 +1179,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustEnvironment.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustEnvironment.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustEnvironment.enumValueIndex = (int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.Environment));
                                     if (EditorGUI.EndChangeCheck())
@@ -1217,7 +1227,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustLogLevel.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustLogLevel.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustLogLevel.enumValueIndex = ((int)((AdjustEnvironment)EditorGUILayout.EnumPopup(_apAdjustInfo.LogLevel))) - 1;
                                     if (EditorGUI.EndChangeCheck())
@@ -1231,7 +1241,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustStartDelay.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustStartDelay.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustStartDelay.floatValue = EditorGUILayout.FloatField(_adjustStartDelay.floatValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1243,7 +1253,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustStartManually.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustStartManually.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustStartManually.boolValue = EditorGUILayout.Toggle(_adjustStartManually.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1255,7 +1265,7 @@ namespace APSdk
                                 EditorGUILayout.Space();
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustEventBuffering.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustEventBuffering.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustEventBuffering.boolValue = EditorGUILayout.Toggle(_adjustEventBuffering.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1267,7 +1277,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustSendInBackground.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustSendInBackground.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustSendInBackground.boolValue = EditorGUILayout.Toggle(_adjustSendInBackground.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1279,7 +1289,7 @@ namespace APSdk
 
                                 EditorGUILayout.BeginHorizontal();
                                 {
-                                    EditorGUILayout.LabelField(_adjustLaunchDeferredDeeplink.displayName, GUILayout.Width(_labelWidth));
+                                    EditorGUILayout.LabelField(_adjustLaunchDeferredDeeplink.displayName, GUILayout.Width(LabelWidth));
                                     EditorGUI.BeginChangeCheck();
                                     _adjustLaunchDeferredDeeplink.boolValue = EditorGUILayout.Toggle(_adjustLaunchDeferredDeeplink.boolValue);
                                     if (EditorGUI.EndChangeCheck())
@@ -1322,7 +1332,7 @@ namespace APSdk
                             "EnableGameAnalyticsEvent",
                             "Enable GameAnalytics event"
                             ),
-                        GUILayout.Width(_labelWidth));
+                        GUILayout.Width(LabelWidth));
                     EditorGUI.BeginChangeCheck();
                     _enableGameAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableGameAnalyticsEvent.boolValue);
                     if (EditorGUI.EndChangeCheck())
@@ -1336,7 +1346,7 @@ namespace APSdk
 
                 EditorGUILayout.BeginHorizontal();
                 {
-                    EditorGUILayout.LabelField(_trackProgressionEventOnGA.displayName, GUILayout.Width(_labelWidth));
+                    EditorGUILayout.LabelField(_trackProgressionEventOnGA.displayName, GUILayout.Width(LabelWidth));
                     EditorGUI.BeginChangeCheck();
                     _trackProgressionEventOnGA.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnGA.boolValue);
                     if (EditorGUI.EndChangeCheck())
@@ -1349,7 +1359,7 @@ namespace APSdk
 #if APSdk_LionKit
                 EditorGUILayout.BeginHorizontal();
                 {
-                    EditorGUILayout.LabelField(_trackAdEventOnGA.displayName, GUILayout.Width(_labelWidth));
+                    EditorGUILayout.LabelField(_trackAdEventOnGA.displayName, GUILayout.Width(LabelWidth));
                     EditorGUI.BeginChangeCheck();
                     _trackAdEventOnGA.boolValue = EditorGUILayout.Toggle(_trackAdEventOnGA.boolValue);
                     if (EditorGUI.EndChangeCheck())
@@ -1368,7 +1378,7 @@ namespace APSdk
                 {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_defaultWorldIndexOnGameAnalytics.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_defaultWorldIndexOnGameAnalytics.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _defaultWorldIndexOnGameAnalytics.intValue = EditorGUILayout.IntField(_defaultWorldIndexOnGameAnalytics.intValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1407,7 +1417,7 @@ namespace APSdk
                                 "EnableFirebaseEvent",
                                 "Enable firebase event"
                                 ),
-                                GUILayout.Width(_labelWidth));
+                                GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _enableFirebaseAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableFirebaseAnalyticsEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -1422,7 +1432,7 @@ namespace APSdk
 #if APSdk_LionKit
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _subscribeToLionEventOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnFirebase.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -1434,7 +1444,7 @@ namespace APSdk
 
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _subscribeToLionEventUAOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnFirebase.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -1541,7 +1551,7 @@ namespace APSdk
                 {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_maxMediationDebugger.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_maxMediationDebugger.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _maxMediationDebugger.boolValue = EditorGUILayout.Toggle(_maxMediationDebugger.boolValue);
                         if (EditorGUI.EndChangeCheck())
@@ -1553,7 +1563,7 @@ namespace APSdk
 
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_showAPSdkLogInConsole.displayName, GUILayout.Width(_labelWidth));
+                        EditorGUILayout.LabelField(_showAPSdkLogInConsole.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
                         _showAPSdkLogInConsole.boolValue = EditorGUILayout.Toggle(_showAPSdkLogInConsole.boolValue);
                         if (EditorGUI.EndChangeCheck())

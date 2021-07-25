@@ -11,7 +11,6 @@ using UnityEditor;
     {
 #region Public Variables
 
-        public bool IsAbleToSubscribeToLionLogEvent { get { return CanBeSubscribedToLionLogEvent(); } }
 
         public bool IsAnalyticsEventEnabled { get { return _enableAnalyticsEvent; } }
 
@@ -40,14 +39,19 @@ using UnityEditor;
 
 #region Abstract Method
 
-        protected abstract bool CanBeSubscribedToLionLogEvent();
+        public abstract bool CanBeSubscribedToLionLogEvent();
 
         /// <summary>
-        /// You can write your editor script for the variables on your derived class
+        /// You can write your editor script for the variables on your derived class before the template editor script
         /// </summary>
-        protected abstract void CustomEditorGUI();
+        public abstract void PreCustomEditorGUI();
 
-#endregion
+        /// <summary>
+        /// You can write your editor script for the variables on your derived class after the template editor script
+        /// </summary>
+        public abstract void PostCustomEditorGUI();
+
+        #endregion
     }
 }
 
