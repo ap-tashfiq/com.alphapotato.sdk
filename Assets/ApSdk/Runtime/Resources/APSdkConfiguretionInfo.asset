@@ -32,6 +32,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 962fff472496344488a292004fcc145f, type: 2}
   - {fileID: 11400000, guid: 72f66cec7d517479d948107a9c3c3225, type: 2}
   - {fileID: 11400000, guid: d8ce44e22d661421bad0a26955d29caf, type: 2}
+  - {fileID: 11400000, guid: 4e4b2db9311d044779eef7b90c8983f7, type: 2}
   indexOfActiveAdConfiguretion: 0
   listOfAdConfiguretion:
   - {fileID: 11400000, guid: a187bd99ed2934aa598eadd41941cc7c, type: 2}

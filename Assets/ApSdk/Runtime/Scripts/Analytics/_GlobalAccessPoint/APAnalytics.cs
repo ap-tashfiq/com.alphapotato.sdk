@@ -100,15 +100,6 @@
         private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
 
 
-
-
-
-
-
-#if APSdk_Firebase
-        private APFirebaseInfo _apFirebaseInfo;
-#endif
-
 #endregion
 
         //---------------
@@ -118,15 +109,6 @@
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
 
-
-
-
-
-
-
-#if APSdk_Firebase
-         _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
-#endif
 
 #if APSdk_LionKit
             _isLionKitIntegrated = true;
@@ -156,8 +138,8 @@
 #if APSdk_Facebook
             //if    :   Facebook Integrated
 
-                if(_apFacebookInfo.IsFacebookEventEnabled)
-                    APFacebookWrapper.Instance.LogEvent(Key.level_started, eventParam);
+                
+                APFacebookWrapper.Instance.LogEvent(Key.level_started, eventParam);
 #endif
 
 #if APSdk_Adjust

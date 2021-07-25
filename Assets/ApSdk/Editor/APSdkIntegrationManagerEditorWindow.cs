@@ -38,88 +38,32 @@ namespace APSdk
 
         #region Private Variables   :   APSdkConfiguretionInfo
 
-                private APSdkConfiguretionInfo  _apSDKConfiguretionInfo;
-                private SerializedObject        _serializedSDKConfiguretionInfo;
+        private APSdkConfiguretionInfo  _apSDKConfiguretionInfo;
+        private SerializedObject        _serializedSDKConfiguretionInfo;
 
-                private GUIContent              _generalSettingContent;
-                private GUIContent              _lionAdSettingContent;
-                private GUIContent              _facebookSettingContent;
-                private GUIContent              _adjustSettingContent;
-                private GUIContent              _gameAnalyticsSettingContent;
-                private GUIContent              _firebaseSettingContent;
-                private GUIContent              _analyticsSettingContent;
-                private GUIContent              _adNetworkSettingContent;
-                private GUIContent              _abTestSettingContent;
-                private GUIContent              _debuggingSettingContent;
-
+        private GUIContent              _generalSettingContent;
+        private GUIContent              _analyticsSettingContent;
+        private GUIContent              _adNetworkSettingContent;
+        private GUIContent              _abTestSettingContent;
+        private GUIContent              _debuggingSettingContent;
         
-                private SerializedProperty      _isLionKitSDKIntegrated;
-                private SerializedProperty      _isFacebookSDKIntegrated;
-                private SerializedProperty      _isAdjustSDKIntegrated;
-                private SerializedProperty      _isGameAnalyticsSDKIntegrated;
-                private SerializedProperty      _isFirebaseSDKIntegrated;
 
-                private SerializedProperty      _showGeneralSettings;
-                private SerializedProperty      _showLionAdSetting;
-                private SerializedProperty      _showFacebookSetting;
-                private SerializedProperty      _showAdjustSetting;
-                private SerializedProperty      _showGameAnalyticsSetting;
-                private SerializedProperty      _showFirebaseSetting;
-                private SerializedProperty      _showAnalytics;
-                private SerializedProperty      _showAdNetworks;
-                private SerializedProperty      _showABTestSetting;
-                private SerializedProperty      _showDebuggingSettings;
+        private SerializedProperty      _showGeneralSettings;
+        private SerializedProperty      _showAnalytics;
+        private SerializedProperty      _showAdNetworks;
+        private SerializedProperty      _showABTestSetting;
+        private SerializedProperty      _showDebuggingSettings;
 
-                private SerializedProperty      _logAnalyticsEvent;
-                private SerializedProperty      _maxMediationDebugger;
+        private SerializedProperty      _logAnalyticsEvent;
+        private SerializedProperty      _maxMediationDebugger;
 
-                private SerializedProperty      _showAPSdkLogInConsole;
+        private SerializedProperty      _showAPSdkLogInConsole;
 
-                private SerializedProperty      _infoLogColor;
-                private SerializedProperty      _warningLogColor;
-                private SerializedProperty      _errorLogColor;
+        private SerializedProperty      _infoLogColor;
+        private SerializedProperty      _warningLogColor;
+        private SerializedProperty      _errorLogColor;
 
 
-
-                #endregion
-
-        #region Private Variables   :   APLionKitInfo
-
-#if APSdk_LionKit
-        private APLionKitInfo        _apLionKitInfo;
-        private SerializedObject    _serializedLionKitInfo;
-
-        private SerializedProperty  _adShowRewardedAdSettings;
-        private SerializedProperty  _adShowInterstitialAdSettings;
-        private SerializedProperty  _adShowBannerAdSettings;
-        private SerializedProperty  _adShowCrossPromoAdSettings;
-
-
-        private SerializedProperty  _adEnableRewardedAd;
-        private SerializedProperty  _adEnableInterstitialAd;
-        private SerializedProperty  _adEnableBannerAd;
-        private SerializedProperty  _adEnableCrossPromoAd;
-
-        private SerializedProperty  _adStartBannerAdManually;
-#endif
-
-        #endregion
-
-
-        #region Prvate Variables    :   Firebase
-
-#if APSdk_Firebase
-        private APFirebaseInfo _apFirebaseInfo;
-        private SerializedObject _serializedFirebaseInfo;
-
-        private SerializedProperty _enableFirebaseAnalyticsEvent;
-
-        private SerializedProperty _trackProgressionEventOnFirebase;
-        private SerializedProperty _trackAdEventOnFirebase;
-
-        private SerializedProperty _subscribeToLionEventOnFirebase;
-        private SerializedProperty _subscribeToLionEventUAOnFirebase;
-#endif
 
         #endregion
 
@@ -172,21 +116,6 @@ namespace APSdk
                 EditorGUI.indentLevel += 1;
                 {
                     GeneralSettingGUI();
-
-                    //EditorGUILayout.Space();
-                    //LionAdSettingsGUI();
-
-                    //EditorGUILayout.Space();
-                    //FacebookSettingGUI();
-
-                    //EditorGUILayout.Space();
-                    //AdjustSettingsGUI();
-
-                    //EditorGUILayout.Space();
-                    //GameAnalyticsSettingsGUI();
-
-                    //EditorGUILayout.Space();
-                    //FirebaseSettingsGUI();
 
                     EditorGUILayout.Space();
                     AnalyticsSettingsGUI();
@@ -624,98 +553,7 @@ namespace APSdk
                 EditorGUI.indentLevel -= 1;
             }
         }
-
-        private void FirebaseSettingsGUI() {
-
-            string title = string.Format("{0}{1}", "Firebase", _isFirebaseSDKIntegrated.boolValue ? "" : "- SDK Not Found");
-            DrawHeaderGUI(title, ref _firebaseSettingContent, ref _settingsTitleStyle, ref _showFirebaseSetting);
-
-#if APSdk_Firebase
-            if (_showFirebaseSetting.boolValue) {
-
-                EditorGUI.indentLevel += 1;
-                {
-                    EditorGUILayout.BeginVertical();
-                    {
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField(
-                                new GUIContent(
-                                "EnableFirebaseEvent",
-                                "Enable firebase event"
-                                ),
-                                GUILayout.Width(LabelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _enableFirebaseAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_enableFirebaseAnalyticsEvent.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                _enableFirebaseAnalyticsEvent.serializedObject.ApplyModifiedProperties();
-                            }
-                        }
-                        EditorGUILayout.EndHorizontal();
-
-                        APSdkEditorModule.DrawHorizontalLine();
-
-#if APSdk_LionKit
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField("SubscribeToLionEvent", GUILayout.Width(LabelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _subscribeToLionEventOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventOnFirebase.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                _subscribeToLionEventOnFirebase.serializedObject.ApplyModifiedProperties();
-                            }
-                        }
-                        EditorGUILayout.EndHorizontal();
-
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField("SubscribeToLionEventUA", GUILayout.Width(LabelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _subscribeToLionEventUAOnFirebase.boolValue = EditorGUILayout.Toggle(_subscribeToLionEventUAOnFirebase.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                _subscribeToLionEventUAOnFirebase.serializedObject.ApplyModifiedProperties();
-                            }
-                        }
-                        EditorGUILayout.EndHorizontal();
-#else
-
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField(_trackProgressionEventOnFirebase.displayName, GUILayout.Width(_labelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _trackProgressionEventOnFirebase.boolValue = EditorGUILayout.Toggle(_trackProgressionEventOnFirebase.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                _trackProgressionEventOnFirebase.serializedObject.ApplyModifiedProperties();
-                            }
-                        }
-                        EditorGUILayout.EndHorizontal();
-
-                        EditorGUILayout.BeginHorizontal();
-                        {
-                            EditorGUILayout.LabelField(_trackAdEventOnFirebase.displayName, GUILayout.Width(_labelWidth));
-                            EditorGUI.BeginChangeCheck();
-                            _trackAdEventOnFirebase.boolValue = EditorGUILayout.Toggle(_trackAdEventOnFirebase.boolValue);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                _trackAdEventOnFirebase.serializedObject.ApplyModifiedProperties();
-                            }
-                        }
-                        EditorGUILayout.EndHorizontal();
-
-#endif
-
-                    }
-                    EditorGUILayout.EndVertical();
-                }
-                EditorGUI.indentLevel -= 1;
-            }
-#endif
-                    }
-
+        
         private void AnalyticsSettingsGUI() {
 
             DrawHeaderGUI("Analytics", ref _analyticsSettingContent, ref _settingsTitleStyle, ref _showAnalytics);
@@ -833,30 +671,20 @@ namespace APSdk
             }
         }
 
-#endregion
+        #endregion
 
-                    #region Configuretion
 
+        #region Configuretion
 
         private void FetchAllTheReference() {
 
-                    #region APSdkConfiguretionInfo
+             #region APSdkConfiguretionInfo
 
             _apSDKConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
             _serializedSDKConfiguretionInfo = new SerializedObject(_apSDKConfiguretionInfo);
 
-            _isLionKitSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isLionKitSDKIntegrated");
-            _isFacebookSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFacebookSDKIntegrated");
-            _isAdjustSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isAdjustSDKIntegrated");
-            _isGameAnalyticsSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isGameAnalyticsSDKIntegrated");
-            _isFirebaseSDKIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isFirebaseSDKIntegrated");
-
+            
             _showGeneralSettings = _serializedSDKConfiguretionInfo.FindProperty("_showGeneralSetting");
-            _showLionAdSetting = _serializedSDKConfiguretionInfo.FindProperty("_showLionAdSetting");
-            _showFacebookSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFacebookSetting");
-            _showAdjustSetting = _serializedSDKConfiguretionInfo.FindProperty("_showAdjustSetting");
-            _showGameAnalyticsSetting = _serializedSDKConfiguretionInfo.FindProperty("_showGameAnalyticsSetting");
-            _showFirebaseSetting = _serializedSDKConfiguretionInfo.FindProperty("_showFirebaseSetting");
             _showAnalytics = _serializedSDKConfiguretionInfo.FindProperty("_showAnalytics");
             _showAdNetworks = _serializedSDKConfiguretionInfo.FindProperty("_showAdNetworks");
             _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showABTestSetting");
@@ -873,25 +701,6 @@ namespace APSdk
 
             _generalSettingContent = new GUIContent(
                         "[" + (!_showGeneralSettings.boolValue ? "+" : "-") + "] General"
-                    );
-            _lionAdSettingContent = new GUIContent(
-                        "[" + (!_showLionAdSetting.boolValue ? "+" : "-") + "] " + (_isLionKitSDKIntegrated.boolValue ? "LionKitAd" : "LionKitAd - LionKit Not Found")
-                    );
-
-            _facebookSettingContent = new GUIContent(
-                        "[" + (!_showFacebookSetting.boolValue ? "+" : "-") + "] " + (_isFacebookSDKIntegrated.boolValue ? "Facebook" : "Facebook - SDK Not Found")
-                    );
-
-            _adjustSettingContent = new GUIContent(
-                        "[" + (!_showAdjustSetting.boolValue ? "+" : "-") + "] " + (_isAdjustSDKIntegrated.boolValue? "Adjust" : "Adjust - SDK Not Found")
-                    );
-
-            _gameAnalyticsSettingContent = new GUIContent(
-                        "[" + (!_showGameAnalyticsSetting.boolValue ? "+" : "-") + "] " + (_isGameAnalyticsSDKIntegrated.boolValue ? "GameAnalytics" : "GameAnalytics - SDK Not Found")
-                    );
-
-            _firebaseSettingContent = new GUIContent(
-                        "[" + (!_showFirebaseSetting.boolValue ? "+" : "-") + "] " + (_isFirebaseSDKIntegrated.boolValue ? "Firebase" : "Firebase - SDK Not Found")
                     );
 
             _analyticsSettingContent = new GUIContent(
@@ -918,59 +727,17 @@ namespace APSdk
             _hyperlinkStyle.wordWrap = true;
             _hyperlinkStyle.richText = true;
 
-                    #endregion
+            #endregion
 
             //-------------
-                    #region LionKitInfo
 
-#if APSdk_LionKit
-
-            _apLionKitInfo = Resources.Load<APLionKitInfo>("LionKit/APLionKitInfo");
-
-            _serializedLionKitInfo = new SerializedObject(_apLionKitInfo);
-
-            _adShowRewardedAdSettings = _serializedLionKitInfo.FindProperty("_showRewardedAdSettings");
-            _adShowInterstitialAdSettings = _serializedLionKitInfo.FindProperty("_showInterstitialAdSettings");
-            _adShowBannerAdSettings = _serializedLionKitInfo.FindProperty("_showBannerAdSettings");
-            _adShowCrossPromoAdSettings = _serializedLionKitInfo.FindProperty("_showCrossPromoAdSettings");
 
             
-
-            _adEnableRewardedAd = _serializedLionKitInfo.FindProperty("enableRewardedAd");
-            _adEnableInterstitialAd = _serializedLionKitInfo.FindProperty("enableInterstitialAd");
-            _adEnableBannerAd = _serializedLionKitInfo.FindProperty("enableBannerAd");
-            _adEnableCrossPromoAd = _serializedLionKitInfo.FindProperty("enableCrossPromoAd");
-            _adStartBannerAdManually = _serializedLionKitInfo.FindProperty("startBannerAdManually");
-
-#endif
-
-
-
-                    #endregion
-
-            
-
-            
-
-#if APSdk_Firebase
-
-            _apFirebaseInfo = Resources.Load<APFirebaseInfo>("Firebase/APFirebaseInfo");
-            _serializedFirebaseInfo = new SerializedObject(_apFirebaseInfo);
-
-            _enableFirebaseAnalyticsEvent = _serializedFirebaseInfo.FindProperty("_enableFirebaseAnalyticsEvent");
-
-            _trackProgressionEventOnFirebase = _serializedFirebaseInfo.FindProperty("_trackProgressionEvent");
-            _trackAdEventOnFirebase = _serializedFirebaseInfo.FindProperty("_trackAdEvent");
-
-            _subscribeToLionEventOnFirebase = _serializedFirebaseInfo.FindProperty("_subscribeToLionEvent");
-            _subscribeToLionEventUAOnFirebase = _serializedFirebaseInfo.FindProperty("_subscribeToLionEventUA");
-#endif
-
             APSdkAssetPostProcessor.LookForSDK();
 
         }
 
-                    #endregion
+        #endregion
 
     }
 
