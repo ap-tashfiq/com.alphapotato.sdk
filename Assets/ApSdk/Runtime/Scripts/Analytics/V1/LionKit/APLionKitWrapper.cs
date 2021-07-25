@@ -164,71 +164,7 @@ LionKit.OnInitialized += () => {
 
                     APSdkLogger.Log("LionKit Initialized");
 
-#if APSdk_Facebook
 
-                APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, ()=> {
-
-                    APFacebookInfo apFacebookInfo = Resources.Load<APFacebookInfo>("Facebook/APFacebookInfo");
-                    if (apFacebookInfo.IsSubscribedToLionEvent)
-                    {
-
-                        LionStudios.Analytics.OnLogEvent += (gameEvent) =>
-                        {
-                            LogLionGameEvent("Facebook", gameEvent);
-                            APFacebookWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                        };
-                    }
-
-                    if (apFacebookInfo.IsSubscribedToLionEventUA)
-                    {
-
-                        LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
-                        {
-                            LogLionGameEvent("FacebookUA", gameEvent);
-                            APFacebookWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                        };
-                    }
-                });
-                
-
-#endif
-
-#if APSdk_Adjust
-
-                    // do adjust init
-                    APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo);
-                    APAdjustInfo aPAdjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
-                    if (aPAdjustInfo.IsSubscribedToLionEvent) {
-
-                        LionStudios.Analytics.OnLogEvent += (gameEvent) =>
-                        {
-                            LogLionGameEvent("Adjust", gameEvent);
-                            APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                        };
-                    }
-
-                    if (aPAdjustInfo.IsSubscribedToLionEventUA) {
-
-                        LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
-                        {
-                            LogLionGameEvent("Adjust|UA", gameEvent);
-                            APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                        };
-                    }
-
-#endif
 
 #if APSdk_Firebase
                 
@@ -324,9 +260,7 @@ LionKit.OnInitialized += () => {
                 APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo);
 #endif
 
-#if APSdk_Adjust
-                APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo);
-#endif
+
 
 #if APSdk_GameAnalytics
                 APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo);

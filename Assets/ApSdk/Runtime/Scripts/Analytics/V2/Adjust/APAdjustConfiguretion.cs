@@ -72,48 +72,6 @@
 #endif
         }
 
-        public override void Initialize()
-        {
-
-            APSdkConfiguretionInfo _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
-
-#if APSdk_LionKit
-
-            LionStudios.LionKit.OnInitialized += () =>
-            {
-                APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
-
-                if (_subscribeToLionEvent) {
-
-                    LionStudios.Analytics.OnLogEvent += (gameEvent) =>
-                    {
-                        APLionKitWrapper.LogLionGameEvent("Adjust", gameEvent);
-                        APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                    };
-                }
-
-                if (_subscribeToLionEventUA)
-                {
-                    LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
-                    {
-                        APLionKitWrapper.LogLionGameEvent("AdjustUA", gameEvent);
-                        APAdjustWrapper.Instance.LogEvent(
-                                    gameEvent.eventName,
-                                    gameEvent.eventParams
-                                );
-                    };
-                }
-            };
-#else
-
-            APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
-
-#endif
-        }
-
         public override bool CanBeSubscribedToLionLogEvent()
         {
             return true;
@@ -279,12 +237,61 @@
 #endif
         }
 
-        
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        {
 
-#endregion
+            if (APAdjustWrapper.Instance == null)
+            {
+
+                GameObject newAPAdjustWrapper = new GameObject("APAdjustWrapper");
+                APAdjustWrapper.Instance = newAPAdjustWrapper.AddComponent<APAdjustWrapper>();
+
+                DontDestroyOnLoad(newAPAdjustWrapper);
+            }
+
+#if APSdk_LionKit
+
+            LionStudios.LionKit.OnInitialized += () =>
+            {
+                APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
+
+                if (_subscribeToLionEvent)
+                {
+
+                    LionStudios.Analytics.OnLogEvent += (gameEvent) =>
+                    {
+                        APLionKitWrapper.LogLionGameEvent("Adjust", gameEvent);
+                        APAdjustWrapper.Instance.LogEvent(
+                                    gameEvent.eventName,
+                                    gameEvent.eventParams
+                                );
+                    };
+                }
+
+                if (_subscribeToLionEventUA)
+                {
+                    LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
+                    {
+                        APLionKitWrapper.LogLionGameEvent("AdjustUA", gameEvent);
+                        APAdjustWrapper.Instance.LogEvent(
+                                    gameEvent.eventName,
+                                    gameEvent.eventParams
+                                );
+                    };
+                }
+            };
+#else
+
+            APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
+
+#endif
+        }
+
+
+        #endregion
     }
 
 
 #endif
-        }
+}
 

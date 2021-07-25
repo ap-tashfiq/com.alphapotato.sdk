@@ -8,7 +8,6 @@ namespace APSdk
     using UnityEngine.Events;
     using Facebook.Unity;
 
-    [DefaultExecutionOrder(APSdkConstant.EXECUTION_ORDER_FacebookWrapper)]
     public class APFacebookWrapper : MonoBehaviour
     {
     #region Public Variables
@@ -22,24 +21,15 @@ namespace APSdk
         #region private Variables
 
         private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
+        private APFacebookConfiguretion _facebookConfiguretion;
         private UnityAction _OnInitialized;
-        private APFacebookInfo _apFacebookInfo;
+        
 
         #endregion
 
         #region Configuretion
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnGameStart() {
-            if (Instance == null)
-            {
-
-                GameObject newAPFacebookWrapper = new GameObject("APFacebookWrapper");
-                Instance = newAPFacebookWrapper.AddComponent<APFacebookWrapper>();
-
-                DontDestroyOnLoad(newAPFacebookWrapper);
-            }
-        }
+        
 
         private void OnInitializeCallback() {
 
@@ -62,12 +52,11 @@ namespace APSdk
 
 #region Public Callback
 
-        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, UnityAction OnInitialized = null) {
+        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, APFacebookConfiguretion facebookConfiguretion, UnityAction OnInitialized = null) {
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
+            _facebookConfiguretion = facebookConfiguretion;
             _OnInitialized = OnInitialized;
-
-            _apFacebookInfo = Resources.Load<APFacebookInfo>("Facebook/APFacebookInfo");
 
             if (!FB.IsInitialized)
             {
@@ -82,7 +71,7 @@ namespace APSdk
         public void ProgressionEvent(string eventName, Dictionary<string, object> eventParams)
         {
 
-            if (_apFacebookInfo.IsTrackingProgressionEvent)
+            if (_facebookConfiguretion.IsTrackingProgressionEvent)
             {
                 LogEvent(eventName, eventParams);
             }
@@ -94,7 +83,7 @@ namespace APSdk
 
         public void AdEvent(string eventName, Dictionary<string, object> eventParams) {
 
-            if (_apFacebookInfo.IsTrackingAdEvent)
+            if (_facebookConfiguretion.IsTrackingAdEvent)
             {
                 LogEvent(eventName, eventParams);
             }
@@ -107,7 +96,7 @@ namespace APSdk
 
             if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
 
-                if (_apFacebookInfo.IsFacebookEventEnabled)
+                if (_facebookConfiguretion.IsAnalyticsEventEnabled)
                 {
 
                     if (FB.IsInitialized)

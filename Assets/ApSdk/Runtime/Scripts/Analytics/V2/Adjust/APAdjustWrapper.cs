@@ -2,13 +2,10 @@
 
 namespace APSdk
 {
-
-
     using System.Collections.Generic;
     using UnityEngine;
     using com.adjust.sdk;
 
-    [DefaultExecutionOrder(APSdkConstant.EXECUTION_ORDER_AdjustWrapper)]
     public class APAdjustWrapper : MonoBehaviour
     {
         #region Public Variables
@@ -20,34 +17,12 @@ namespace APSdk
         #region Private Variables
 
         private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
-        private APAdjustInfo _aPAdjustInfo;
+        private APAdjustConfiguretion _adjustConfiguretion;
 
-
-        #endregion
-
-        #region Configuretion
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnGameStart()
-        {
-            if (Instance == null)
-            {
-
-                GameObject newAPAdjustWrapper = new GameObject("APAdjustWrapper");
-                Instance = newAPAdjustWrapper.AddComponent<APAdjustWrapper>();
-
-                DontDestroyOnLoad(newAPAdjustWrapper);
-            }
-        }
 
         #endregion
 
         #region Mono Behaviour
-
-        private void Awake()
-        {
-            _aPAdjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
-        }
 
         private void OnApplicationPause(bool pause)
         {
@@ -75,6 +50,7 @@ namespace APSdk
         public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, APAdjustConfiguretion adjustConfiguretion) {
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
+            _adjustConfiguretion = adjustConfiguretion;
 
             AdjustConfig adjustConfig = new AdjustConfig(
                 adjustConfiguretion.appToken,
@@ -93,32 +69,11 @@ namespace APSdk
             APSdkLogger.Log("Adjust Initialized");
         }
 
-        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
-        {
-            _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
-            APAdjustInfo adjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
-
-            AdjustConfig adjustConfig = new AdjustConfig(
-                adjustInfo.appToken,
-                adjustInfo.Environment,
-                adjustInfo.LogLevel == AdjustLogLevel.Suppress);
-
-            adjustConfig.setLogLevel(adjustInfo.LogLevel);
-            adjustConfig.setSendInBackground(adjustInfo.SendInBackground);
-            adjustConfig.setEventBufferingEnabled(adjustInfo.EventBuffering);
-            adjustConfig.setLaunchDeferredDeeplink(adjustInfo.LaunchDeferredDeeplink);
-
-            adjustConfig.setDelayStart(adjustInfo.StartDelay);
-
-            Adjust.start(adjustConfig);
-
-            APSdkLogger.Log("Adjust Initialized");
-        }
 
         public void ProgressionEvent(string eventName, Dictionary<string, object> eventParams)
         {
 
-            if (_aPAdjustInfo.IsTrackingProgressionEvent)
+            if (_adjustConfiguretion.IsTrackingProgressionEvent)
             {
                 LogEvent(eventName, eventParams);
             }
@@ -131,7 +86,7 @@ namespace APSdk
         public void AdEvent(string eventName, Dictionary<string, object> eventParams)
         {
 
-            if (_aPAdjustInfo.IsTrackingAdEvent)
+            if (_adjustConfiguretion.IsTrackingAdEvent)
             {
                 LogEvent(eventName, eventParams);
             }
@@ -145,7 +100,7 @@ namespace APSdk
         {
             if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
 
-                if (_aPAdjustInfo.IsAdjustEventEnabled)
+                if (_adjustConfiguretion.IsAnalyticsEventEnabled)
                 {
                     AdjustEvent newEvent = new AdjustEvent(eventName);
                     Adjust.trackEvent(newEvent);

@@ -59,23 +59,7 @@
 
         #endregion
 
-        #region Configuretion
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnGameStart() {
-
-            APSdkConfiguretionInfo apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
-            if (apSdkConfiguretionInfo.SelectedAdConfig != null)
-            {
-                apSdkConfiguretionInfo.SelectedAdConfig.Initialize();
-            }
-            else {
-
-                APSdkLogger.LogError("No Ad Network Selected");
-            }
-        }
-
-        #endregion
+        
 
     }
 }

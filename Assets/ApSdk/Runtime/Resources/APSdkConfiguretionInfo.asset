@@ -29,6 +29,7 @@ MonoBehaviour:
   _showDebuggingSetting: 1
   logAnalyticsEvent: 1
   listOfAnalyticsConfiguretion:
+  - {fileID: 11400000, guid: 962fff472496344488a292004fcc145f, type: 2}
   - {fileID: 11400000, guid: 72f66cec7d517479d948107a9c3c3225, type: 2}
   indexOfActiveAdConfiguretion: 0
   listOfAdConfiguretion:

@@ -99,13 +99,9 @@
         private bool _isLionKitIntegrated = false;
         private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
 
-#if APSdk_Facebook
-        private APFacebookInfo _apFacebookInfo;
-#endif
 
-#if APSdk_Adjust
-        private APAdjustInfo _apAdjustInfo;
-#endif
+
+
 
 #if APSdk_GameAnalytics
         private APGameAnalyticsInfo _apGameAnalyticsInfo;
@@ -124,13 +120,9 @@
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
 
-#if APSdk_Facebook
-            _apFacebookInfo = Resources.Load<APFacebookInfo>("Facebook/APFacebookInfo");
-#endif
 
-#if APSdk_Adjust
-            _apAdjustInfo = Resources.Load<APAdjustInfo>("Adjust/APAdjustInfo");
-#endif
+
+
 
 #if APSdk_GameAnalytics
             _apGameAnalyticsInfo = Resources.Load<APGameAnalyticsInfo>("GameAnalytics/APGameAnalyticsInfo");

@@ -7,7 +7,7 @@
     public class APMaxAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
         
-        public override void Initialize()
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
 #if APSdk_MaxAdNetwork
             APMaxAdNetwork.Initialize(this);

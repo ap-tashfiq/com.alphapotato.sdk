@@ -40,7 +40,7 @@
 
         public abstract void SetNameAndIntegrationStatus();
 
-        public abstract void Initialize();
+        public abstract void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo);
 
         #endregion
     }

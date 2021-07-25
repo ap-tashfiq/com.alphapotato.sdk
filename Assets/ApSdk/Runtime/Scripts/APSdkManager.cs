@@ -11,10 +11,10 @@
            APSdkConfiguretionInfo _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
 
             foreach (APBaseClassForAnalyticsConfiguretion analyticsConfiguretion in _apSdkConfiguretionInfo.listOfAnalyticsConfiguretion)
-                analyticsConfiguretion.Initialize();
+                analyticsConfiguretion.Initialize(_apSdkConfiguretionInfo);
 
             foreach (APBaseClassForAdConfiguretion adConfiguretion in _apSdkConfiguretionInfo.listOfAdConfiguretion)
-                adConfiguretion.Initialize();
+                adConfiguretion.Initialize(_apSdkConfiguretionInfo);
         }
     }
 }
