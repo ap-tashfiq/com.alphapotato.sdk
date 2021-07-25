@@ -3,7 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public abstract class BaseClassForAdConfiguretion : APBaseClassForConfiguretion
+    public abstract class APBaseClassForAdConfiguretion : APBaseClassForConfiguretion
     {
         #region Public Variables
 
@@ -16,8 +16,7 @@
         #region Private Variables
 
 #if UNITY_EDITOR
-        [SerializeField] private bool _showSettings;
-
+        
         [SerializeField] private bool _showRewardedAdSettings;
         [SerializeField] private bool _showInterstitialAdSettings;
         [SerializeField] private bool _showBannerAdSettings;

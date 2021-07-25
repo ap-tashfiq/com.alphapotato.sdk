@@ -12,6 +12,10 @@
 
         #region Protected Variables
 
+#if UNITY_EDITOR
+        [SerializeField] protected bool _showSettings;
+#endif
+
         [SerializeField] protected string _nameOfConfiguretion;
         [SerializeField] protected bool _isSDKIntegrated;
 

@@ -4,7 +4,7 @@
     using UnityEngine.Events;
 
     [CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
-    public class APMaxAdNetworkConfiguretion : BaseClassForAdConfiguretion
+    public class APMaxAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
         
         public override void Initialize()
@@ -66,7 +66,9 @@
         public override void SetNameAndIntegrationStatus()
         {
             SetNameOfConfiguretion(APSdkConstant.APSdk_MaxAdNetwork);
+#if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated();
+#endif
         }
     }
 }

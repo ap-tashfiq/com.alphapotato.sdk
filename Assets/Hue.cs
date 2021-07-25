@@ -10,7 +10,7 @@ public class Hue : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        RewardedAd.Show("test", (value)=> { });
+        APRewardedAd.Show("test", (value)=> { });
     }
 
     // Update is called once per frame

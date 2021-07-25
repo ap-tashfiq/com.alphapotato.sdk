@@ -12,7 +12,7 @@
     using GameAnalyticsSDK;
 #endif
 
-    public static class InterstitialAd
+    public static class APInterstitialAd
     {
         #region Private Variables
 

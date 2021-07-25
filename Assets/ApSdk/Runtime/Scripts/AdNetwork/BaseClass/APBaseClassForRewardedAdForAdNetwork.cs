@@ -2,7 +2,7 @@
 {
     using UnityEngine.Events;
 
-    public abstract class BaseClassForRewardedAdForAdNetwork
+    public abstract class APBaseClassForRewardedAdForAdNetwork
     {
         #region Public Variables
 
@@ -12,7 +12,7 @@
 
         #region Protected Variables
 
-        protected BaseClassForAdConfiguretion _adConfiguretion;
+        protected APBaseClassForAdConfiguretion _adConfiguretion;
 
         protected bool _isEligibleForReward = false;
 

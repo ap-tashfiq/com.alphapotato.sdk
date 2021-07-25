@@ -5,7 +5,7 @@
     using UnityEngine.Events;
     using LionStudios.Ads;
 
-    public class APRewardedAdOnMaxAdNetwork : BaseClassForRewardedAdForAdNetwork
+    public class APRewardedAdOnMaxAdNetwork : APBaseClassForRewardedAdForAdNetwork
     {
 
         #region Private Variables
@@ -20,7 +20,7 @@
 
         #region Public Callback
 
-        public APRewardedAdOnMaxAdNetwork(BaseClassForAdConfiguretion adConfiguretion) {
+        public APRewardedAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
 
             _adConfiguretion = adConfiguretion;
 

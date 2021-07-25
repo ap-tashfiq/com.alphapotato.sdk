@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: APMaxAdNetworkConfiguretion
   m_EditorClassIdentifier: 
   _showSettings: 1
+  _nameOfConfiguretion: MaxAdNetwork
+  _isSDKIntegrated: 1
   _showRewardedAdSettings: 1
   _showInterstitialAdSettings: 1
   _showBannerAdSettings: 1
-  _nameOfAdNetwork: MaxAdNetwork
-  _isAdSDKIntegrated: 1
   _enableRewardedAd: 0
   _enableInterstitialAd: 1
   _enableBannerAd: 1

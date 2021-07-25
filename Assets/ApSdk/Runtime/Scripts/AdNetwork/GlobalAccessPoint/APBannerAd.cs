@@ -11,7 +11,7 @@
     using GameAnalyticsSDK;
 #endif
 
-    public static class BannerAd
+    public static class APBannerAd
     {
         #region Private Variables
 

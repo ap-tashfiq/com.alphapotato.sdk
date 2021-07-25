@@ -23,11 +23,12 @@
         [SerializeField] private bool _showAdjustSetting = false;
         [SerializeField] private bool _showGameAnalyticsSetting = false;
         [SerializeField] private bool _showFirebaseSetting = false;
+        [SerializeField] private bool _showAnalytics = false;
         [SerializeField] private bool _showAdNetworks = false;
         [SerializeField] private bool _showABTestSetting = false;
         [SerializeField] private bool _showDebuggingSetting = false;
 #endif
-        public BaseClassForAdConfiguretion SelectedAdConfig
+        public APBaseClassForAdConfiguretion SelectedAdConfig
         {
             get {
                 if (indexOfActiveAdConfiguretion >= 0 && indexOfActiveAdConfiguretion < listOfAdConfiguretion.Count)
@@ -39,10 +40,11 @@
 
         [Header("Parameter  :   Analytics")]
         public bool logAnalyticsEvent = true;
+        public List<APBaseClassForAnalyticsConfiguretion> listOfAnalyticsConfiguretion;
 
         [Header("Parameter  :   Ads")]
         public int indexOfActiveAdConfiguretion = -1;
-        public List<BaseClassForAdConfiguretion> listOfAdConfiguretion;
+        public List<APBaseClassForAdConfiguretion> listOfAdConfiguretion;
 
         [Header("Parameter  :   Debugger")]
         public bool maxMediationDebugger = false;

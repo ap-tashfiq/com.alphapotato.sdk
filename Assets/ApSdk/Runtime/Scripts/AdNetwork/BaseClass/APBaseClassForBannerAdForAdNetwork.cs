@@ -1,6 +1,6 @@
 ﻿namespace APSdk
 {
-    public abstract class BaseClassForBannerAdForAdNetwork
+    public abstract class APBaseClassForBannerAdForAdNetwork
     {
         #region Public Variables
 
@@ -10,7 +10,7 @@
 
         #region Protected Variables
 
-        protected BaseClassForAdConfiguretion _adConfiguretion;
+        protected APBaseClassForAdConfiguretion _adConfiguretion;
         protected string _adPlacement;
 
         #endregion

@@ -5,7 +5,7 @@
     using UnityEngine.Events;
     using LionStudios.Ads;
 
-    public class APInterstitialAdOnMaxAdNetwork : BaseClassForInterstitialAdForAdNetwork
+    public class APInterstitialAdOnMaxAdNetwork : APBaseClassForInterstitialAdForAdNetwork
     {
         #region Private Variables
 
@@ -15,7 +15,7 @@
 
         #region Public Callback
 
-        public APInterstitialAdOnMaxAdNetwork(BaseClassForAdConfiguretion adConfiguretion) {
+        public APInterstitialAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
 
             _adConfiguretion = adConfiguretion;
 

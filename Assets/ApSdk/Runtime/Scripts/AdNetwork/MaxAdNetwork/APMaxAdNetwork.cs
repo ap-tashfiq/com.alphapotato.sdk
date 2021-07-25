@@ -14,7 +14,7 @@
 
         #region Public Variables
 
-        public static void Initialize(BaseClassForAdConfiguretion adConfiguretion) {
+        public static void Initialize(APBaseClassForAdConfiguretion adConfiguretion) {
 
             RewardedAd = new APRewardedAdOnMaxAdNetwork(adConfiguretion);
             InterstitialAd = new APInterstitialAdOnMaxAdNetwork(adConfiguretion);

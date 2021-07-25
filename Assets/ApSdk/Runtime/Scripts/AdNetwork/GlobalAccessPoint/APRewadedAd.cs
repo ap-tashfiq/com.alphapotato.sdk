@@ -12,7 +12,7 @@
     using GameAnalyticsSDK;
 #endif
 
-    public static class RewardedAd
+    public static class APRewardedAd
     {
         #region Private Variables
 

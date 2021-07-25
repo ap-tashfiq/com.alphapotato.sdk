@@ -7,7 +7,7 @@
 using UnityEditor;
 #endif
 
-    public abstract class BaseClassForAnalyticsInfo : ScriptableObject
+    public abstract class APBaseClassForAnalyticsConfiguretion : APBaseClassForConfiguretion
     {
 #region Public Variables
 
@@ -21,9 +21,11 @@ using UnityEditor;
         public bool IsSubscribedToLionEvent { get { return _subscribeToLionEvent; } }
         public bool IsSubscribedToLionEventUA { get { return _subscribeToLionEventUA; } }
 
-#endregion
+        #endregion
 
-#region Protected Variables
+        #region Protected Variables
+
+
 
         [SerializeField] protected bool _enableAnalyticsEvent = false;
 
