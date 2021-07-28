@@ -17,11 +17,22 @@
             _isLionKitIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckLionKitIntegration();
             _isLionKitIntegrated.serializedObject.ApplyModifiedProperties();
 
-            foreach (APBaseClassForAnalyticsConfiguretion adConfig in _apSDKConfiguretionInfo.listOfAnalyticsConfiguretion)
-                adConfig.SetNameAndIntegrationStatus();
+            Object[] analyticsConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAnalyticsConfiguretion));
+            foreach (Object analyticsConfiguretionObject in analyticsConfiguretionObjects) {
 
-            foreach (APBaseClassForAdConfiguretion adConfig in _apSDKConfiguretionInfo.listOfAdConfiguretion)
-                adConfig.SetNameAndIntegrationStatus();
+                APBaseClassForAnalyticsConfiguretion analyticsConfiguretion = (APBaseClassForAnalyticsConfiguretion)analyticsConfiguretionObject;
+                if (analyticsConfiguretion != null)
+                    analyticsConfiguretion.SetNameAndIntegrationStatus();
+            }
+
+            Object[] adNetworkConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAdConfiguretion));
+            foreach (Object adNetoworkConfiguretionObject in adNetworkConfiguretionObjects)
+            {
+
+                APBaseClassForAdConfiguretion adNetworkConfiguretion = (APBaseClassForAdConfiguretion)adNetoworkConfiguretionObject;
+                if (adNetworkConfiguretion != null)
+                    adNetworkConfiguretion.SetNameAndIntegrationStatus();
+            }
 
             _serializedSDKConfiguretionInfo.ApplyModifiedProperties();
         }

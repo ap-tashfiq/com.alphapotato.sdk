@@ -59,17 +59,7 @@
 
         public Color InfoLogColor { get { return _infoLogColor; } }
         public Color WarningLogColor { get { return _warningLogColor; } }
-        public Color ErrorLogColor { get { return _errorLogColor; } }
-
-        [Header("Parameter  :   Analytics")]
-        
-        public List<APBaseClassForAnalyticsConfiguretion> listOfAnalyticsConfiguretion;
-
-        [Header("Parameter  :   Ads")]
-        
-        public List<APBaseClassForAdConfiguretion> listOfAdConfiguretion;        
-
-        
+        public Color ErrorLogColor { get { return _errorLogColor; } }        
 
         #endregion
 

@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.gameanalytics.sdk": {
-      "version": "https://github.com/GameAnalytics/GA-SDK-UNITY.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "b3111355d4dacb12722830ecbb81d9c4448bfaf5"
-    },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 2,

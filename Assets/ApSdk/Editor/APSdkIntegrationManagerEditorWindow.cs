@@ -648,7 +648,8 @@ namespace APSdk
                 {
                     for (int i = 0; i < numberOfAnalytics; i++)
                     {
-                        DrawAnalyticsGUI(_apSDKConfiguretionInfo.listOfAnalyticsConfiguretion[i]);
+                        if(_apSDKConfiguretionInfo.listOfAnalyticsConfiguretion[i] != null)
+                            DrawAnalyticsGUI(_apSDKConfiguretionInfo.listOfAnalyticsConfiguretion[i]);
                     }
                 }
             }
