@@ -281,7 +281,7 @@
                 };
 #else
 
-            APAdjustWrapper.Instance.Initialize(_apSdkConfiguretionInfo, this);
+            APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
 
 #endif
 

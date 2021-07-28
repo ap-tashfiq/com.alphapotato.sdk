@@ -27,11 +27,11 @@
         /// Editor Only
         /// </summary>
         /// <param name="scriptDefineSymbol"></param>
-        protected void SetNameOfConfiguretion(string scriptDefineSymbol)
+        protected void SetNameOfConfiguretion(string scriptDefineSymbol,string concatinate = "")
         {
 
             string[] splited = scriptDefineSymbol.Split('_');
-            _nameOfConfiguretion = splited[1];
+            _nameOfConfiguretion = splited[1] + concatinate;
         }
 
         #endregion

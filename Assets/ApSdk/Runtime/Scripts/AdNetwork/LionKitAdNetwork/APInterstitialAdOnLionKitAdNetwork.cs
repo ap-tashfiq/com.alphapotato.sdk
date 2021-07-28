@@ -1,11 +1,11 @@
 ﻿namespace APSdk
 {
-#if APSdk_MaxAdNetwork
+#if APSdk_LionKit
 
     using UnityEngine.Events;
     using LionStudios.Ads;
 
-    public class APInterstitialAdOnMaxAdNetwork : APBaseClassForInterstitialAdForAdNetwork
+    public class APInterstitialAdOnLionKitAdNetwork : APBaseClassForInterstitialAdForAdNetwork
     {
         #region Private Variables
 
@@ -15,7 +15,7 @@
 
         #region Public Callback
 
-        public APInterstitialAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
+        public APInterstitialAdOnLionKitAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
 
             _adConfiguretion = adConfiguretion;
 

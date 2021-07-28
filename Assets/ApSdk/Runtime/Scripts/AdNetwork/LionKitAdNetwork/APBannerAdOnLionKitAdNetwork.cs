@@ -4,17 +4,17 @@
 
     using LionStudios.Ads;
     
-    public class APBannerAdOnMaxAdNetwork : APBaseClassForBannerAdForAdNetwork
+    public class APBannerAdOnLionKitAdNetwork : APBaseClassForBannerAdForAdNetwork
     {
-        #region Private Variables
+    #region Private Variables
 
         private ShowAdRequest _ShowBannerAdRequest;
 
-        #endregion
+    #endregion
 
-        #region Public Callback
+    #region Public Callback
 
-        public APBannerAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion)
+        public APBannerAdOnLionKitAdNetwork(APBaseClassForAdConfiguretion adConfiguretion)
         {
             
             _adConfiguretion = adConfiguretion;
@@ -71,7 +71,7 @@
             }
         }
 
-        #endregion
+    #endregion
 
     }
 

@@ -119,7 +119,7 @@
 
                 };
 #else
-        APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo);
+        APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
 #endif
 
             }

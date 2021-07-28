@@ -10,6 +10,7 @@
         public bool IsRewardedAdEnabled { get { return _enableRewardedAd; } }
         public bool IsInterstitialAdEnabled { get { return _enableInterstitialAd; } }
         public bool IsBannerAdEnabled { get { return _enableBannerAd; } }
+        public bool IsCrossPromoAdEnabled { get { return _enableCrossPromoAd; } }
 
         #endregion
 
@@ -20,10 +21,10 @@
         [SerializeField] private bool _showRewardedAdSettings;
         [SerializeField] private bool _showInterstitialAdSettings;
         [SerializeField] private bool _showBannerAdSettings;
-
+        [SerializeField] private bool _showCrossPromoAdSettings;
 #endif
 
-        
+
 
         [Space(5.0f)]
         [SerializeField] private bool _enableRewardedAd;
@@ -58,6 +59,9 @@
         public abstract void ShowBannerAd(string adPlacement = "banner", int playerLevel = 0);
         public abstract void HideBannerAd();
 
+        public abstract bool IsCrossPromoAdReady();
+        public abstract void ShowCrossPromoAd(string adPlacement = "crossPromo");
+        public abstract void HideCrossPromoAd();
 
         #endregion
 

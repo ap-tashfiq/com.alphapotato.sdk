@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e927253ddfe5b45e79cb371c526d68bf, type: 3}
-  m_Name: APMaxAdNetworkConfiguretion
+  m_Name: APLionKitAdNetworkConfiguretion
   m_EditorClassIdentifier: 
-  _showSettings: 0
-  _nameOfConfiguretion: MaxAdNetwork
-  _isSDKIntegrated: 1
+  _showSettings: 1
+  _nameOfConfiguretion: LionKitAdNetwork
+  _isSDKIntegrated: 0
   _showRewardedAdSettings: 1
   _showInterstitialAdSettings: 1
   _showBannerAdSettings: 1
+  _showCrossPromoAdSettings: 1
   _enableRewardedAd: 0
   _enableInterstitialAd: 1
   _enableBannerAd: 1

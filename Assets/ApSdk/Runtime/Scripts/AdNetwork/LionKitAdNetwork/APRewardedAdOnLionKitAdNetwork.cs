@@ -1,11 +1,11 @@
 ﻿namespace APSdk
 {
-#if APSdk_MaxAdNetwork
+#if APSdk_LionKit
 
     using UnityEngine.Events;
     using LionStudios.Ads;
 
-    public class APRewardedAdOnMaxAdNetwork : APBaseClassForRewardedAdForAdNetwork
+    public class APRewardedAdOnLionKitAdNetwork : APBaseClassForRewardedAdForAdNetwork
     {
 
         #region Private Variables
@@ -20,7 +20,7 @@
 
         #region Public Callback
 
-        public APRewardedAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
+        public APRewardedAdOnLionKitAdNetwork(APBaseClassForAdConfiguretion adConfiguretion) {
 
             _adConfiguretion = adConfiguretion;
 
@@ -87,7 +87,7 @@
         
 
 
-        #endregion
+    #endregion
 
 
     }

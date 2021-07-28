@@ -183,7 +183,7 @@ namespace APSdk
 
             //Setting Titles
             GUIContent titleContent = new GUIContent(
-                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : " - (SDK Not Found)"))
                 );
             GUIStyle titleStyle = new GUIStyle(EditorStyles.boldLabel);
             titleStyle.alignment = TextAnchor.MiddleLeft;
@@ -197,7 +197,7 @@ namespace APSdk
                     _showSettings.serializedObject.ApplyModifiedProperties();
 
                     titleContent = new GUIContent(
-                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : " - (SDK Not Found)"))
                     );
                 }
 
@@ -248,7 +248,7 @@ namespace APSdk
 #else
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField(_trackProgressionEvent.displayName, GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _trackProgressionEvent.boolValue = EditorGUILayout.Toggle(_trackProgressionEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -258,7 +258,7 @@ namespace APSdk
 
                         EditorGUILayout.BeginHorizontal();
                         {
-                            EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(_labelWidth));
+                            EditorGUILayout.LabelField(_trackAdEvent.displayName, GUILayout.Width(LabelWidth));
                             EditorGUI.BeginChangeCheck();
                             _trackAdEvent.boolValue = EditorGUILayout.Toggle(_trackAdEvent.boolValue);
                             if (EditorGUI.EndChangeCheck())
@@ -326,7 +326,7 @@ namespace APSdk
 
             //Setting Titles
             GUIContent titleContent = new GUIContent(
-                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                    "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : " - (SDK Not Found)"))
                 );
             GUIStyle titleStyle = new GUIStyle(EditorStyles.boldLabel);
             titleStyle.alignment = TextAnchor.MiddleLeft;
@@ -340,7 +340,7 @@ namespace APSdk
                     _showSettings.serializedObject.ApplyModifiedProperties();
 
                     titleContent = new GUIContent(
-                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : "SDK Not Found"))
+                        "[" + (!_showSettings.boolValue ? "+" : "-") + "] " + (_nameOfConfiguretion.stringValue + (_isSDKIntegrated.boolValue ? "" : " - (SDK Not Found)"))
                     );
                 }
 
@@ -514,6 +514,50 @@ namespace APSdk
 
                     #endregion
 
+                    //------------------------------
+                    #region CrossPromoAd
+
+                    EditorGUI.indentLevel += 1;
+                    {
+                        EditorGUILayout.BeginHorizontal(GUI.skin.box);
+                        {
+                            string crossPromoAdLabel = "[" + (!_showCrossPromoAdSettings.boolValue ? "+" : "-") + "] [CrossPromoAd]";
+                            GUIContent crossPromoAdLabelContent = new GUIContent(
+                                    crossPromoAdLabel
+
+                                );
+
+                            if (GUILayout.Button(crossPromoAdLabelContent, adTypeStyle, GUILayout.Width(EditorGUIUtility.currentViewWidth)))
+                            {
+                                _showCrossPromoAdSettings.boolValue = !_showCrossPromoAdSettings.boolValue;
+                                _showCrossPromoAdSettings.serializedObject.ApplyModifiedProperties();
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        if (_showCrossPromoAdSettings.boolValue)
+                        {
+
+                            EditorGUI.indentLevel += 2;
+                            {
+                                EditorGUILayout.BeginHorizontal();
+                                {
+                                    EditorGUILayout.LabelField(_enableCrossPromoAd.displayName, GUILayout.Width(LabelWidth));
+                                    EditorGUI.BeginChangeCheck();
+                                    _enableCrossPromoAd.boolValue = EditorGUILayout.Toggle(_enableCrossPromoAd.boolValue);
+                                    if (EditorGUI.EndChangeCheck())
+                                        _enableCrossPromoAd.serializedObject.ApplyModifiedProperties();
+                                }
+                                EditorGUILayout.EndHorizontal();
+                            }
+                            EditorGUI.indentLevel -= 2;
+
+                        }
+                    }
+                    EditorGUI.indentLevel -= 1;
+
+
+                    #endregion
 
                 }
                 EditorGUI.EndDisabledGroup();

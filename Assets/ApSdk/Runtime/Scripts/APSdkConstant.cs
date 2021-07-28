@@ -6,12 +6,6 @@
         public const string NameOfSDK = "APSdk";
 
         public const float EDITOR_LABEL_WIDTH = 200;
-
-        public const int EXECUTION_ORDER_LionKitWrapper = -1000;
-        public const int EXECUTION_ORDER_FacebookWrapper= -900;
-        public const int EXECUTION_ORDER_AdjustWrapper  = -800;
-        public const int EXECUTION_ORDER_GameAnalytics  = -700;
-        public const int EXECUTION_ORDER_Firebase       = -600;
         
 
         public const string APSdk_LionKit = "APSdk_LionKit";
