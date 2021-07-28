@@ -7,40 +7,6 @@
       "dependencies": {},
       "hash": "b3111355d4dacb12722830ecbb81d9c4448bfaf5"
     },
-    "com.lionstudios.release.gdpr": {
-      "version": "1.1.5",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.lionstudios.release.localization": "1.1.1"
-      },
-      "url": "http://packages.lionstudios.cc:4873"
-    },
-    "com.lionstudios.release.lionkit": {
-      "version": "1.4.9",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.lionstudios.release.localization": "1.1.5",
-        "com.lionstudios.release.gdpr": "1.1.5",
-        "com.lionstudios.release.lionlogger": "1.1.2"
-      },
-      "url": "http://packages.lionstudios.cc:4873"
-    },
-    "com.lionstudios.release.lionlogger": {
-      "version": "1.1.2",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "http://packages.lionstudios.cc:4873"
-    },
-    "com.lionstudios.release.localization": {
-      "version": "1.1.5",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "http://packages.lionstudios.cc:4873"
-    },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 2,

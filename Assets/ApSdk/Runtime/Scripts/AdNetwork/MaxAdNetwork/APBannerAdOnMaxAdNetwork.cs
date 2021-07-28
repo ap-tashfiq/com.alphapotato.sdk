@@ -1,9 +1,9 @@
 ﻿namespace APSdk
 {
-#if APSdk_MaxAdNetwork
+#if APSdk_LionKit
 
     using LionStudios.Ads;
-
+    
     public class APBannerAdOnMaxAdNetwork : APBaseClassForBannerAdForAdNetwork
     {
         #region Private Variables
@@ -16,7 +16,7 @@
 
         public APBannerAdOnMaxAdNetwork(APBaseClassForAdConfiguretion adConfiguretion)
         {
-
+            
             _adConfiguretion = adConfiguretion;
 
             _ShowBannerAdRequest = new ShowAdRequest();
