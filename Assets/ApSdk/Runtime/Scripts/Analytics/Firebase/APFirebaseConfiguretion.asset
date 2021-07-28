@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: APFirebaseConfiguretion
   m_EditorClassIdentifier: 
   _showSettings: 0
-  _nameOfConfiguretion: 
-  _isSDKIntegrated: 0
+  _nameOfConfiguretion: Firebase
+  _isSDKIntegrated: 1
   _enableAnalyticsEvent: 0
   _trackProgressionEvent: 0
   _trackAdEvent: 0

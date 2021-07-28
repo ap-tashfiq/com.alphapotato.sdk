@@ -59,27 +59,30 @@
                                     {
                                         List<Firebase.Analytics.Parameter> parameters = new List<Firebase.Analytics.Parameter>();
 
-                                        List<string> keyList = new List<string>();
-                                        List<string> valueList = new List<string>();
+                                        if (gameEvent.eventParams != null) {
 
-                                        Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
-                                        Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
+                                            List<string> keyList = new List<string>();
+                                            List<string> valueList = new List<string>();
 
-                                        foreach (object key in keys)
-                                        {
-                                            keyList.Add(key.ToString());
-                                        }
+                                            Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
+                                            Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
 
-                                        foreach (object value in values)
-                                        {
-                                            valueList.Add(value.ToString());
-                                        }
+                                            foreach (object key in keys)
+                                            {
+                                                keyList.Add(key.ToString());
+                                            }
 
-                                        int numberOfEventParams = keyList.Count;
+                                            foreach (object value in values)
+                                            {
+                                                valueList.Add(value.ToString());
+                                            }
 
-                                        for (int i = 0; i < numberOfEventParams; i++)
-                                        {
-                                            parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                                            int numberOfEventParams = keyList.Count;
+
+                                            for (int i = 0; i < numberOfEventParams; i++)
+                                            {
+                                                parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                                            }
                                         }
 
                                         APFirebaseWrapper.Instance.LogFirebaseEvent(gameEvent.eventName, parameters);
@@ -93,27 +96,31 @@
                                     {
                                         List<Firebase.Analytics.Parameter> parameters = new List<Firebase.Analytics.Parameter>();
 
-                                        List<string> keyList = new List<string>();
-                                        List<string> valueList = new List<string>();
-
-                                        Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
-                                        Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
-
-                                        foreach (object key in keys)
+                                        if (gameEvent.eventParams != null)
                                         {
-                                            keyList.Add(key.ToString());
-                                        }
 
-                                        foreach (object value in values)
-                                        {
-                                            valueList.Add(value.ToString());
-                                        }
+                                            List<string> keyList = new List<string>();
+                                            List<string> valueList = new List<string>();
 
-                                        int numberOfEventParams = keyList.Count;
+                                            Dictionary<string, object>.KeyCollection keys = gameEvent.eventParams.Keys;
+                                            Dictionary<string, object>.ValueCollection values = gameEvent.eventParams.Values;
 
-                                        for (int i = 0; i < numberOfEventParams; i++)
-                                        {
-                                            parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                                            foreach (object key in keys)
+                                            {
+                                                keyList.Add(key.ToString());
+                                            }
+
+                                            foreach (object value in values)
+                                            {
+                                                valueList.Add(value.ToString());
+                                            }
+
+                                            int numberOfEventParams = keyList.Count;
+
+                                            for (int i = 0; i < numberOfEventParams; i++)
+                                            {
+                                                parameters.Add(new Firebase.Analytics.Parameter(keyList[i], valueList[i]));
+                                            }
                                         }
 
                                         APFirebaseWrapper.Instance.LogFirebaseEvent(gameEvent.eventName, parameters);
