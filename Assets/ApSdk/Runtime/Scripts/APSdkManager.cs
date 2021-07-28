@@ -13,8 +13,12 @@
             foreach (APBaseClassForAnalyticsConfiguretion analyticsConfiguretion in _apSdkConfiguretionInfo.listOfAnalyticsConfiguretion)
                 analyticsConfiguretion.Initialize(_apSdkConfiguretionInfo);
 
-            foreach (APBaseClassForAdConfiguretion adConfiguretion in _apSdkConfiguretionInfo.listOfAdConfiguretion)
-                adConfiguretion.Initialize(_apSdkConfiguretionInfo);
+            int numberOfAdConfiguretion = _apSdkConfiguretionInfo.listOfAdConfiguretion.Count;
+            for (int i = 0; i < numberOfAdConfiguretion; i++) {
+
+                if (i == _apSdkConfiguretionInfo.IndexOfActiveAdConfiguretion)
+                    _apSdkConfiguretionInfo.listOfAdConfiguretion[i].Initialize(_apSdkConfiguretionInfo);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-            if (APFirebaseWrapper.Instance == null)
+            if (APFirebaseWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
                 GameObject newAPFirebaseWrapper = new GameObject("APFirebaseWrapper");

@@ -2,6 +2,7 @@
 {
 #if APSdk_GameAnalytics
     using UnityEngine;
+    
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -20,7 +21,13 @@
 
         [SerializeField] private int _defaultWorldIndex = 1;
 
-        #endregion
+#if UNITY_EDITOR
+        private GameAnalyticsSDK.Setup.Settings _gaSettings;
+        private Editor _gaSettingsEditor;
+        private bool _isShowingGASettings;
+        
+#endif
+#endregion
 
         #region Override Method
 
@@ -39,7 +46,20 @@
 
         public override void PreCustomEditorGUI()
         {
+#if UNITY_EDITOR
+
+            if (IsAnalyticsEventEnabled) {
+
+                if (_gaSettings == null)
+                    _gaSettings = Resources.Load<GameAnalyticsSDK.Setup.Settings>("GameAnalytics/Settings");
+
+                EditorGUILayout.HelpBox("If you haven't setup your game on GA, please do by loging, adding platform and selecting your games from down below", MessageType.Warning);
+                APSdkEditorModule.DrawSettingsEditor(_gaSettings, null, ref _isShowingGASettings, ref _gaSettingsEditor);
+                APSdkEditorModule.DrawHorizontalLine();
+            }
             
+
+#endif
         }
 
         public override void PostCustomEditorGUI()
@@ -65,7 +85,7 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-            if (APGameAnalyticsWrapper.Instance == null)
+            if (APGameAnalyticsWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
                 Instantiate(Resources.Load("GameAnalytics/AP_GameAnalytics"));
 

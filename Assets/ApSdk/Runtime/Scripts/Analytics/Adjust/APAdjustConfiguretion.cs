@@ -240,7 +240,7 @@
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
 
-            if (APAdjustWrapper.Instance == null)
+            if (APAdjustWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
                 GameObject newAPAdjustWrapper = new GameObject("APAdjustWrapper");

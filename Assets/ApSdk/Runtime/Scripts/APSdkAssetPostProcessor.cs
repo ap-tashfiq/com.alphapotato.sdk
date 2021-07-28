@@ -12,6 +12,11 @@
             APSdkConfiguretionInfo _apSDKConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
             SerializedObject _serializedSDKConfiguretionInfo = new SerializedObject(_apSDKConfiguretionInfo);
 
+            SerializedProperty _isLionKitIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isLionKitIntegrated");
+
+            _isLionKitIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckLionKitIntegration();
+            _isLionKitIntegrated.serializedObject.ApplyModifiedProperties();
+
             foreach (APBaseClassForAnalyticsConfiguretion adConfig in _apSDKConfiguretionInfo.listOfAnalyticsConfiguretion)
                 adConfig.SetNameAndIntegrationStatus();
 

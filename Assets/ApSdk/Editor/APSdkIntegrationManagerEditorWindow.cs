@@ -2,12 +2,8 @@
 namespace APSdk
 {
 #if UNITY_EDITOR
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEditor;
-#if APSdk_Adjust
-    using com.adjust.sdk;
-#endif
 
     public class APSdkIntegrationManagerEditorWindow : EditorWindow
     {
@@ -36,12 +32,14 @@ namespace APSdk
 
         #endregion
 
+
         #region Private Variables   :   APSdkConfiguretionInfo
 
         private APSdkConfiguretionInfo  _apSDKConfiguretionInfo;
         private SerializedObject        _serializedSDKConfiguretionInfo;
 
         private GUIContent              _generalSettingContent;
+        private GUIContent              _lionKitSettingContent;
         private GUIContent              _analyticsSettingContent;
         private GUIContent              _adNetworkSettingContent;
         private GUIContent              _abTestSettingContent;
@@ -49,13 +47,15 @@ namespace APSdk
         
 
         private SerializedProperty      _showGeneralSettings;
+        private SerializedProperty      _showLionKitSettings;
         private SerializedProperty      _showAnalytics;
         private SerializedProperty      _showAdNetworks;
         private SerializedProperty      _showABTestSetting;
         private SerializedProperty      _showDebuggingSettings;
 
-        private SerializedProperty      _logAnalyticsEvent;
-        private SerializedProperty      _maxMediationDebugger;
+        private SerializedProperty      _enableAnalyticsEvents;
+
+        private SerializedProperty      _showMaxMediationDebugger;
 
         private SerializedProperty      _showAPSdkLogInConsole;
 
@@ -116,6 +116,11 @@ namespace APSdk
                 EditorGUI.indentLevel += 1;
                 {
                     GeneralSettingGUI();
+
+#if APSdk_LionKit
+                    EditorGUILayout.Space();
+                    LionKitSettingsGUI();
+#endif
 
                     EditorGUILayout.Space();
                     AnalyticsSettingsGUI();
@@ -339,17 +344,17 @@ namespace APSdk
                     );
                 }
 
-                if (_apSDKConfiguretionInfo.indexOfActiveAdConfiguretion == adConfiguretionIndex)
+                if (_apSDKConfiguretionInfo.IndexOfActiveAdConfiguretion == adConfiguretionIndex)
                 {
                     if (GUILayout.Button("Disable", GUILayout.Width(80)))
                     {
-                        _apSDKConfiguretionInfo.indexOfActiveAdConfiguretion = -1;
+                        _apSDKConfiguretionInfo.SetIndexForActiveAdConfiguretion(- 1);
                     }
                 }
                 else {
                     if (GUILayout.Button("Enable", GUILayout.Width(80)))
                     {
-                        _apSDKConfiguretionInfo.indexOfActiveAdConfiguretion = adConfiguretionIndex;
+                        _apSDKConfiguretionInfo.SetIndexForActiveAdConfiguretion(adConfiguretionIndex);
                     }
                 }
 
@@ -359,7 +364,7 @@ namespace APSdk
 
             if (_showSettings.boolValue) {
 
-                EditorGUI.BeginDisabledGroup((_apSDKConfiguretionInfo.indexOfActiveAdConfiguretion == adConfiguretionIndex) ? false : true);
+                EditorGUI.BeginDisabledGroup((_apSDKConfiguretionInfo.IndexOfActiveAdConfiguretion == adConfiguretionIndex) ? false : true);
                 {
                     //AdType Configuretion
                     GUIStyle adTypeStyle = new GUIStyle(EditorStyles.boldLabel);
@@ -538,28 +543,62 @@ namespace APSdk
                     }
                     EditorGUILayout.EndHorizontal();
 
+                }
+                EditorGUI.indentLevel -= 1;
+            }
+        }
 
+        private void LionKitSettingsGUI() {
+
+            DrawHeaderGUI("LionKit", ref _lionKitSettingContent, ref _settingsTitleStyle, ref _showLionKitSettings);
+
+            if (_showLionKitSettings.boolValue) {
+
+                EditorGUI.indentLevel += 1;
+                {
                     EditorGUILayout.BeginHorizontal();
                     {
-                        EditorGUILayout.LabelField(_logAnalyticsEvent.displayName, GUILayout.Width(LabelWidth));
+                        EditorGUILayout.LabelField(_showMaxMediationDebugger.displayName, GUILayout.Width(LabelWidth));
                         EditorGUI.BeginChangeCheck();
-                        _logAnalyticsEvent.boolValue = EditorGUILayout.Toggle(_logAnalyticsEvent.boolValue);
+                        _showMaxMediationDebugger.boolValue = EditorGUILayout.Toggle(_showMaxMediationDebugger.boolValue);
                         if (EditorGUI.EndChangeCheck())
-                            _logAnalyticsEvent.serializedObject.ApplyModifiedProperties();
-
+                        {
+                            _showMaxMediationDebugger.serializedObject.ApplyModifiedProperties();
+                        }
                     }
                     EditorGUILayout.EndHorizontal();
                 }
                 EditorGUI.indentLevel -= 1;
             }
         }
-        
+
         private void AnalyticsSettingsGUI() {
 
             DrawHeaderGUI("Analytics", ref _analyticsSettingContent, ref _settingsTitleStyle, ref _showAnalytics);
 
             if (_showAnalytics.boolValue)
             {
+                EditorGUI.indentLevel += 1;
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        EditorGUILayout.LabelField(new GUIContent(
+                            _enableAnalyticsEvents.displayName,
+                            "Toggle all analytics event (ProgressionEvent/AdEvent etc) for all the sdk (Firebase, GA etc)"),
+                            GUILayout.Width(LabelWidth));
+
+                        EditorGUI.BeginChangeCheck();
+                        _enableAnalyticsEvents.boolValue = EditorGUILayout.Toggle(_enableAnalyticsEvents.boolValue);
+                        if (EditorGUI.EndChangeCheck())
+                            _enableAnalyticsEvents.serializedObject.ApplyModifiedProperties();
+
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+                EditorGUI.indentLevel -= 1;
+
+                APSdkEditorModule.DrawHorizontalLine();
+
                 int numberOfAnalytics = _apSDKConfiguretionInfo.listOfAnalyticsConfiguretion.Count;
 
                 {
@@ -614,18 +653,6 @@ namespace APSdk
 
                 EditorGUILayout.BeginVertical();
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        EditorGUILayout.LabelField(_maxMediationDebugger.displayName, GUILayout.Width(LabelWidth));
-                        EditorGUI.BeginChangeCheck();
-                        _maxMediationDebugger.boolValue = EditorGUILayout.Toggle(_maxMediationDebugger.boolValue);
-                        if (EditorGUI.EndChangeCheck())
-                        {
-                            _maxMediationDebugger.serializedObject.ApplyModifiedProperties();
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
-
                     EditorGUILayout.BeginHorizontal();
                     {
                         EditorGUILayout.LabelField(_showAPSdkLogInConsole.displayName, GUILayout.Width(LabelWidth));
@@ -685,22 +712,28 @@ namespace APSdk
 
             
             _showGeneralSettings = _serializedSDKConfiguretionInfo.FindProperty("_showGeneralSetting");
+            _showLionKitSettings = _serializedSDKConfiguretionInfo.FindProperty("_showLionKitSettings");
             _showAnalytics = _serializedSDKConfiguretionInfo.FindProperty("_showAnalytics");
             _showAdNetworks = _serializedSDKConfiguretionInfo.FindProperty("_showAdNetworks");
             _showABTestSetting = _serializedSDKConfiguretionInfo.FindProperty("_showABTestSetting");
             _showDebuggingSettings = _serializedSDKConfiguretionInfo.FindProperty("_showDebuggingSetting");
 
-            _logAnalyticsEvent = _serializedSDKConfiguretionInfo.FindProperty("logAnalyticsEvent");
-            _maxMediationDebugger = _serializedSDKConfiguretionInfo.FindProperty("maxMediationDebugger");
+            _enableAnalyticsEvents = _serializedSDKConfiguretionInfo.FindProperty("_enableAnalyticsEvents");
 
-            _showAPSdkLogInConsole = _serializedSDKConfiguretionInfo.FindProperty("showAPSdkLogInConsole");
+            _showMaxMediationDebugger = _serializedSDKConfiguretionInfo.FindProperty("_showMaxMediationDebugger");
 
-            _infoLogColor = _serializedSDKConfiguretionInfo.FindProperty("infoLogColor");
-            _warningLogColor = _serializedSDKConfiguretionInfo.FindProperty("warningLogColor");
-            _errorLogColor = _serializedSDKConfiguretionInfo.FindProperty("errorLogColor");
+            _showAPSdkLogInConsole = _serializedSDKConfiguretionInfo.FindProperty("_showAPSdkLogInConsole");
+
+            _infoLogColor = _serializedSDKConfiguretionInfo.FindProperty("_infoLogColor");
+            _warningLogColor = _serializedSDKConfiguretionInfo.FindProperty("_warningLogColor");
+            _errorLogColor = _serializedSDKConfiguretionInfo.FindProperty("_errorLogColor");
 
             _generalSettingContent = new GUIContent(
                         "[" + (!_showGeneralSettings.boolValue ? "+" : "-") + "] General"
+                    );
+
+            _lionKitSettingContent = new GUIContent(
+                        "[" + (!_showLionKitSettings.boolValue ? "+" : "-") + "] LionKit"
                     );
 
             _analyticsSettingContent = new GUIContent(
@@ -731,8 +764,6 @@ namespace APSdk
 
             //-------------
 
-
-            
             APSdkAssetPostProcessor.LookForSDK();
 
         }

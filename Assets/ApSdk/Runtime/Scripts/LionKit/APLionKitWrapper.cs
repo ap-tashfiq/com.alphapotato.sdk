@@ -47,7 +47,7 @@
                 {
                     APSdkConfiguretionInfo apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
 
-                    if (apSdkConfiguretionInfo.maxMediationDebugger)
+                    if (apSdkConfiguretionInfo.ShowMaxMediationDebugger)
                     {
 #if APSdk_LionKit
                         MaxSdk.ShowMediationDebugger();
@@ -78,7 +78,7 @@
 
 LionKit.OnInitialized += () => {
 
-#if UNITY_IOS || UNITY_IPHONE
+#if UNITY_IOS
                     if (MaxSdkUtils.CompareVersions(UnityEngine.iOS.Device.systemVersion, "14.5") != MaxSdkUtils.VersionComparisonResult.Lesser)
                     {
                         APSdkLogger.Log("iOS 14.5+ detected!! SetAdvertiserTrackingEnabled = true");
@@ -98,17 +98,7 @@ LionKit.OnInitialized += () => {
 
                 };
 
-
-#else
-                // if LionKit not integrated
-
-
-
-
-
 #endif
-
-
             }
         }
 

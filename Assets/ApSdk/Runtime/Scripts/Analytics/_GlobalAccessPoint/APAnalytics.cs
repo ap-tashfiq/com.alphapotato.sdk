@@ -122,7 +122,7 @@
 
     public void LevelStarted(object level, object score = null)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
                 Dictionary<string, object> eventParam = new Dictionary<string, object>();
                 eventParam.Add(Key.level, level);
@@ -150,18 +150,15 @@
 
 #if APSdk_Firebase
 
-                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
-
-                    if (score == null)
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
-                    else
-                    {
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(
-                                Key.level_started,
-                                Key.score,
-                            (string)score
-                            );
-                    }
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
+                else
+                {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_started,
+                            Key.score,
+                        (string)score
+                        );
                 }
 
 #endif
@@ -170,8 +167,8 @@
 
 #if APSdk_GameAnalytics
                 //if    :   GameAnalytics Integrated
-                
-                    APGameAnalyticsWrapper.Instance.ProgressionEvents(
+
+                APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Start,
                         (int)level,
                         world: -1);
@@ -183,7 +180,7 @@
         {
             
 
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
                 Dictionary<string, object> eventParam = new Dictionary<string, object>();
                 eventParam.Add(Key.level, level);
@@ -201,8 +198,8 @@
 #if APSdk_Facebook
             //if    :   Facebook Integrated
             
-                if(_apFacebookInfo.IsFacebookEventEnabled)
-                    APFacebookWrapper.Instance.LogEvent(Key.level_complete, eventParam);
+                
+                APFacebookWrapper.Instance.LogEvent(Key.level_complete, eventParam);
 #endif
 
 #if APSdk_Adjust
@@ -213,18 +210,15 @@
 
 #if APSdk_Firebase
 
-                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
-
-                    if (score == null)
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
-                    else
-                    {
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(
-                                Key.level_complete,
-                                Key.score,
-                            (string)score
-                            );
-                    }
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
+                else
+                {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_complete,
+                            Key.score,
+                        (string)score
+                        );
                 }
 
 #endif
@@ -236,8 +230,8 @@
 
 #if APSdk_GameAnalytics
                 //if    :   GameAnalytics Integrated
-                
-                    APGameAnalyticsWrapper.Instance.ProgressionEvents(
+
+                APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Complete,
                         (int)level,
                         world: -1);
@@ -247,7 +241,7 @@
 
         public void LevelFailed(object level, object score = null)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
                 Dictionary<string, object> eventParam = new Dictionary<string, object>();
                 eventParam.Add(Key.level, level);
@@ -263,8 +257,7 @@
 #if APSdk_Facebook
             //if    :   Facebook Integrated
 
-                if(_apFacebookInfo.IsFacebookEventEnabled)
-                    APFacebookWrapper.Instance.LogEvent(Key.level_failed, eventParam);
+                APFacebookWrapper.Instance.LogEvent(Key.level_failed, eventParam);
 #endif
 
 #if APSdk_Adjust
@@ -275,18 +268,15 @@
 
 #if APSdk_Firebase
 
-                if (_apFirebaseInfo.IsTrackingProgressionEvent) {
-
-                    if (score == null)
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
-                    else
-                    {
-                        APFirebaseWrapper.Instance.LogFirebaseEvent(
-                                Key.level_failed,
-                                Key.score,
-                            (string)score
-                            );
-                    }
+                if (score == null)
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
+                else
+                {
+                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                            Key.level_failed,
+                            Key.score,
+                        (string)score
+                        );
                 }
 
 #endif
@@ -298,8 +288,8 @@
 
 #if APSdk_GameAnalytics
                 //if    :   GameAnalytics Integrated
-                
-                    APGameAnalyticsWrapper.Instance.ProgressionEvents(
+
+                APGameAnalyticsWrapper.Instance.ProgressionEvents(
                         GameAnalyticsSDK.GAProgressionStatus.Fail,
                         (int)level,
                         world: -1);

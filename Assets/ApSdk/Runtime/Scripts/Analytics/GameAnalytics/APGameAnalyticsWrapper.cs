@@ -107,37 +107,37 @@ namespace APSdk
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01)
         {
-            if(_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if(_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, int score)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, score);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, int score)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, score);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, progression03);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03, int score)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, progression03, score);
         }
 
@@ -147,19 +147,19 @@ namespace APSdk
 
         public void AdEvent(GAAdAction adAction, GAAdType adType, string sdkName, string adPlacement)
         {
-            if(_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
+            if(_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
                 GameAnalytics.NewAdEvent(adAction, adType, sdkName, adPlacement);
         }
 
         public void AdEvent(GAAdAction adAction, GAAdType adType, string sdkName, string adPlacement, long duration) {
 
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
                 GameAnalytics.NewAdEvent(adAction, adType, sdkName, adPlacement, duration);
         }
 
         public void AdEvent(GAAdAction adAction, GAAdType adType, string sdkName, string adPlacement, GAAdError noAdError)
         {
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingAdEvent)
                 GameAnalytics.NewAdEvent(adAction, adType, sdkName, adPlacement, noAdError);
         }
 

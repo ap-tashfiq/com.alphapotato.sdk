@@ -120,10 +120,10 @@ namespace APSdk
 
 		public static void Log(object message)
 		{
-			if (_apSdkConfiguretionInfo.showAPSdkLogInConsole) {
+			if (_apSdkConfiguretionInfo.ShowAPSdkLogInConsole) {
 				Debug.Log(string.Format(
 					"<color={0}>{1}{2}</color>",
-					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.infoLogColor),
+					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.InfoLogColor),
 					"[" + APSdkConstant.NameOfSDK + "]: ",
 					message));
 			}
@@ -133,11 +133,11 @@ namespace APSdk
 
 		public static void LogWarning(object message)
 		{
-			if (_apSdkConfiguretionInfo.showAPSdkLogInConsole)
+			if (_apSdkConfiguretionInfo.ShowAPSdkLogInConsole)
 			{
 				Debug.LogWarning(string.Format(
 					"<color={0}>{1}{2}</color>",
-					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.warningLogColor),
+					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.WarningLogColor),
 					"[" + APSdkConstant.NameOfSDK + "]: ",
 					message));
 			}
@@ -146,11 +146,11 @@ namespace APSdk
 
 		public static void LogError(object message)
 		{
-			if (_apSdkConfiguretionInfo.showAPSdkLogInConsole)
+			if (_apSdkConfiguretionInfo.ShowAPSdkLogInConsole)
 			{
 				Debug.LogError(string.Format(
 					"<color={0}>{1}{2}</color>",
-					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.errorLogColor),
+					GetHexColorFromRGBColor(_apSdkConfiguretionInfo.ErrorLogColor),
 					"[" + APSdkConstant.NameOfSDK + "]: ",
 					message));
 			}

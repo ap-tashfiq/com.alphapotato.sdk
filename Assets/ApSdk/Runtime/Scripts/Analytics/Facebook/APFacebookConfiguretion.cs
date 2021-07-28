@@ -3,11 +3,22 @@
 
 #if APSdk_Facebook
 
+    using System.Collections.Generic;
     using UnityEngine;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
     [CreateAssetMenu(fileName = "APFacebookConfiguretion", menuName = "APFacebookConfiguretion")]
     public class APFacebookConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
+        #region Private Variables
+
+        [SerializeField] private string _facebookAppName;
+        [SerializeField] private string _facebookAppId;
+
+        #endregion
+
         #region Override Method
 
         public override void SetNameAndIntegrationStatus()
@@ -30,12 +41,40 @@
 
         public override void PreCustomEditorGUI()
         {
-            
+#if UNITY_EDITOR
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUILayout.LabelField("appName", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
+                EditorGUI.BeginChangeCheck();
+                _facebookAppName = EditorGUILayout.TextField(_facebookAppName);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    Facebook.Unity.Settings.FacebookSettings.AppLabels = new List<string>() { _facebookAppName };
+                }
+
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUILayout.LabelField("appId", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
+                EditorGUI.BeginChangeCheck();
+                _facebookAppId = EditorGUILayout.TextField(_facebookAppId);
+                if (EditorGUI.EndChangeCheck())
+                {
+
+                    Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId };
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+
+            APSdkEditorModule.DrawHorizontalLine();
+#endif
         }
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-            if (APFacebookWrapper.Instance == null)
+            if (APFacebookWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
                 GameObject newAPFacebookWrapper = new GameObject("APFacebookWrapper");
@@ -88,7 +127,7 @@
 
         }
 
-        #endregion
+#endregion
 
 
     }

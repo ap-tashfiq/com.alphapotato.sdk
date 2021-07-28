@@ -65,7 +65,7 @@
         public void LogFirebaseEvent(string eventName, string parameName, string paramValue)
         {
 
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
             {
                 FirebaseAnalytics.LogEvent(
                         eventName,
@@ -78,7 +78,7 @@
         public void LogFirebaseEvent(string eventName, List<Parameter> parameter)
         {
 
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
             {
 
                 FirebaseAnalytics.LogEvent(

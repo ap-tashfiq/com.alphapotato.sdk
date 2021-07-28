@@ -94,7 +94,7 @@ namespace APSdk
 
         public void LogEvent(string eventName, Dictionary<string, object> eventParams) {
 
-            if (_apSdkConfiguretionInfo.logAnalyticsEvent) {
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled) {
 
                 if (_facebookConfiguretion.IsAnalyticsEventEnabled)
                 {

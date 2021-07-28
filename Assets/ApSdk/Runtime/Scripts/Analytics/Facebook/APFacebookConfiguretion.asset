@@ -20,3 +20,5 @@ MonoBehaviour:
   _trackAdEvent: 0
   _subscribeToLionEvent: 0
   _subscribeToLionEventUA: 0
+  _facebookAppName: Side Hero
+  _facebookAppId: 1562855960
