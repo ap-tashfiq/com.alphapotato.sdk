@@ -33,6 +33,7 @@ namespace APSdk
 
 #else
             GameAnalytics.Initialize();
+            APSdkLogger.Log("GA Initialized");
 #endif
             
         }
@@ -59,21 +60,25 @@ namespace APSdk
         public void GameAnalyticsATTListenerAuthorized()
         {
             GameAnalytics.Initialize();
+            APSdkLogger.Log("GA : ATTListenerAuthorized");
         }
 
         public void GameAnalyticsATTListenerDenied()
         {
             GameAnalytics.Initialize();
+            APSdkLogger.LogError("GA : ATTListenerDenied");
         }
 
         public void GameAnalyticsATTListenerNotDetermined()
         {
             GameAnalytics.Initialize();
+            APSdkLogger.LogError("GA : ATTListenerNotDetermined");
         }
 
         public void GameAnalyticsATTListenerRestricted()
         {
             GameAnalytics.Initialize();
+            APSdkLogger.LogWarning("GA : ATTListenerRestricted");
         }
 
         #endregion

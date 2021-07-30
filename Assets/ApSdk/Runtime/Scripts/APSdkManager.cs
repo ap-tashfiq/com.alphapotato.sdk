@@ -24,7 +24,7 @@
             {
 
                 APBaseClassForAdConfiguretion adNetworkConfiguretion = (APBaseClassForAdConfiguretion)adNetoworkConfiguretionObject;
-                if (adNetworkConfiguretion != null)
+                if (adNetworkConfiguretion != null && _apSdkConfiguretionInfo.SelectedAdConfig == adNetworkConfiguretion)
                     adNetworkConfiguretion.Initialize(_apSdkConfiguretionInfo);
             }
 

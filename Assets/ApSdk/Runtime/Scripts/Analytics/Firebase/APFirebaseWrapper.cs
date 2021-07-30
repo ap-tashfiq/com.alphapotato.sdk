@@ -40,12 +40,12 @@
                     // subscribe to firebase events
                     // subscribe here so avoid error if dependency check fails
 
-                    Debug.Log("Firebase Initialized");
+                    APSdkLogger.Log("Firebase Initialized");
                     OnInitialized?.Invoke();
                 }
                 else
                 {
-                    Debug.LogError($"Firebase: Could not resolve all Firebase dependencies: {dependencyStatus}");
+                    APSdkLogger.LogError($"Firebase: Could not resolve all Firebase dependencies: {dependencyStatus}");
                 }
             });
         }
