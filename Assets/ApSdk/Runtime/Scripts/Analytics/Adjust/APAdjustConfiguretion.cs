@@ -1,9 +1,10 @@
 ﻿namespace APSdk
 {
-#if APSdk_Adjust
-
     using UnityEngine;
+
+#if APSdk_Adjust
     using com.adjust.sdk;
+#endif
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -13,6 +14,8 @@
     public class APAdjustConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
         #region Public Variables
+
+#if APSdk_Adjust
 
         public string appToken
         {
@@ -37,10 +40,14 @@
         public bool SendInBackground { get { return _sendInBackground; } }
         public bool LaunchDeferredDeeplink { get { return _launchDeferredDeeplink; } }
 
+#endif
+
         #endregion
 
 
         #region Private Variables
+
+#if APSdk_Adjust
 
 #if UNITY_EDITOR
 
@@ -59,16 +66,18 @@
         [SerializeField] private bool _eventBuffering;
         [SerializeField] private bool _sendInBackground;
         [SerializeField] private bool _launchDeferredDeeplink = true;
+#endif
 
-        #endregion
+#endregion
 
         #region Override Methods
 
         public override void SetNameAndIntegrationStatus()
         {
-            SetNameOfConfiguretion(APSdkConstant.APSdk_Adjust);
+            string sdkName = "APSdk_Adjust";
+            SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
-            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckAdjustIntegration();
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckAdjustIntegration(sdkName);
 #endif
         }
 
@@ -79,14 +88,14 @@
 
         public override void PreCustomEditorGUI()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_Adjust
 
 #endif
         }
 
         public override void PostCustomEditorGUI()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_Adjust
 
             #region Settings    :   Basic
 
@@ -239,7 +248,7 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-
+#if APSdk_Adjust
             if (APAdjustWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
@@ -286,13 +295,12 @@
 #endif
 
             }
+
+#endif
         }
 
 
         #endregion
     }
-
-
-#endif
 }
 

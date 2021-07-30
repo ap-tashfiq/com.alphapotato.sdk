@@ -71,9 +71,10 @@
 
         public override void SetNameAndIntegrationStatus()
         {
-            SetNameOfConfiguretion(APSdkConstant.APSdk_LionKit, "AdNetwork");
+            string sdkName = APSdkConstant.APSdk_LionKit;
+            SetNameOfConfiguretion(sdkName, "AdNetwork");
 #if UNITY_EDITOR
-            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckLionKitIntegration();
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckLionKitIntegration(sdkName);
 #endif
         }
 

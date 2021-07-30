@@ -21,6 +21,7 @@
         [HideInInspector, SerializeField] private bool _isLionKitIntegrated;
 
         [HideInInspector, SerializeField] private bool _enableAnalyticsEvents = true;
+        [HideInInspector, SerializeField] private APBaseClassForAdConfiguretion _selectedAdConfiguretion = null;
         [HideInInspector, SerializeField] private int _indexOfActiveAdConfiguretion = -1;
 
         [HideInInspector, SerializeField] private bool _showMaxMediationDebugger = false;
@@ -40,14 +41,10 @@
         public bool IsAnalyticsEventEnabled { get { return _enableAnalyticsEvents; } }
 
         //AdNework
-        public int  IndexOfActiveAdConfiguretion { get { return _indexOfActiveAdConfiguretion; } }
         public APBaseClassForAdConfiguretion SelectedAdConfig
         {
             get {
-                if (IndexOfActiveAdConfiguretion >= 0 && IndexOfActiveAdConfiguretion < listOfAdConfiguretion.Count)
-                    return listOfAdConfiguretion[IndexOfActiveAdConfiguretion];
-
-                return null;
+                return _selectedAdConfiguretion;
             }
         }
 
@@ -62,16 +59,6 @@
         public Color ErrorLogColor { get { return _errorLogColor; } }        
 
         #endregion
-
-        #region Public Callback
-
-#if UNITY_EDITOR
-        public void SetIndexForActiveAdConfiguretion(int index) {
-            _indexOfActiveAdConfiguretion = index;
-        }
-#endif
-
-#endregion
 
     }
 }

@@ -10,15 +10,24 @@
         {
            APSdkConfiguretionInfo _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
 
-            foreach (APBaseClassForAnalyticsConfiguretion analyticsConfiguretion in _apSdkConfiguretionInfo.listOfAnalyticsConfiguretion)
-                analyticsConfiguretion.Initialize(_apSdkConfiguretionInfo);
+            Object[] analyticsConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAnalyticsConfiguretion));
+            foreach (Object analyticsConfiguretionObject in analyticsConfiguretionObjects)
+            {
 
-            int numberOfAdConfiguretion = _apSdkConfiguretionInfo.listOfAdConfiguretion.Count;
-            for (int i = 0; i < numberOfAdConfiguretion; i++) {
-
-                if (i == _apSdkConfiguretionInfo.IndexOfActiveAdConfiguretion)
-                    _apSdkConfiguretionInfo.listOfAdConfiguretion[i].Initialize(_apSdkConfiguretionInfo);
+                APBaseClassForAnalyticsConfiguretion analyticsConfiguretion = (APBaseClassForAnalyticsConfiguretion)analyticsConfiguretionObject;
+                if (analyticsConfiguretion != null)
+                    analyticsConfiguretion.Initialize(_apSdkConfiguretionInfo);
             }
+
+            Object[] adNetworkConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAdConfiguretion));
+            foreach (Object adNetoworkConfiguretionObject in adNetworkConfiguretionObjects)
+            {
+
+                APBaseClassForAdConfiguretion adNetworkConfiguretion = (APBaseClassForAdConfiguretion)adNetoworkConfiguretionObject;
+                if (adNetworkConfiguretion != null)
+                    adNetworkConfiguretion.Initialize(_apSdkConfiguretionInfo);
+            }
+
         }
     }
 }

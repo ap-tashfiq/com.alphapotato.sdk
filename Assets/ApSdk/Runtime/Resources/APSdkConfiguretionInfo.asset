@@ -14,22 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showGeneralSetting: 0
   _showLionKitSettings: 0
-  _showAnalytics: 1
+  _showAnalytics: 0
   _showAdNetworks: 0
   _showABTestSetting: 0
   _showDebuggingSetting: 0
   _isLionKitIntegrated: 0
   _enableAnalyticsEvents: 1
-  _indexOfActiveAdConfiguretion: 0
+  _selectedAdConfiguretion: {fileID: 0}
+  _indexOfActiveAdConfiguretion: -1
   _showMaxMediationDebugger: 0
   _showAPSdkLogInConsole: 1
   _infoLogColor: {r: 0, g: 1, b: 1, a: 1}
   _warningLogColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _errorLogColor: {r: 1, g: 0, b: 0, a: 1}
-  listOfAnalyticsConfiguretion:
-  - {fileID: 11400000, guid: 962fff472496344488a292004fcc145f, type: 2}
-  - {fileID: 11400000, guid: 72f66cec7d517479d948107a9c3c3225, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 4e4b2db9311d044779eef7b90c8983f7, type: 2}
-  listOfAdConfiguretion:
-  - {fileID: 11400000, guid: a187bd99ed2934aa598eadd41941cc7c, type: 2}

@@ -1,6 +1,6 @@
 ﻿namespace APSdk
 {
-#if APSdk_GameAnalytics
+
     using UnityEngine;
     
 
@@ -11,6 +11,8 @@
     [CreateAssetMenu(fileName = "APGameAnalyticsConfiguretion", menuName = "APGameAnalyticsConfiguretion")]
     public class APGameAnalyticsConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
+        
+
         #region Public Variables
 
         public int DefaultWorldIndex { get { return _defaultWorldIndex; } }
@@ -21,21 +23,23 @@
 
         [SerializeField] private int _defaultWorldIndex = 1;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_GameAnalytics
         private GameAnalyticsSDK.Setup.Settings _gaSettings;
         private Editor _gaSettingsEditor;
         private bool _isShowingGASettings;
         
 #endif
-#endregion
+
+        #endregion
 
         #region Override Method
 
         public override void SetNameAndIntegrationStatus()
         {
-            SetNameOfConfiguretion(APSdkConstant.APSdk_GameAnalytics);
+            string sdkName = "APSdk_GameAnalytics";
+            SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
-            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckGameAnalyticsIntegration();
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckGameAnalyticsIntegration(sdkName);
 #endif
         }
 
@@ -46,7 +50,7 @@
 
         public override void PreCustomEditorGUI()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_GameAnalytics
 
             if (IsAnalyticsEventEnabled) {
 
@@ -64,7 +68,7 @@
 
         public override void PostCustomEditorGUI()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_GameAnalytics
                 APSdkEditorModule.DrawHorizontalLine();
 
                 EditorGUILayout.BeginVertical();
@@ -85,6 +89,7 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
+#if APSdk_GameAnalytics
             if (APGameAnalyticsWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
                 Instantiate(Resources.Load("GameAnalytics/AP_GameAnalytics"));
@@ -96,6 +101,7 @@
 
                 APGameAnalyticsWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
             }
+#endif
         }
 
 #endregion
@@ -103,6 +109,5 @@
 
 
     }
-#endif
-        }
+}
 

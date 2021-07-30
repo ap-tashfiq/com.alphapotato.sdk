@@ -1,8 +1,6 @@
 ﻿namespace APSdk
 {
 
-#if APSdk_Facebook
-
     using System.Collections.Generic;
     using UnityEngine;
 #if UNITY_EDITOR
@@ -14,18 +12,23 @@
     {
         #region Private Variables
 
+#if APSdk_Facebook
+
         [SerializeField] private string _facebookAppName;
         [SerializeField] private string _facebookAppId;
 
-        #endregion
+#endif
+
+#endregion
 
         #region Override Method
 
         public override void SetNameAndIntegrationStatus()
         {
-            SetNameOfConfiguretion(APSdkConstant.APSdk_Facebook);
+            string sdkName = "APSdk_Facebook";
+            SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
-            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFacebookIntegration();
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFacebookIntegration(sdkName);
 #endif
         }
 
@@ -41,7 +44,7 @@
 
         public override void PreCustomEditorGUI()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && APSdk_Facebook
             EditorGUILayout.BeginHorizontal();
             {
                 EditorGUILayout.LabelField("appName", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
@@ -74,6 +77,8 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
+#if APSdk_Facebook
+
             if (APFacebookWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
@@ -124,7 +129,7 @@
 
             }
 
-
+#endif
         }
 
 #endregion
@@ -132,7 +137,5 @@
 
     }
 
-#endif
-
-        }
+}
 

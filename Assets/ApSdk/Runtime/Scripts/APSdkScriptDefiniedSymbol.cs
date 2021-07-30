@@ -164,11 +164,11 @@
 
         #region Public Callback :   AdNetwork
 
-        public static bool CheckMaxAdNetworkIntegrated() {
+        public static bool CheckMaxAdNetworkIntegrated(string sdkName) {
 
-            bool isAdded = AssetDatabase.IsValidFolder("Assets/MaxSdk");
+            bool isAdded = AssetDatabase.IsValidFolder("Assets/MaxSdk/Scripts");
             UpdateDefines(
-                    APSdkConstant.APSdk_MaxAdNetwork,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
@@ -179,58 +179,58 @@
 
         #region Public Callback :   3rd Party SDK
 
-        public static bool CheckLionKitIntegration()
+        public static bool CheckLionKitIntegration(string sdkName)
         {
 
             bool isAdded = IsPackageBeenAddedToManifest("com.lionstudios.release.lionkit");
             UpdateDefines(
-                    APSdkConstant.APSdk_LionKit,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
             return isAdded;
         }
 
-        public static bool CheckFacebookIntegration()
+        public static bool CheckFacebookIntegration(string sdkName)
         {
             bool isAdded = AssetDatabase.IsValidFolder("Assets/FacebookSDK");
             UpdateDefines(
-                    APSdkConstant.APSdk_Facebook,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
             return isAdded;   
         }
 
-        public static bool CheckAdjustIntegration()
+        public static bool CheckAdjustIntegration(string sdkName)
         {
             bool isAdded = AssetDatabase.IsValidFolder("Assets/Adjust/Unity");
             UpdateDefines(
-                    APSdkConstant.APSdk_Adjust,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
             return isAdded;   
         }
 
-        public static bool CheckGameAnalyticsIntegration()
+        public static bool CheckGameAnalyticsIntegration(string sdkName)
         {
 
             bool isAdded = IsPackageBeenAddedToManifest("com.gameanalytics.sdk") || AssetDatabase.IsValidFolder("Assets/GameAnalytics/Editor/Playmaker");
             UpdateDefines(
-                    APSdkConstant.APSdk_GameAnalytics,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
             return isAdded;
         }
 
-        public static bool CheckFirebaseIntegration()
+        public static bool CheckFirebaseIntegration(string sdkName)
         {
 
             bool isAdded = AssetDatabase.IsValidFolder("Assets/Firebase");
             UpdateDefines(
-                    APSdkConstant.APSdk_Firebase,
+                    sdkName,
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );

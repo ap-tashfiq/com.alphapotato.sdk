@@ -14,7 +14,7 @@
 
             SerializedProperty _isLionKitIntegrated = _serializedSDKConfiguretionInfo.FindProperty("_isLionKitIntegrated");
 
-            _isLionKitIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckLionKitIntegration();
+            _isLionKitIntegrated.boolValue = APSdkScriptDefiniedSymbol.CheckLionKitIntegration(APSdkConstant.APSdk_LionKit);
             _isLionKitIntegrated.serializedObject.ApplyModifiedProperties();
 
             Object[] analyticsConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAnalyticsConfiguretion));

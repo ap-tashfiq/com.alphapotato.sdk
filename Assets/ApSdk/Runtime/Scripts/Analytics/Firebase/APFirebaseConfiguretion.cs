@@ -1,6 +1,6 @@
 ﻿namespace APSdk
 {
-#if APSdk_Firebase
+
 
     using UnityEngine;
     using System.Collections.Generic;
@@ -13,9 +13,10 @@
 
         public override void SetNameAndIntegrationStatus()
         {
-            SetNameOfConfiguretion(APSdkConstant.APSdk_Firebase);
+            string sdkName = "APSdk_Firebase";
+            SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
-            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFirebaseIntegration();
+            _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFirebaseIntegration(sdkName);
 #endif
         }
 
@@ -36,6 +37,8 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
+#if APSdk_Firebase
+
             if (APFirebaseWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
 
@@ -136,6 +139,7 @@
 #endif
 
             }
+#endif
         }
 
 #endregion
@@ -144,7 +148,5 @@
 
     }
 
-#endif
-
-            }
+}
 
