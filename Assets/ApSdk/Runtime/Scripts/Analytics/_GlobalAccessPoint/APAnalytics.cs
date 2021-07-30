@@ -7,7 +7,7 @@
     using LionStudios;
 #endif
 
-    public class APAnalytics
+    public static class APAnalytics
     {
         #region Custom Variables
 
@@ -96,31 +96,31 @@
         //---------------
         #region Private Variables
 
-        private bool _isLionKitIntegrated = false;
-        private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
+        private static bool _isLionKitIntegrated = false;
+        private static APSdkConfiguretionInfo _apSdkConfiguretionInfo;
 
 
-#endregion
+        #endregion
 
         //---------------
         #region Public Callback
 
-        public APAnalytics (APSdkConfiguretionInfo apSdkConfiguretionInfo) {
+        public static void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        {
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
-
 
 #if APSdk_LionKit
             _isLionKitIntegrated = true;
 #endif
-
         }
 
-    #endregion
 
-    #region Event   :   Preset
+        #endregion
 
-    public void LevelStarted(object level, object score = null)
+        #region Event   :   Preset
+
+        public static void LevelStarted(object level, object score = null)
         {
             if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
@@ -176,9 +176,9 @@
             }
         }
 
-        public void LevelComplete(object level, object score = null)
+        public static void LevelComplete(object level, object score = null)
         {
-            
+
 
             if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
@@ -187,7 +187,7 @@
                 if (score != null)
                     eventParam.Add(_isLionKitIntegrated ? Key.rank : Key.score, score);
 
-                
+
 
 #if APSdk_LionKit
                 //if    :   LionKit Integrated
@@ -239,7 +239,7 @@
             }
         }
 
-        public void LevelFailed(object level, object score = null)
+        public static void LevelFailed(object level, object score = null)
         {
             if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
             {
