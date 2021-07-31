@@ -3,7 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    [CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
+    //[CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
     public class APMaxAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
         public override void HideBannerAd()
@@ -43,7 +43,7 @@
 
         public override void SetNameAndIntegrationStatus()
         {
-            string sdkName = "APSdk_MaxAdNetwork";
+            string sdkName = APSdkConstant.NameOfSDK + "_MaxAdNetwork";
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated(sdkName);

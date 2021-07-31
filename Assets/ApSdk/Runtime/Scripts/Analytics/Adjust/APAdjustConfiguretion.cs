@@ -10,7 +10,7 @@
     using UnityEditor;
 #endif
 
-    [CreateAssetMenu(fileName = "APAdjustConfiguretion",menuName = "APAdjustConfiguretion")]
+    //[CreateAssetMenu(fileName = "APAdjustConfiguretion",menuName = "APAdjustConfiguretion")]
     public class APAdjustConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
         #region Public Variables
@@ -51,30 +51,30 @@
 
 #if UNITY_EDITOR
 
-        [SerializeField] private bool _showBasicInfo;
-        [SerializeField] private bool _showAdvancedInfo;
+        [HideInInspector, SerializeField] private bool _showBasicInfo;
+        [HideInInspector, SerializeField] private bool _showAdvancedInfo;
 
 #endif
 
-        [SerializeField] private string _appTokenForAndroid;
-        [SerializeField] private string _appTokenForIOS;
-        [SerializeField] private AdjustEnvironment _environment = AdjustEnvironment.Sandbox;
+        [HideInInspector, SerializeField] private string _appTokenForAndroid;
+        [HideInInspector, SerializeField] private string _appTokenForIOS;
+        [HideInInspector, SerializeField] private AdjustEnvironment _environment = AdjustEnvironment.Sandbox;
 
-        [SerializeField] private AdjustLogLevel _logLevel = AdjustLogLevel.Suppress;
-        [SerializeField] private float _startDelay = 0;
-        [SerializeField] private bool _startManually = true;
-        [SerializeField] private bool _eventBuffering;
-        [SerializeField] private bool _sendInBackground;
-        [SerializeField] private bool _launchDeferredDeeplink = true;
+        [HideInInspector, SerializeField] private AdjustLogLevel _logLevel = AdjustLogLevel.Suppress;
+        [HideInInspector, SerializeField] private float _startDelay = 0;
+        [HideInInspector, SerializeField] private bool _startManually = true;
+        [HideInInspector, SerializeField] private bool _eventBuffering;
+        [HideInInspector, SerializeField] private bool _sendInBackground;
+        [HideInInspector, SerializeField] private bool _launchDeferredDeeplink = true;
 #endif
 
-#endregion
+        #endregion
 
         #region Override Methods
 
         public override void SetNameAndIntegrationStatus()
         {
-            string sdkName = "APSdk_Adjust";
+            string sdkName = APSdkConstant.NameOfSDK + "_Adjust";
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckAdjustIntegration(sdkName);

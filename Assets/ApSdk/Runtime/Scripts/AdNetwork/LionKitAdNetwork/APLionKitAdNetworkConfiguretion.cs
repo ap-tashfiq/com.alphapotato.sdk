@@ -3,7 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    [CreateAssetMenu(fileName = "APLionKitAdNetworkConfiguretion", menuName = "APLionKitAdNetworkConfiguretion")]
+    //[CreateAssetMenu(fileName = "APLionKitAdNetworkConfiguretion", menuName = "APLionKitAdNetworkConfiguretion")]
     public class APLionKitAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
         

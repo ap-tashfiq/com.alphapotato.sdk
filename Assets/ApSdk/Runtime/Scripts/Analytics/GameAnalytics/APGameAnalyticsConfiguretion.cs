@@ -8,7 +8,7 @@
     using UnityEditor;
 #endif
 
-    [CreateAssetMenu(fileName = "APGameAnalyticsConfiguretion", menuName = "APGameAnalyticsConfiguretion")]
+    //[CreateAssetMenu(fileName = "APGameAnalyticsConfiguretion", menuName = "APGameAnalyticsConfiguretion")]
     public class APGameAnalyticsConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
         
@@ -21,7 +21,7 @@
 
         #region Private Variables
 
-        [SerializeField] private int _defaultWorldIndex = 1;
+        [HideInInspector, SerializeField] private int _defaultWorldIndex = 1;
 
 #if UNITY_EDITOR && APSdk_GameAnalytics
         private GameAnalyticsSDK.Setup.Settings _gaSettings;
@@ -36,7 +36,7 @@
 
         public override void SetNameAndIntegrationStatus()
         {
-            string sdkName = "APSdk_GameAnalytics";
+            string sdkName = APSdkConstant.NameOfSDK + "_GameAnalytics";
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckGameAnalyticsIntegration(sdkName);

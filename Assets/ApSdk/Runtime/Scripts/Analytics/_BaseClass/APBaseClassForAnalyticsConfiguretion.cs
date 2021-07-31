@@ -26,13 +26,13 @@ using UnityEditor;
 
 
 
-        [SerializeField] protected bool _enableAnalyticsEvent = false;
+        [HideInInspector, SerializeField] protected bool _enableAnalyticsEvent = false;
 
-        [SerializeField] protected bool _trackProgressionEvent = false;
-        [SerializeField] protected bool _trackAdEvent = false;
+        [HideInInspector, SerializeField] protected bool _trackProgressionEvent = false;
+        [HideInInspector, SerializeField] protected bool _trackAdEvent = false;
 
-        [SerializeField] protected bool _subscribeToLionEvent = false;
-        [SerializeField] protected bool _subscribeToLionEventUA = false;
+        [HideInInspector, SerializeField] protected bool _subscribeToLionEvent = false;
+        [HideInInspector, SerializeField] protected bool _subscribeToLionEventUA = false;
 
 
 #endregion

@@ -18,26 +18,26 @@
 
 #if UNITY_EDITOR
         
-        [SerializeField] private bool _showRewardedAdSettings;
-        [SerializeField] private bool _showInterstitialAdSettings;
-        [SerializeField] private bool _showBannerAdSettings;
-        [SerializeField] private bool _showCrossPromoAdSettings;
+        [HideInInspector, SerializeField] private bool _showRewardedAdSettings;
+        [HideInInspector, SerializeField] private bool _showInterstitialAdSettings;
+        [HideInInspector, SerializeField] private bool _showBannerAdSettings;
+        [HideInInspector, SerializeField] private bool _showCrossPromoAdSettings;
 #endif
 
 
 
         [Space(5.0f)]
-        [SerializeField] private bool _enableRewardedAd;
+        [HideInInspector, SerializeField] private bool _enableRewardedAd;
 
         [Space(5.0f)]
-        [SerializeField] private bool _enableInterstitialAd;
+        [HideInInspector, SerializeField] private bool _enableInterstitialAd;
 
         [Space(5.0f)]
-        [SerializeField] private bool _enableBannerAd;
-        [SerializeField] private bool _showBannerAdManually;
+        [HideInInspector, SerializeField] private bool _enableBannerAd;
+        [HideInInspector, SerializeField] private bool _showBannerAdManually;
 
         [Space(5.0f)]
-        [SerializeField] private bool _enableCrossPromoAd;
+        [HideInInspector, SerializeField] private bool _enableCrossPromoAd;
 
         #endregion
 

@@ -13,11 +13,11 @@
         #region Protected Variables
 
 #if UNITY_EDITOR
-        [SerializeField] protected bool _showSettings;
+        [HideInInspector, SerializeField] protected bool _showSettings;
 #endif
 
-        [SerializeField] protected string _nameOfConfiguretion;
-        [SerializeField] protected bool _isSDKIntegrated;
+        [HideInInspector, SerializeField] protected string _nameOfConfiguretion;
+        [HideInInspector, SerializeField] protected bool _isSDKIntegrated;
 
         #endregion
 

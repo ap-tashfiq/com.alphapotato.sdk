@@ -7,25 +7,25 @@
     using UnityEditor;
 #endif
 
-    [CreateAssetMenu(fileName = "APFacebookConfiguretion", menuName = "APFacebookConfiguretion")]
+    //[CreateAssetMenu(fileName = "APFacebookConfiguretion", menuName = "APFacebookConfiguretion")]
     public class APFacebookConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
         #region Private Variables
 
 #if APSdk_Facebook
 
-        [SerializeField] private string _facebookAppName;
-        [SerializeField] private string _facebookAppId;
+        [HideInInspector, SerializeField] private string _facebookAppName;
+        [HideInInspector, SerializeField] private string _facebookAppId;
 
 #endif
 
-#endregion
+        #endregion
 
         #region Override Method
 
         public override void SetNameAndIntegrationStatus()
         {
-            string sdkName = "APSdk_Facebook";
+            string sdkName = APSdkConstant.NameOfSDK + "_Facebook";
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFacebookIntegration(sdkName);

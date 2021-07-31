@@ -5,7 +5,7 @@
     using UnityEngine;
     using System.Collections.Generic;
 
-    [CreateAssetMenu(fileName = "APFirebaseConfiguretion", menuName = "APFirebaseConfiguretion")]
+    //[CreateAssetMenu(fileName = "APFirebaseConfiguretion", menuName = "APFirebaseConfiguretion")]
     public class APFirebaseConfiguretion : APBaseClassForAnalyticsConfiguretion
     {
 
@@ -13,7 +13,7 @@
 
         public override void SetNameAndIntegrationStatus()
         {
-            string sdkName = "APSdk_Firebase";
+            string sdkName = APSdkConstant.NameOfSDK + "_Firebase";
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckFirebaseIntegration(sdkName);
