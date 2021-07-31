@@ -1,5 +1,5 @@
 # APSdk Integration Manager
-[![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_allSettings.png)]
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_allSettings.png)
 
 
 
@@ -10,7 +10,7 @@
 
 Please go to the release section on this repository and download the latest version of "APSdk". Once you download the ".unityPackage", import it to your unity project. Once the project recompilation is complete, you will be able to see the following windows as the given screenshot below (AP -> APSdk Integration Manager)
 
-[![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_apSdkIntegrationManager.png)]
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_apSdkIntegrationManager.png)
 
 
 
@@ -28,7 +28,7 @@ APSdk Integration manager comes with the following section
 - A/B Testing (Under development)
 - Debugging
 
-[![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_allSettings.png)]
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_allSettings.png)
 
 
 
@@ -36,7 +36,7 @@ APSdk Integration manager comes with the following section
 ### General
 - Download : Will redirect you the following repository
 - Documentation : Will redirect you to the README.md file.
-[![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_general.png)]
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_general.png)
 
 
 
@@ -56,4 +56,10 @@ APSdk Integration manager comes with the following section
 > Once the SDK has been imported, you will be able to interact with the section.
 > In order to iniatize the SDK and work properly, make sure to "Enable" the imported SDK.
 
-[![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources//ss_analytics.png)]
+- Analytics SDK can be used both with & without "LionKit".
+
+> With LionKit : If LionKit is integrated and your analytics has generic way to feed the logs, then you will see the options "SubscribeLionEvent" & "SubscribeToLionEventUA" (UA means the events for Ads, IAP etc). 
+
+> Without LionKit : If you haven't integrated LionKit or there are no generic ways to feed the data for analytics (GameAnalytics etc...), then you will see the option "TrackProgressionEvent" (For LevelStarted, LevelComplete & LevelFailed) and "TrackAdEvent" (For RewardedAd, InterstitialAd & BannerAd)
+
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources//ss_analytics.png)
