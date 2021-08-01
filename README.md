@@ -44,6 +44,7 @@ APSdk Integration manager comes with the following section
 ## LionKit
 - ShowMax Mediation Deugger : Will turn on the max mediation debugger in order to check the LionKit, Apploving & Other AdNetworks integration status.
 
+![](https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/Assets/_GitHubResources/ss_lionkit.png)
 
 
 
