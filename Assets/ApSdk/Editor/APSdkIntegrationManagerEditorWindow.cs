@@ -326,14 +326,22 @@ namespace APSdk
             SerializedProperty _showCrossPromoAdSettings = serailizedAdConfiguretion.FindProperty("_showCrossPromoAdSettings");
 
             SerializedProperty _enableRewardedAd   = serailizedAdConfiguretion.FindProperty("_enableRewardedAd");
+            SerializedProperty _adUnitIdForRewardedAd_Android = serailizedAdConfiguretion.FindProperty("_adUnitIdForRewardedAd_Android");
+            SerializedProperty _adUnitIdForRewardedAd_iOS = serailizedAdConfiguretion.FindProperty("_adUnitIdForRewardedAd_iOS");
 
             SerializedProperty _enableInterstitialAd    = serailizedAdConfiguretion.FindProperty("_enableInterstitialAd");
+            SerializedProperty _adUnitIdForInterstitialAd_Android = serailizedAdConfiguretion.FindProperty("_adUnitIdForInterstitialAd_Android");
+            SerializedProperty _adUnitIdForInterstitialAd_iOS = serailizedAdConfiguretion.FindProperty("_adUnitIdForInterstitialAd_iOS");
 
             SerializedProperty _enableBannerAd          = serailizedAdConfiguretion.FindProperty("_enableBannerAd");
+            SerializedProperty _adUnitIdForBannerAd_Android = serailizedAdConfiguretion.FindProperty("_adUnitIdForBannerAd_Android");
+            SerializedProperty _adUnitIdForBannerAd_iOS = serailizedAdConfiguretion.FindProperty("_adUnitIdForBannerAd_iOS");
             SerializedProperty _showBannerAdManually    = serailizedAdConfiguretion.FindProperty("_showBannerAdManually");
 
             SerializedProperty _enableCrossPromoAd      = serailizedAdConfiguretion.FindProperty("_enableCrossPromoAd");
 
+            string displayName_AdUnitId_Android = "AdUnitID Android";
+            string displayName_AdUnitId_iOS = "AdUnitID iOS";
 
             //Setting Titles
             GUIContent titleContent = new GUIContent(
@@ -383,6 +391,10 @@ namespace APSdk
 
                     EditorGUI.BeginDisabledGroup((_apSDKConfiguretionInfo.SelectedAdConfig == adConfiguretion) ? false : true);
                     {
+                        EditorGUI.indentLevel += 1;
+                        adConfiguretion.PreCustomEditorGUI();
+                        EditorGUI.indentLevel -= 1;
+
                         //AdType Configuretion
                         GUIStyle adTypeStyle = new GUIStyle(EditorStyles.boldLabel);
                         adTypeStyle.alignment = TextAnchor.MiddleLeft;
@@ -414,6 +426,31 @@ namespace APSdk
 
                                 EditorGUI.indentLevel += 2;
                                 {
+                                    if (adConfiguretion.AskForAdIds()) {
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_Android, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForRewardedAd_Android.stringValue = EditorGUILayout.TextField(_adUnitIdForRewardedAd_Android.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForRewardedAd_Android.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_iOS, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForRewardedAd_iOS.stringValue = EditorGUILayout.TextField(_adUnitIdForRewardedAd_iOS.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForRewardedAd_iOS.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        APSdkEditorModule.DrawHorizontalLine();
+                                    }
+
                                     EditorGUILayout.BeginHorizontal();
                                     {
                                         EditorGUILayout.LabelField(_enableRewardedAd.displayName, GUILayout.Width(LabelWidth));
@@ -458,6 +495,33 @@ namespace APSdk
                             {
                                 EditorGUI.indentLevel += 2;
                                 {
+
+                                    if (adConfiguretion.AskForAdIds())
+                                    {
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_Android, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForInterstitialAd_Android.stringValue = EditorGUILayout.TextField(_adUnitIdForInterstitialAd_Android.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForInterstitialAd_Android.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_iOS, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForInterstitialAd_iOS.stringValue = EditorGUILayout.TextField(_adUnitIdForInterstitialAd_iOS.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForInterstitialAd_iOS.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        APSdkEditorModule.DrawHorizontalLine();
+                                    }
+
                                     EditorGUILayout.BeginHorizontal();
                                     {
                                         EditorGUILayout.LabelField(_enableInterstitialAd.displayName, GUILayout.Width(LabelWidth));
@@ -502,6 +566,33 @@ namespace APSdk
                             {
                                 EditorGUI.indentLevel += 2;
                                 {
+
+                                    if (adConfiguretion.AskForAdIds())
+                                    {
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_Android, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForBannerAd_Android.stringValue = EditorGUILayout.TextField(_adUnitIdForBannerAd_Android.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForBannerAd_Android.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        EditorGUILayout.BeginHorizontal();
+                                        {
+                                            EditorGUILayout.LabelField(displayName_AdUnitId_iOS, GUILayout.Width(LabelWidth));
+                                            EditorGUI.BeginChangeCheck();
+                                            _adUnitIdForBannerAd_iOS.stringValue = EditorGUILayout.TextField(_adUnitIdForBannerAd_iOS.stringValue);
+                                            if (EditorGUI.EndChangeCheck())
+                                                _adUnitIdForBannerAd_iOS.serializedObject.ApplyModifiedProperties();
+                                        }
+                                        EditorGUILayout.EndHorizontal();
+
+                                        APSdkEditorModule.DrawHorizontalLine();
+                                    }
+
                                     EditorGUILayout.BeginHorizontal();
                                     {
                                         EditorGUILayout.LabelField(_enableBannerAd.displayName, GUILayout.Width(LabelWidth));
@@ -576,6 +667,9 @@ namespace APSdk
 
                         #endregion
 
+                        EditorGUI.indentLevel += 1;
+                        adConfiguretion.PostCustomEditorGUI();
+                        EditorGUI.indentLevel -= 1;
                     }
                     EditorGUI.EndDisabledGroup();
 

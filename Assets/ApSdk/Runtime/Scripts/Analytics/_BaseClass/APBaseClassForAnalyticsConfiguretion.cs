@@ -41,15 +41,7 @@ using UnityEditor;
 
         public abstract bool CanBeSubscribedToLionLogEvent();
 
-        /// <summary>
-        /// You can write your editor script for the variables on your derived class before the template editor script
-        /// </summary>
-        public abstract void PreCustomEditorGUI();
-
-        /// <summary>
-        /// You can write your editor script for the variables on your derived class after the template editor script
-        /// </summary>
-        public abstract void PostCustomEditorGUI();
+        
 
         #endregion
     }

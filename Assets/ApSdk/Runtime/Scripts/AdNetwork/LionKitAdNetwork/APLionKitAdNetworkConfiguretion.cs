@@ -92,6 +92,21 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override bool AskForAdIds()
+        {
+            return false;
+        }
+
+        public override void PreCustomEditorGUI()
+        {
+            
+        }
+
+        public override void PostCustomEditorGUI()
+        {
+            
+        }
     }
 }
 

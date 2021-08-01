@@ -16,11 +16,18 @@ MonoBehaviour:
   _nameOfConfiguretion: MaxAdNetwork
   _isSDKIntegrated: 1
   _showRewardedAdSettings: 0
-  _showInterstitialAdSettings: 0
-  _showBannerAdSettings: 0
+  _showInterstitialAdSettings: 1
+  _showBannerAdSettings: 1
   _showCrossPromoAdSettings: 0
   _enableRewardedAd: 0
+  _adUnitIdForRewardedAd_Android: 
+  _adUnitIdForRewardedAd_iOS: 
   _enableInterstitialAd: 0
+  _adUnitIdForInterstitialAd_Android: 
+  _adUnitIdForInterstitialAd_iOS: 
   _enableBannerAd: 0
+  _adUnitIdForBannerAd_Android: 
+  _adUnitIdForBannerAd_iOS: 
   _showBannerAdManually: 0
   _enableCrossPromoAd: 0
+  _maxSdkKey: 

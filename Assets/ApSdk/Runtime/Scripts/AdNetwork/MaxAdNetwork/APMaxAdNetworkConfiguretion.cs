@@ -3,9 +3,26 @@
     using UnityEngine;
     using UnityEngine.Events;
 
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
+
     //[CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
     public class APMaxAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
+        #region Private Variables
+
+        [SerializeField] private string _maxSdkKey;
+
+        #endregion
+
+        #region Override Method
+
+        public override bool AskForAdIds()
+        {
+            return true;
+        }
+
         public override void HideBannerAd()
         {
             throw new System.NotImplementedException();
@@ -41,6 +58,25 @@
             throw new System.NotImplementedException();
         }
 
+        public override void PostCustomEditorGUI()
+        {
+            
+        }
+
+        public override void PreCustomEditorGUI()
+        {
+#if UNITY_EDITOR
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUILayout.LabelField("MaxSDK Key", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
+                _maxSdkKey = EditorGUILayout.TextField(_maxSdkKey);
+            }
+            EditorGUILayout.EndHorizontal();
+
+            APSdkEditorModule.DrawHorizontalLine();
+#endif
+        }
+
         public override void SetNameAndIntegrationStatus()
         {
             string sdkName = APSdkConstant.NameOfSDK + "_MaxAdNetwork";
@@ -70,6 +106,8 @@
         {
             throw new System.NotImplementedException();
         }
+
+#endregion
     }
 }
 
