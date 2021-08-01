@@ -3,19 +3,10 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-#if UNITY_EDITOR
-    using UnityEditor;
-#endif
 
     //[CreateAssetMenu(fileName = "APMaxAdNetworkConfiguretion", menuName = "APMaxAdNetworkConfiguretion")]
     public class APMaxAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
-        #region Private Variables
-
-        [SerializeField] private string _maxSdkKey;
-
-        #endregion
-
         #region Override Method
 
         public override bool AskForAdIds()
@@ -25,7 +16,9 @@
 
         public override void HideBannerAd()
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            APMaxAdNetwork.BannerAd.HideBannerAd();
+#endif
         }
 
         public override void HideCrossPromoAd()
@@ -35,12 +28,18 @@
 
         public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            APMaxAdNetwork.Initialize(this);
+#endif
         }
 
         public override bool IsBannerAdReady()
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            return APMaxAdNetwork.BannerAd.IsBannerAdReady();
+#else
+            return false;
+#endif
         }
 
         public override bool IsCrossPromoAdReady()
@@ -50,12 +49,20 @@
 
         public override bool IsInterstitialAdReady()
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            return APMaxAdNetwork.InterstitialAd.IsInterstitialAdReady();
+#else
+            return false;
+#endif
         }
 
         public override bool IsRewardedAdReady()
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            return APMaxAdNetwork.RewardedAd.IsRewardedAdReady();
+#else
+            return false;
+#endif
         }
 
         public override void PostCustomEditorGUI()
@@ -65,16 +72,7 @@
 
         public override void PreCustomEditorGUI()
         {
-#if UNITY_EDITOR
-            EditorGUILayout.BeginHorizontal();
-            {
-                EditorGUILayout.LabelField("MaxSDK Key", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
-                _maxSdkKey = EditorGUILayout.TextField(_maxSdkKey);
-            }
-            EditorGUILayout.EndHorizontal();
 
-            APSdkEditorModule.DrawHorizontalLine();
-#endif
         }
 
         public override void SetNameAndIntegrationStatus()
@@ -89,7 +87,9 @@
 
         public override void ShowBannerAd(string adPlacement = "banner", int playerLevel = 0)
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            APMaxAdNetwork.BannerAd.ShowBannerAd(adPlacement, playerLevel);
+#endif
         }
 
         public override void ShowCrossPromoAd(string adPlacement = "crossPromo")
@@ -99,15 +99,19 @@
 
         public override void ShowInterstitialAd(string adPlacement = "interstitial", UnityAction OnAdFailed = null, UnityAction OnAdClosed = null)
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            APMaxAdNetwork.InterstitialAd.ShowInterstitialAd(adPlacement, OnAdFailed, OnAdClosed);
+#endif
         }
 
         public override void ShowRewardedAd(string adPlacement, UnityAction<bool> OnAdClosed, UnityAction OnAdFailed = null)
         {
-            throw new System.NotImplementedException();
+#if APSdk_MaxAdNetwork
+            APMaxAdNetwork.RewardedAd.ShowRewardedAd(adPlacement, OnAdClosed, OnAdFailed);
+#endif
         }
 
-#endregion
+        #endregion
     }
 }
 

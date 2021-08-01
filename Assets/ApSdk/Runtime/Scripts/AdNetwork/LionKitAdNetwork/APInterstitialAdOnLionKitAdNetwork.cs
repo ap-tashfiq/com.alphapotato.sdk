@@ -62,7 +62,7 @@
             if (_adConfiguretion.IsInterstitialAdEnabled)
             {
 
-                _adPlacement = string.IsNullOrEmpty(adPlacement) ? "rewarded_video" : adPlacement;
+                _adPlacement = string.IsNullOrEmpty(adPlacement) ? "interstitial" : adPlacement;
                 _OnAdClosed = OnAdClosed;
                 _OnAdFailed = OnAdFailed;
 

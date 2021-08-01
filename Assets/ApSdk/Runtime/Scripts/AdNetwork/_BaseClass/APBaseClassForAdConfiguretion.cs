@@ -40,8 +40,21 @@
         public bool IsInterstitialAdEnabled { get { return _enableInterstitialAd; } }
 
 
-
+        public string AdUnitId_BannerAd
+        {
+            get
+            {
+#if UNITY_ANDROID
+                return _adUnitIdForBannerAd_Android;
+#elif UNITY_IOS
+                return _adUnitIdForBannerAd_iOS;
+#else
+                return "";
+#endif
+            }
+        }
         public bool IsBannerAdEnabled { get { return _enableBannerAd; } }
+
         public bool IsCrossPromoAdEnabled { get { return _enableCrossPromoAd; } }
 
 #endregion
