@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a57a0b015c445d4b084119d72e8405, type: 3}
   m_Name: APSdkConfiguretionInfo
   m_EditorClassIdentifier: 
-  _showGeneralSetting: 1
+  _showGeneralSetting: 0
   _showLionKitSettings: 0
-  _showAnalytics: 1
-  _showAdNetworks: 0
+  _showAnalytics: 0
+  _showAdNetworks: 1
   _showABTestSetting: 0
   _showDebuggingSetting: 0
-  _isLionKitIntegrated: 0
+  _isLionKitIntegrated: 1
   _enableAnalyticsEvents: 1
-  _selectedAdConfiguretion: {fileID: 0}
+  _selectedAdConfiguretion: {fileID: 11400000, guid: a187bd99ed2934aa598eadd41941cc7c,
+    type: 2}
   _indexOfActiveAdConfiguretion: -1
   _showMaxMediationDebugger: 0
   _showAPSdkLogInConsole: 1

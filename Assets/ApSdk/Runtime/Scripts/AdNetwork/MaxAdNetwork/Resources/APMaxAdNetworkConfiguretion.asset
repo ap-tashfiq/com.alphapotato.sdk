@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dae920ff5fac4500902b880d8aace1d, type: 3}
   m_Name: APMaxAdNetworkConfiguretion
   m_EditorClassIdentifier: 
-  _showSettings: 0
+  _showSettings: 1
   _nameOfConfiguretion: MaxAdNetwork
-  _isSDKIntegrated: 0
+  _isSDKIntegrated: 1
   _showRewardedAdSettings: 0
   _showInterstitialAdSettings: 0
   _showBannerAdSettings: 0

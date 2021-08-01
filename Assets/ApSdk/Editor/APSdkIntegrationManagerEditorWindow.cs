@@ -28,11 +28,8 @@ namespace APSdk
         private List<APBaseClassForAnalyticsConfiguretion> _listOfAnalyticsConfiguretion;
         private List<APBaseClassForAdConfiguretion> _listOfAdConfiguretion;
 
-        //private const string _linkForDownload       = "<a href=\"" + "https://portbucket2@bitbucket.org/portbucket2/apsdk.git" + "\"> Download </a>";
-        //private const string _linkForDocumetation   = "<a href=\"" + "https://bitbucket.org/portbucket2/apsdk/src/master/" + "\"> Documentation </a>";
-
-        private const string _linkForDownload       = "https://portbucket2@bitbucket.org/portbucket2/apsdk.git";
-        private const string _linkForDocumetation   = "https://bitbucket.org/portbucket2/apsdk/src/master/";
+        private const string _linkForDownload       = "https://github.com/ap-tashfiq/com.alphapotato.sdk/releases/";
+        private const string _linkForDocumetation   = "https://github.com/ap-tashfiq/com.alphapotato.sdk/blob/main/README.md";
 
         #endregion
 

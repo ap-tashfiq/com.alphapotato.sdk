@@ -13,7 +13,7 @@
         #region Protected Variables
 
 #if UNITY_EDITOR
-        [HideInInspector, SerializeField] protected bool _showSettings;
+        [ SerializeField] protected bool _showSettings;
 #endif
 
         [HideInInspector, SerializeField] protected string _nameOfConfiguretion;

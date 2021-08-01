@@ -19,7 +19,7 @@ MonoBehaviour:
   _showInterstitialAdSettings: 1
   _showBannerAdSettings: 1
   _showCrossPromoAdSettings: 1
-  _enableRewardedAd: 0
+  _enableRewardedAd: 1
   _enableInterstitialAd: 1
   _enableBannerAd: 1
   _showBannerAdManually: 0

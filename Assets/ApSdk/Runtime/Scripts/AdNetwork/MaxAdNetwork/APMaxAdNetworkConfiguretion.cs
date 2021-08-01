@@ -44,6 +44,7 @@
         public override void SetNameAndIntegrationStatus()
         {
             string sdkName = APSdkConstant.NameOfSDK + "_MaxAdNetwork";
+            //(!APSdkScriptDefiniedSymbol.CheckLionKitIntegration(APSdkConstant.NameOfSDK + "LionKit") && APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated(sdkName)) ? true : false
             SetNameOfConfiguretion(sdkName);
 #if UNITY_EDITOR
             _isSDKIntegrated = APSdkScriptDefiniedSymbol.CheckMaxAdNetworkIntegrated(sdkName);

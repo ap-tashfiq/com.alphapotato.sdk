@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _General:
     _UseMultiDexSupport: 1
-    _UseProGuard: 0
+    _UseProGuard: 1
     _OverrideGradlePluginVersion: 0
     _GradlePluginOverride: 
   _RemoteConfig:
@@ -25,21 +25,21 @@ MonoBehaviour:
     _BannersDisabled: 0
   _AppLovin:
     _Enabled: 1
-    _SDKKey: Lzi5VR_J50y55PM5ctwAwALT5d9g1CKMhT1TF0naOa4fSUn98Vd6rXsvAp4I3A-5LaPvNk4RSvKe5fesxKhRzh
+    _SDKKey: 
     _MaxAdReviewEnabled: 1
     _BannerAdBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
     _iOSRewardedAdUnitId: 
     _iOSInterstitialAdUnitId: 
     _iOSBannerAdUnitId: 
-    _AndroidRewardedAdUnitId: 478006d4c1e88308
-    _AndroidInterstitialAdUnitId: aac7fad8a38cc5e2
-    _AndroidBannerAdUnitId: ccaed8a834123d92
+    _AndroidRewardedAdUnitId: 
+    _AndroidInterstitialAdUnitId: 
+    _AndroidBannerAdUnitId: 
     _iOSAdMobAppId: 
-    _AndroidAdMobAppId: ca-app-pub-3555987499620362~3114775359
+    _AndroidAdMobAppId: 
   _InAppReview:
     _Enabled: 0
   _Debugging:
-    _EnableDebugger: 0
+    _EnableDebugger: 1
     _ShowAtStartup: 1
     _DebugLevel: 4
     _Prefab: {fileID: 3567132744369196153, guid: b601099fd50b54d848defd884015ca64,
