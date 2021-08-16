@@ -38,21 +38,6 @@ namespace APSdk
             
         }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnGameStart()
-        {
-            if (Instance == null)
-            {
-
-                Instantiate(Resources.Load("GameAnalytics/AP_GameAnalytics"));
-
-                GameObject newAPGameAnalyticsWrapper = new GameObject("APGameAnalyticsWrapper");
-                Instance = newAPGameAnalyticsWrapper.AddComponent<APGameAnalyticsWrapper>();
-
-                DontDestroyOnLoad(newAPGameAnalyticsWrapper);
-            }
-        }
-
         #endregion
 
         #region GameAnalytics Callback

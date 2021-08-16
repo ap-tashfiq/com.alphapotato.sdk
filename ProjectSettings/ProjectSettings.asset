@@ -577,8 +577,8 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: LK_USE_MAX
-    4: s_max_enabled;APSdk_LionKit_Integrated;APSdk_Facebook_Integrated;APSdk_Adjust_Integrated;APSdk_GameAnalytics_Integrated;LK_USE_MAX;gameanalytics_max_enabled;APSdk_LionKit;APSdk_MaxAdNetwork;APSdkLionKit
-    7: LK_USE_MAX;gameanalytics_max_enabled;APSdk_LionKit;APSdk_MaxAdNetwork;APSdkLionKit
+    4: s_max_enabled;APSdk_LionKit_Integrated;APSdk_Facebook_Integrated;APSdk_Adjust_Integrated;APSdk_GameAnalytics_Integrated;LK_USE_MAX;gameanalytics_max_enabled;APSdkLionKit
+    7: LK_USE_MAX;gameanalytics_max_enabled;APSdkLionKit
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
