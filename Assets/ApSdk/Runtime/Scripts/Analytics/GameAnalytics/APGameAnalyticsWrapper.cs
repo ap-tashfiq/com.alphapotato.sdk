@@ -27,14 +27,15 @@ namespace APSdk
 
             yield return new WaitForSeconds(0.1f);
 
-#if UNITY_IOS
-
-            GameAnalytics.RequestTrackingAuthorization(this);
-
-#else
-            GameAnalytics.Initialize();
-            APSdkLogger.Log("GA Initialized");
-#endif
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                GameAnalytics.RequestTrackingAuthorization(this);
+            }
+            else
+            {
+                APSdkLogger.Log("GA Initialized");
+                GameAnalytics.Initialize();
+            }
             
         }
 

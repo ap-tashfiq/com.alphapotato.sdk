@@ -57,8 +57,15 @@
                 if (_gaSettings == null)
                     _gaSettings = Resources.Load<GameAnalyticsSDK.Setup.Settings>("GameAnalytics/Settings");
 
-                EditorGUILayout.HelpBox("If you haven't setup your game on GA, please do by loging, adding platform and selecting your games from down below", MessageType.Warning);
-                APSdkEditorModule.DrawSettingsEditor(_gaSettings, null, ref _isShowingGASettings, ref _gaSettingsEditor);
+                if (_gaSettings == null)
+                    EditorGUILayout.HelpBox("You need to create GA_'Settings' by going to 'Window/Game Analytics/Select Settings' from menu in order to ga_sdk for working properly", MessageType.Error);
+                else
+                {
+                    EditorGUILayout.HelpBox("If you haven't setup your game on GA, please do by loging, adding platform and selecting your games from down below. Make sure to put the right 'sdk key' and 'secret key' for your specefic platform", MessageType.Warning);
+                    APSdkEditorModule.DrawSettingsEditor(_gaSettings, null, ref _isShowingGASettings, ref _gaSettingsEditor);
+                }
+
+                
                 APSdkEditorModule.DrawHorizontalLine();
             }
             
@@ -87,7 +94,7 @@
 #endif
         }
 
-        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false)
         {
 #if APSdk_GameAnalytics
             if (APGameAnalyticsWrapper.Instance == null && IsAnalyticsEventEnabled)

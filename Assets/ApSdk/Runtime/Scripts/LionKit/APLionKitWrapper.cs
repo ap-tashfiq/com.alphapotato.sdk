@@ -35,7 +35,7 @@
 
         private IEnumerator ShowMaxMediationDebugger() {
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
 
             if (Instance != this)
             {
@@ -76,28 +76,13 @@
 
 #if APSdk_LionKit
 
-LionKit.OnInitialized += () => {
+                MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) =>
+                {
+                    LionKit.OnInitialized += () => {
 
-#if UNITY_IOS
-                    if (MaxSdkUtils.CompareVersions(UnityEngine.iOS.Device.systemVersion, "14.5") != MaxSdkUtils.VersionComparisonResult.Lesser)
-                    {
-                        APSdkLogger.Log("iOS 14.5+ detected!! SetAdvertiserTrackingEnabled = true");
-#if APSdk_Facebook
-        Facebook.Unity.FB.Mobile.SetAdvertiserTrackingEnabled(true);
-#endif
-                    }
-                    else
-                    {
-                        APSdkLogger.Log("iOS <14.5 detected!! Normal Mode");
-                    }
-#endif
-
-                    APSdkLogger.Log("LionKit Initialized");
-
-
-
+                        APSdkLogger.Log("LionKit Initialized");
+                    };
                 };
-
 #endif
             }
         }

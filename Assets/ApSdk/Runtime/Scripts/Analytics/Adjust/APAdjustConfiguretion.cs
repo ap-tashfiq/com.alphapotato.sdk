@@ -246,8 +246,9 @@
 #endif
         }
 
-        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false)
         {
+
 #if APSdk_Adjust
             if (APAdjustWrapper.Instance == null && IsAnalyticsEventEnabled)
             {
@@ -261,6 +262,7 @@
 
                 LionStudios.LionKit.OnInitialized += () =>
                 {
+
                     APAdjustWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
 
                     if (_subscribeToLionEvent)

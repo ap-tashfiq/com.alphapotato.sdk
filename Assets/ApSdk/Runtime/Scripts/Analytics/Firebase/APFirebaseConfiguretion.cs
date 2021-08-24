@@ -35,7 +35,7 @@
             
         }
 
-        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false)
         {
 #if APSdk_Firebase
 

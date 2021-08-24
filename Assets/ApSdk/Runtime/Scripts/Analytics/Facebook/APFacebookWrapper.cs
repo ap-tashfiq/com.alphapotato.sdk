@@ -20,8 +20,10 @@ namespace APSdk
 
         #region private Variables
 
+        
         private APSdkConfiguretionInfo _apSdkConfiguretionInfo;
         private APFacebookConfiguretion _facebookConfiguretion;
+        private bool _isATTEnabled = false;
         private UnityAction _OnInitialized;
         
 
@@ -37,6 +39,10 @@ namespace APSdk
             {
                 FB.ActivateApp();
                 APSdkLogger.Log("FacebookSDK initialized");
+
+#if UNITY_IOS
+                FB.Mobile.SetAdvertiserTrackingEnabled(_isATTEnabled);
+#endif
                 _OnInitialized?.Invoke();
             }
             else
@@ -52,10 +58,11 @@ namespace APSdk
 
 #region Public Callback
 
-        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, APFacebookConfiguretion facebookConfiguretion, UnityAction OnInitialized = null) {
+        public void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, APFacebookConfiguretion facebookConfiguretion, bool isATTEnabled, UnityAction OnInitialized = null) {
 
             _apSdkConfiguretionInfo = apSdkConfiguretionInfo;
             _facebookConfiguretion = facebookConfiguretion;
+            _isATTEnabled = isATTEnabled;
             _OnInitialized = OnInitialized;
 
             if (!FB.IsInitialized)

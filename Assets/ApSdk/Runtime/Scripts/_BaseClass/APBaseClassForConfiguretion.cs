@@ -16,7 +16,7 @@
         [ SerializeField] protected bool _showSettings;
 #endif
 
-        [HideInInspector, SerializeField] protected string _nameOfConfiguretion;
+        [ SerializeField] protected string _nameOfConfiguretion;
         [HideInInspector, SerializeField] protected bool _isSDKIntegrated;
 
         #endregion
@@ -40,7 +40,7 @@
 
         public abstract void SetNameAndIntegrationStatus();
 
-        public abstract void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo);
+        public abstract void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false);
 
         /// <summary>
         /// You can write your editor script for the variables on your derived class before the template editor script

@@ -16,7 +16,7 @@
 
         [HideInInspector, SerializeField] private string _facebookAppName;
         [HideInInspector, SerializeField] private string _facebookAppId;
-
+        private Facebook.Unity.Settings.FacebookSettings _facebookSettings;
 #endif
 
         #endregion
@@ -45,37 +45,50 @@
         public override void PreCustomEditorGUI()
         {
 #if UNITY_EDITOR && APSdk_Facebook
-            EditorGUILayout.BeginHorizontal();
+
+            if(_facebookSettings == null)
+                _facebookSettings = Resources.Load<Facebook.Unity.Settings.FacebookSettings>("FacebookSettings");
+
+            if (_facebookSettings == null)
             {
-                EditorGUILayout.LabelField("appName", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
-                EditorGUI.BeginChangeCheck();
-                _facebookAppName = EditorGUILayout.TextField(_facebookAppName);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Facebook.Unity.Settings.FacebookSettings.AppLabels = new List<string>() { _facebookAppName };
-                }
-
+                EditorGUILayout.HelpBox(string.Format("You need to create 'FacebookSettings' by going to 'Facebook/Edit Settings' from menu in order to facebook sdk for working properly"), MessageType.Error);
             }
-            EditorGUILayout.EndHorizontal();
+            else {
 
-            EditorGUILayout.BeginHorizontal();
-            {
-                EditorGUILayout.LabelField("appId", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
-                EditorGUI.BeginChangeCheck();
-                _facebookAppId = EditorGUILayout.TextField(_facebookAppId);
-                if (EditorGUI.EndChangeCheck())
+                EditorGUILayout.BeginHorizontal();
                 {
+                    EditorGUILayout.LabelField("appName", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
+                    EditorGUI.BeginChangeCheck();
+                    _facebookAppName = EditorGUILayout.TextField(_facebookAppName);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        Facebook.Unity.Settings.FacebookSettings.AppLabels = new List<string>() { _facebookAppName };
+                    }
 
-                    Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId };
                 }
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("appId", GUILayout.Width(APSdkConstant.EDITOR_LABEL_WIDTH));
+                    EditorGUI.BeginChangeCheck();
+                    _facebookAppId = EditorGUILayout.TextField(_facebookAppId);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+
+                        Facebook.Unity.Settings.FacebookSettings.AppIds = new List<string>() { _facebookAppId };
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
+
+            
 
             APSdkEditorModule.DrawHorizontalLine();
 #endif
         }
 
-        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false)
         {
 #if APSdk_Facebook
 
@@ -94,6 +107,7 @@
                     APFacebookWrapper.Instance.Initialize(
                         apSdkConfiguretionInfo,
                         this,
+                        isATTEnable,
                         () => {
                             if (_subscribeToLionEvent)
                             {
@@ -124,7 +138,7 @@
 
                 };
 #else
-        APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);
+        APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, this, isATTEnable);
 #endif
 
             }

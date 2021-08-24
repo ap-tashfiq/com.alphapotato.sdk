@@ -188,6 +188,7 @@
                     isAdded,
                     new BuildTargetGroup[] { BuildTargetGroup.Android, BuildTargetGroup.iOS }
                 );
+
             return isAdded;
         }
 

@@ -7,7 +7,7 @@
     public class APLionKitAdNetworkConfiguretion : APBaseClassForAdConfiguretion
     {
         
-        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo)
+        public override void Initialize(APSdkConfiguretionInfo apSdkConfiguretionInfo, bool isATTEnable = false)
         {
 #if APSdk_LionKit
             APLionKitAdNetwork.Initialize(this);

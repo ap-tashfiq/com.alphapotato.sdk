@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showGeneralSetting: 0
   _showLionKitSettings: 0
-  _showAnalytics: 0
+  _showAnalytics: 1
   _showAdNetworks: 0
   _showABTestSetting: 0
   _showDebuggingSetting: 0
