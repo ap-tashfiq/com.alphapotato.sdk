@@ -98,7 +98,8 @@ namespace APSdk
 
         public void LogEvent(string eventName, Dictionary<string, object> eventParams)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled) {
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
+            {
 
                 if (_adjustConfiguretion.IsAnalyticsEventEnabled)
                 {
@@ -108,8 +109,12 @@ namespace APSdk
                 else
                 {
 
-                    APSdkLogger.LogError("'logAdjustEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                    APSdkLogger.LogWarning("'logAdjustEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
                 }
+            }
+            else {
+
+                APSdkLogger.LogWarning("Analytics events are currently disabled under the 'Analytics'->'EnableAnalyticsEvents' on 'APSdk IntegrationManager'");
             }
         }
 

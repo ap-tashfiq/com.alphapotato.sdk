@@ -23,6 +23,27 @@ namespace APSdk
 
         #region Configuretion
 
+        private bool CanLogEvent() {
+
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
+            {
+
+                if (_apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled)
+                {
+                    return true;
+                }
+                else
+                {
+                    APSdkLogger.LogWarning("'logGAEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                }
+            }
+            else {
+                APSdkLogger.LogWarning("Analytics events are currently disabled under the 'Analytics'->'EnableAnalyticsEvents' on 'APSdk IntegrationManager'");
+            }
+
+            return false;
+        }
+
         private IEnumerator InitializationWithDelay() {
 
             yield return new WaitForSeconds(0.1f);
@@ -98,37 +119,37 @@ namespace APSdk
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01)
         {
-            if(_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if(CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, int score)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, score);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, int score)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, score);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, progression03);
         }
 
         public void ProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03, int score)
         {
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsAnalyticsEventEnabled && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
+            if (CanLogEvent() && _apGameAnalyticsConfiguretion.IsTrackingProgressionEvent)
                 GameAnalytics.NewProgressionEvent(progressionStatus, progression01, progression02, progression03, score);
         }
 

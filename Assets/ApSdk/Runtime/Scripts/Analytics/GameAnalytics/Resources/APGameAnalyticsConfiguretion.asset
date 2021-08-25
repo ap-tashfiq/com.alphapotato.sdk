@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e0bce3929c94610ae0dd8f70a948b8, type: 3}
   m_Name: APGameAnalyticsConfiguretion
   m_EditorClassIdentifier: 
-  _showSettings: 1
+  _showSettings: 0
   _nameOfConfiguretion: GameAnalytics
   _isSDKIntegrated: 1
   _enableAnalyticsEvent: 1

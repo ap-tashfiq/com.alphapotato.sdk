@@ -40,8 +40,13 @@ namespace APSdk
                 FB.ActivateApp();
                 APSdkLogger.Log("FacebookSDK initialized");
 
+
 #if UNITY_IOS
+
+                APSdkLogger.Log(string.Format("Facebook ATT Status (iOS) = {0}", _isATTEnabled));
                 FB.Mobile.SetAdvertiserTrackingEnabled(_isATTEnabled);
+                AudienceNetwork.AdSettings.SetAdvertiserTrackingEnabled(_isATTEnabled);
+
 #endif
                 _OnInitialized?.Invoke();
             }
@@ -101,7 +106,8 @@ namespace APSdk
 
         public void LogEvent(string eventName, Dictionary<string, object> eventParams) {
 
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled) {
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
+            {
 
                 if (_facebookConfiguretion.IsAnalyticsEventEnabled)
                 {
@@ -115,14 +121,17 @@ namespace APSdk
                     }
                     else
                     {
-                        APSdkLogger.LogError(string.Format("{0}\n{1}", "Failed to log event for facebook analytics!", eventName));
+                        APSdkLogger.LogError(string.Format("{0}\n{1}", "Failed to log event for facebook analytics! as it's not initialized", eventName, eventParams));
                     }
                 }
                 else
                 {
-
-                    APSdkLogger.LogError("'logEventOnFacebook' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                    APSdkLogger.LogWarning("'logFacebookEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
                 }
+            }
+            else {
+
+                APSdkLogger.LogWarning("Analytics events are currently disabled under the 'Analytics'->'EnableAnalyticsEvents' on 'APSdk IntegrationManager'");
             }
         }
 

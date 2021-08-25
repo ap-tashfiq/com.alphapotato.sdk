@@ -23,7 +23,30 @@
 
         #endregion
 
+        #region Configuretion
 
+        private bool CanLogEvent() {
+
+            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled)
+            {
+                if (_apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+                {
+                    return true;
+                }
+                else
+                {
+                    APSdkLogger.LogWarning("'logFirebaseEvent' is currently turned off from APSDkIntegrationManager, please set it to 'true'");
+                }
+            }
+            else
+            {
+                APSdkLogger.LogWarning("Analytics events are currently disabled under the 'Analytics'->'EnableAnalyticsEvents' on 'APSdk IntegrationManager'");
+            }
+
+            return false;
+        }
+
+        #endregion
 
         #region Public Callback
 
@@ -53,9 +76,8 @@
 
         public void LogFirebaseEvent(string eventName)
         {
-            if (_apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+            if (CanLogEvent())
             {
-
                 FirebaseAnalytics.LogEvent(
                    eventName);
             }
@@ -65,7 +87,7 @@
         public void LogFirebaseEvent(string eventName, string parameName, string paramValue)
         {
 
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+            if (CanLogEvent())
             {
                 FirebaseAnalytics.LogEvent(
                         eventName,
@@ -78,7 +100,7 @@
         public void LogFirebaseEvent(string eventName, List<Parameter> parameter)
         {
 
-            if (_apSdkConfiguretionInfo.IsAnalyticsEventEnabled && _apFirebaseConfiguretion.IsAnalyticsEventEnabled)
+            if (CanLogEvent())
             {
 
                 FirebaseAnalytics.LogEvent(
@@ -88,12 +110,38 @@
             }
         }
 
+        public void ProgressionEvent(string eventName)
+        {
+
+            if (_apFirebaseConfiguretion.IsTrackingAdEvent)
+            {
+                LogFirebaseEvent(eventName);
+            }
+            else
+            {
+                APSdkLogger.LogWarning("'AdEvent' is disabled for 'FirebaseSDK'");
+            }
+        }
+
         public void ProgressionEvent(string eventName, string parameName, string paramValue)
         {
 
             if (_apFirebaseConfiguretion.IsTrackingProgressionEvent)
             {
                 LogFirebaseEvent(eventName, parameName, paramValue);
+            }
+            else
+            {
+                APSdkLogger.LogWarning("'ProgressionEvent' is disabled for 'FirebaseSDK'");
+            }
+        }
+
+        public void ProgressionEvent(string eventName, List<Parameter> parameter)
+        {
+
+            if (_apFirebaseConfiguretion.IsTrackingProgressionEvent)
+            {
+                LogFirebaseEvent(eventName, parameter);
             }
             else
             {

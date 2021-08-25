@@ -8,7 +8,15 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
-/[Mm]emoryCaptures/
+/[Mm]emoryCaptures
+/Assets/Adjust
+/Assets/Editor Default Resources
+/Assets/ExternalDependencyManager
+/Assets/FacebookSDK
+/Assets/Firebase
+/Assets/Parse
+/Assets/PlayServicesResolver
+/Assets/Plugins
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta

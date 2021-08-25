@@ -139,22 +139,22 @@
             //if    :   Facebook Integrated
 
                 
-                APFacebookWrapper.Instance.LogEvent(Key.level_started, eventParam);
+                APFacebookWrapper.Instance.ProgressionEvent(Key.level_started, eventParam);
 #endif
 
 #if APSdk_Adjust
             //if    :   Adjust Integrated
             
-                APAdjustWrapper.Instance.LogEvent(Key.level_started, eventParam);
+                APAdjustWrapper.Instance.ProgressionEvent(Key.level_started, eventParam);
 #endif
 
 #if APSdk_Firebase
 
                 if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_started);
+                    APFirebaseWrapper.Instance.ProgressionEvent(Key.level_started);
                 else
                 {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                    APFirebaseWrapper.Instance.ProgressionEvent(
                             Key.level_started,
                             Key.score,
                         (string)score
@@ -199,22 +199,22 @@
             //if    :   Facebook Integrated
             
                 
-                APFacebookWrapper.Instance.LogEvent(Key.level_complete, eventParam);
+                APFacebookWrapper.Instance.ProgressionEvent(Key.level_complete, eventParam);
 #endif
 
 #if APSdk_Adjust
             //if    :   Adjust Integrated
             
-                APAdjustWrapper.Instance.LogEvent(Key.level_complete, eventParam);
+                APAdjustWrapper.Instance.ProgressionEvent(Key.level_complete, eventParam);
 #endif
 
 #if APSdk_Firebase
 
                 if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_complete);
+                    APFirebaseWrapper.Instance.ProgressionEvent(Key.level_complete);
                 else
                 {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                    APFirebaseWrapper.Instance.ProgressionEvent(
                             Key.level_complete,
                             Key.score,
                         (string)score
@@ -257,22 +257,22 @@
 #if APSdk_Facebook
             //if    :   Facebook Integrated
 
-                APFacebookWrapper.Instance.LogEvent(Key.level_failed, eventParam);
+                APFacebookWrapper.Instance.ProgressionEvent(Key.level_failed, eventParam);
 #endif
 
 #if APSdk_Adjust
             //if    :   Adjust Integrated
             
-                APAdjustWrapper.Instance.LogEvent(Key.level_failed, eventParam);
+                APAdjustWrapper.Instance.ProgressionEvent(Key.level_failed, eventParam);
 #endif
 
 #if APSdk_Firebase
 
                 if (score == null)
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(Key.level_failed);
+                    APFirebaseWrapper.Instance.ProgressionEvent(Key.level_failed);
                 else
                 {
-                    APFirebaseWrapper.Instance.LogFirebaseEvent(
+                    APFirebaseWrapper.Instance.ProgressionEvent(
                             Key.level_failed,
                             Key.score,
                         (string)score
