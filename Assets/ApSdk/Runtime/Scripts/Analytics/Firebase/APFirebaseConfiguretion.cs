@@ -48,21 +48,22 @@
                 DontDestroyOnLoad(newAPFirebaseWrapper);
 
 #if APSdk_LionKit
-                LionStudios.LionKit.OnInitialized += () =>
-                {
-                    APFirebaseWrapper.Instance.Initialize(
+
+                APFirebaseWrapper.Instance.Initialize(
                             apSdkConfiguretionInfo,
                             this,
                             () =>
                             {
 
-                                if (_subscribeToLionEvent) {
+                                if (_subscribeToLionEvent)
+                                {
 
                                     LionStudios.Analytics.OnLogEvent += (gameEvent) =>
                                     {
                                         List<Firebase.Analytics.Parameter> parameters = new List<Firebase.Analytics.Parameter>();
 
-                                        if (gameEvent.eventParams != null) {
+                                        if (gameEvent.eventParams != null)
+                                        {
 
                                             List<string> keyList = new List<string>();
                                             List<string> valueList = new List<string>();
@@ -93,7 +94,8 @@
                                 }
 
                                 //------------------------
-                                if (_subscribeToLionEventUA) {
+                                if (_subscribeToLionEventUA)
+                                {
 
                                     LionStudios.Analytics.OnLogEventUA += (gameEvent) =>
                                     {
@@ -131,8 +133,6 @@
                                 }
                             }
                         );
-                };
-
 
 #else
             APFirebaseWrapper.Instance.Initialize(apSdkConfiguretionInfo, this);

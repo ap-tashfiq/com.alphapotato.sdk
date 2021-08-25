@@ -1,12 +1,22 @@
 ﻿namespace APSdk
 {
     using UnityEngine;
+#if APSdk_LionKit
+    using LionStudios;
+#endif
+
 #if UNITY_IOS
     using UnityEngine.iOS;
 #endif
 
     public static class APSdkManager
     {
+        public static bool IsATTEnabled
+        {
+            get;
+            private set;
+        } = false;
+
         private static void InitializeAnalytics(APSdkConfiguretionInfo _apSdkConfiguretionInfo, bool IsATTEnabled = false) {
 
             Object[] analyticsConfiguretionObjects = Resources.LoadAll("", typeof(APBaseClassForAnalyticsConfiguretion));
@@ -34,7 +44,6 @@
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void OnGameStart()
         {
-            bool isATTEnabled = false;
 
             APSdkConfiguretionInfo _apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
 
@@ -52,7 +61,7 @@
             if (MaxSdkUtils.CompareVersions(Device.systemVersion, "14.5") != MaxSdkUtils.VersionComparisonResult.Lesser)
             {
                 APSdkLogger.Log("iOS 14.5+ detected!! SetAdvertiserTrackingEnabled = true");
-                isATTEnabled = sdkConfiguration.AppTrackingStatus == MaxSdkBase.AppTrackingStatus.Authorized;
+                IsATTEnabled = sdkConfiguration.AppTrackingStatus == MaxSdkBase.AppTrackingStatus.Authorized;
 
             }
             else
@@ -61,12 +70,19 @@
             }
 #endif
 
-                InitializeAnalytics(_apSdkConfiguretionInfo, isATTEnabled);
-                InitializeAdNetworks(_apSdkConfiguretionInfo, isATTEnabled);
+                
+            };
+
+            LionKit.OnInitialized += () =>
+            {
+                APSdkLogger.Log("LionKit Initialized");
+
+                InitializeAnalytics(_apSdkConfiguretionInfo, IsATTEnabled);
+                InitializeAdNetworks(_apSdkConfiguretionInfo, IsATTEnabled);
             };
 #else
-                InitializeAnalytics(_apSdkConfiguretionInfo, isATTEnabled);
-                InitializeAdNetworks(_apSdkConfiguretionInfo, isATTEnabled);
+            InitializeAnalytics(_apSdkConfiguretionInfo, IsATTEnabled);
+            InitializeAdNetworks(_apSdkConfiguretionInfo, IsATTEnabled);
 #endif
 
 

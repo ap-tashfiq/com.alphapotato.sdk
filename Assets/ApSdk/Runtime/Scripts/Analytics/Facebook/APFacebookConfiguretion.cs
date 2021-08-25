@@ -101,10 +101,7 @@
                 DontDestroyOnLoad(newAPFacebookWrapper);
 
 #if APSdk_LionKit
-                LionStudios.LionKit.OnInitialized += () =>
-                {
-
-                    APFacebookWrapper.Instance.Initialize(
+                APFacebookWrapper.Instance.Initialize(
                         apSdkConfiguretionInfo,
                         this,
                         isATTEnable,
@@ -135,8 +132,6 @@
                                 };
                             }
                         });
-
-                };
 #else
         APFacebookWrapper.Instance.Initialize(apSdkConfiguretionInfo, this, isATTEnable);
 #endif

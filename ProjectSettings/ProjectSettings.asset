@@ -585,8 +585,8 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: LK_USE_MAX
-    4: s_max_enabled;LK_USE_MAX;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics;APSdk_Firebase
-    7: LK_USE_MAX;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics;APSdk_Firebase
+    4: s_max_enabled;LK_USE_MAX;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics;APSdk_Firebase;gameanalytics_max_enabled;APSdk_LionKit
+    7: LK_USE_MAX;APSdk_Facebook;APSdk_Adjust;APSdk_GameAnalytics;APSdk_Firebase;gameanalytics_max_enabled;APSdk_LionKit
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

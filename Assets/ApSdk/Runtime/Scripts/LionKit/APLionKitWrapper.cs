@@ -70,20 +70,6 @@
 
                 DontDestroyOnLoad(newAPLionKitWrapper);
 
-                APSdkConfiguretionInfo apSdkConfiguretionInfo = Resources.Load<APSdkConfiguretionInfo>("APSdkConfiguretionInfo");
-
-
-
-#if APSdk_LionKit
-
-                MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) =>
-                {
-                    LionKit.OnInitialized += () => {
-
-                        APSdkLogger.Log("LionKit Initialized");
-                    };
-                };
-#endif
             }
         }
 
