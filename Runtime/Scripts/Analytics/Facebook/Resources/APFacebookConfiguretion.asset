@@ -15,10 +15,10 @@ MonoBehaviour:
   _showSettings: 0
   _nameOfConfiguretion: Facebook
   _isSDKIntegrated: 1
-  _enableAnalyticsEvent: 0
+  _enableAnalyticsEvent: 1
   _trackProgressionEvent: 0
   _trackAdEvent: 0
-  _subscribeToLionEvent: 0
-  _subscribeToLionEventUA: 0
-  _facebookAppName: 
-  _facebookAppId: 
+  _subscribeToLionEvent: 1
+  _subscribeToLionEventUA: 1
+  _facebookAppName: Battle Ballet
+  _facebookAppId: 1479019119116611

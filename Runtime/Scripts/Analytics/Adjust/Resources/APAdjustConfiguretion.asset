@@ -15,11 +15,11 @@ MonoBehaviour:
   _showSettings: 0
   _nameOfConfiguretion: Adjust
   _isSDKIntegrated: 1
-  _enableAnalyticsEvent: 0
+  _enableAnalyticsEvent: 1
   _trackProgressionEvent: 0
   _trackAdEvent: 0
-  _subscribeToLionEvent: 0
-  _subscribeToLionEventUA: 0
+  _subscribeToLionEvent: 1
+  _subscribeToLionEventUA: 1
   _showBasicInfo: 0
   _showAdvancedInfo: 0
   _appTokenForAndroid: 
